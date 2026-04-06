@@ -1,19 +1,19 @@
 import { useState } from "react";
 import { format } from "date-fns";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Clock, Loader2, CreditCard, Factory, Truck, PackageCheck, CheckCircle2, XCircle, Ban } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderDetails from "./OrderDetails";
 
-const STATUS_COLORS = {
-  "Нове":        "bg-blue-600 text-white",
-  "В обробці":   "bg-amber-400 text-white",
-  "Оплачено":    "bg-emerald-500 text-white",
-  "Виробництво": "bg-purple-500 text-white",
-  "Відправлено": "bg-indigo-500 text-white",
-  "Доставлено":  "bg-teal-500 text-white",
-  "Виконано":    "bg-green-500 text-white",
-  "Не вдалося":  "bg-red-500 text-white",
-  "Скасовано":   "bg-gray-400 text-white",
+const STATUS_CONFIG = {
+  "Нове":        { color: "bg-blue-600 text-white",    icon: Clock },
+  "В обробці":   { color: "bg-amber-400 text-white",   icon: Loader2 },
+  "Оплачено":    { color: "bg-emerald-500 text-white", icon: CreditCard },
+  "Виробництво": { color: "bg-purple-500 text-white",  icon: Factory },
+  "Відправлено": { color: "bg-indigo-500 text-white",  icon: Truck },
+  "Доставлено":  { color: "bg-teal-500 text-white",    icon: PackageCheck },
+  "Виконано":    { color: "bg-green-600 text-white",   icon: CheckCircle2 },
+  "Не вдалося":  { color: "bg-red-500 text-white",     icon: XCircle },
+  "Скасовано":   { color: "bg-gray-400 text-white",    icon: Ban },
 };
 
 export default function OrderRow({ order }) {
@@ -23,7 +23,8 @@ export default function OrderRow({ order }) {
     ? format(new Date(order.order_date), "yyyy-MM-dd HH:mm")
     : "—";
 
-  const badgeClass = STATUS_COLORS[order.status] || "bg-blue-600 text-white";
+  const config = STATUS_CONFIG[order.status] || STATUS_CONFIG["Нове"];
+  const StatusIcon = config.icon;
 
   return (
     <div>
@@ -53,8 +54,9 @@ export default function OrderRow({ order }) {
 
         {/* Status badge */}
         <span
-          className={`${badgeClass} rounded-full px-5 py-2 text-sm font-semibold w-36 text-center shrink-0`}
+          className={`${config.color} rounded-full pl-2.5 pr-3.5 py-1.5 text-xs font-semibold inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap`}
         >
+          <StatusIcon className="w-3 h-3 shrink-0" />
           {order.status}
         </span>
 

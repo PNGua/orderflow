@@ -112,7 +112,7 @@ export default function OrdersTable({ orders, isLoading }) {
         <span className="w-40 shrink-0">Дата</span>
         <span className="flex-1" />
         <SortHeader field="total_amount" className="w-32 justify-end shrink-0">Сума</SortHeader>
-        <span className="w-36 text-center shrink-0">Статус</span>
+        <span className="shrink-0">Статус</span>
         <span className="w-4 shrink-0" />
       </div>
 
