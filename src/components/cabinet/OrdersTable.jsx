@@ -107,13 +107,10 @@ export default function OrdersTable({ orders, isLoading }) {
       </div>
 
       {/* Header */}
-      <div className="grid grid-cols-[1fr_1fr_1fr_1fr_36px] md:grid-cols-[1fr_1.2fr_1.2fr_0.8fr_36px] gap-2 px-4 py-3 bg-muted/40 border-b">
-        <SortHeader field="order_number">Номер</SortHeader>
-        <SortHeader field="order_date">Дата</SortHeader>
-        <SortHeader field="status">Статус</SortHeader>
-        <SortHeader field="total_amount" className="justify-end">
-          Сума
-        </SortHeader>
+      <div className="grid grid-cols-[auto_1fr_auto_20px] gap-3 px-4 py-3 bg-muted/40 border-b">
+        <SortHeader field="order_number">Замовлення</SortHeader>
+        <SortHeader field="status" className="justify-center">Прогрес виконання</SortHeader>
+        <SortHeader field="total_amount" className="justify-end">Сума</SortHeader>
         <div />
       </div>
 
