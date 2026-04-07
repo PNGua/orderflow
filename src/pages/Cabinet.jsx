@@ -6,6 +6,7 @@ import OrdersTable from "../components/cabinet/OrdersTable";
 import PlaceholderSection from "../components/cabinet/PlaceholderSection";
 import UserSection from "../components/cabinet/UserSection";
 import BalanceSection from "../components/cabinet/BalanceSection";
+import PayersSection from "../components/cabinet/PayersSection";
 
 const SECTION_TITLES = {
   user:       "Користувач",
@@ -49,6 +50,8 @@ export default function Cabinet() {
               <UserSection />
             ) : section === "balance" ? (
               <BalanceSection />
+            ) : section === "payers" ? (
+              <PayersSection />
             ) : (
               <PlaceholderSection title={SECTION_TITLES[section]} />
             )}
