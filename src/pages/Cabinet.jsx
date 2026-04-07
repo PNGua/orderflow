@@ -4,6 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import CabinetSidebar from "../components/cabinet/CabinetSidebar";
 import OrdersTable from "../components/cabinet/OrdersTable";
 import PlaceholderSection from "../components/cabinet/PlaceholderSection";
+import UserSection from "../components/cabinet/UserSection";
 
 const SECTION_TITLES = {
   user:       "Користувач",
@@ -43,6 +44,8 @@ export default function Cabinet() {
           <div className="flex-1 min-w-0">
             {section === "orders" ? (
               <OrdersTable orders={orders} isLoading={isLoading} />
+            ) : section === "user" ? (
+              <UserSection />
             ) : (
               <PlaceholderSection title={SECTION_TITLES[section]} />
             )}

@@ -1,0 +1,34 @@
+{
+  "name": "User",
+  "type": "object",
+  "properties": {
+    "role": {
+      "type": "string",
+      "enum": [
+        "admin",
+        "user"
+      ],
+      "default": "user"
+    },
+    "first_name": {
+      "type": "string",
+      "description": "\u0406\u043c'\u044f"
+    },
+    "last_name": {
+      "type": "string",
+      "description": "\u041f\u0440\u0456\u0437\u0432\u0438\u0449\u0435"
+    },
+    "phone": {
+      "type": "string",
+      "description": "\u0422\u0435\u043b\u0435\u0444\u043e\u043d"
+    },
+    "city": {
+      "type": "string",
+      "description": "\u041c\u0456\u0441\u0442\u043e"
+    },
+    "branch": {
+      "type": "string",
+      "description": "\u0424\u0456\u043b\u0456\u044f"
+    }
+  }
+}
