@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { format } from "date-fns";
 import { uk } from "date-fns/locale";
-import { ChevronDown, Clock, Loader2, CreditCard, Factory, Truck, PackageCheck, CheckCircle2, XCircle, Ban, FileText, Link2, MapPin, User, UserCog, Hash, MessageSquare } from "lucide-react";
+import { ChevronDown, Clock, Loader2, CreditCard, Factory, Truck, PackageCheck, CheckCircle2, XCircle, Ban, FileText, Link2, MapPin, User, UserCog, Hash, MessageSquare, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderItems from "./OrderItems";
 
@@ -116,16 +116,41 @@ export default function OrderCard({ order }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="border-t px-5 py-4 bg-muted/30 space-y-3">
+            <div className="border-t px-5 py-4 bg-muted/30 space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
-                <InfoRow icon={User} label="Отримувач" value={order.recipient_name} />
-                <InfoRow icon={User} label="Телефон" value={order.recipient_phone} />
-                <InfoRow icon={User} label="Платник" value={order.payer_name} />
-                <InfoRow icon={UserCog} label="Менеджер" value={order.manager_name} />
-                <InfoRow icon={Hash} label="ТТН" value={order.ttn} />
-                <InfoRow icon={MessageSquare} label="Коментар" value={order.comment} />
-                <InfoRow icon={Link2} label="Макети" value={order.layout_url} isLink={!!order.layout_url} />
-                <InfoRow icon={FileText} label="Рахунок-фактура" value={order.invoice_url} isLink={!!order.invoice_url} />
+                {/* Left column */}
+                <div className="space-y-2">
+                  <InfoRow icon={Hash} label="Номер замовлення" value={order.order_number} />
+                  <InfoRow icon={CreditCard} label="Сума замовлення" value={`${(order.total_amount || 0).toFixed(2)} грн`} />
+                  <InfoRow icon={CreditCard} label="Тип оплати" value={order.payment_type} />
+                  <InfoRow
+                    icon={User}
+                    label="Отримувач"
+                    value={[order.recipient_name, order.recipient_phone].filter(Boolean).join(" ")}
+                  />
+                  <InfoRow icon={FileText} label="Статус" value={order.status} />
+                  <InfoRow icon={FileText} label="Рахунок-фактура" value={order.invoice_url} isLink={!!order.invoice_url} />
+                  <InfoRow icon={MapPin} label="Зона обслуговування" value={order.service_zone} />
+                  <InfoRow icon={MessageSquare} label="Коментар" value={order.comment} />
+                </div>
+                {/* Right column */}
+                <div className="space-y-2">
+                  <InfoRow
+                    icon={Clock}
+                    label="Дата та час замовлення"
+                    value={order.order_date ? format(new Date(order.order_date), "d MMMM yyyy, HH:mm", { locale: uk }) : "—"}
+                  />
+                  <InfoRow icon={Truck} label="Тип доставки" value={order.delivery_type} />
+                  <InfoRow icon={User} label="Платник" value={order.payer_name} />
+                  <InfoRow icon={UserCog} label="Менеджер" value={order.manager_name} />
+                  <div className="space-y-0.5">
+                    <InfoRow icon={Link2} label="Посилання на макети" value={order.layout_url} isLink={!!order.layout_url} />
+                    {order.layout_url && (
+                      <div className="pl-5 text-xs text-primary break-all">{order.layout_url}</div>
+                    )}
+                  </div>
+                  <InfoRow icon={Hash} label="ТТН замовлення" value={order.ttn || "—"} />
+                </div>
               </div>
               <OrderItems items={order.items} />
             </div>
