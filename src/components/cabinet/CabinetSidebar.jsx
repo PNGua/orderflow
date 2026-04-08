@@ -23,8 +23,8 @@ export default function CabinetSidebar({ active, onSelect }) {
               onClick={() => onSelect(item.key)}
               className={`w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors border-b last:border-b-0 text-left
                 ${isActive
-                  ? "bg-teal-700 text-white font-semibold"
-                  : "text-gray-600 hover:bg-gray-50"
+                  ? "bg-[#037291] text-white font-semibold"
+                  : "text-gray-600 hover:bg-[#037291]/10 hover:text-[#037291]"
                 }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
