@@ -70,7 +70,7 @@ export default function OrdersTable({ orders, isLoading }) {
               {activeCount} активні
             </span>
           )}
-          <span className="text-muted-foreground">{filtered.length} замовлень загалом</span>
+          <span className="text-zinc-500">{filtered.length} замовлень загалом</span>
         </div>
       </div>
 

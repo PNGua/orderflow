@@ -6,15 +6,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import OrderItems from "./OrderItems";
 
 const STATUS_CONFIG = {
-  "Нове":        { color: "bg-blue-100 text-blue-700 border-blue-200",      icon: Clock },
-  "В обробці":   { color: "bg-amber-100 text-amber-700 border-amber-200",   icon: Loader2 },
-  "Оплачено":    { color: "bg-emerald-100 text-emerald-700 border-emerald-200", icon: CreditCard },
-  "Виробництво": { color: "bg-purple-100 text-purple-700 border-purple-200", icon: Factory },
-  "Відправлено": { color: "bg-indigo-100 text-indigo-700 border-indigo-200", icon: Truck },
-  "Доставлено":  { color: "bg-teal-100 text-teal-700 border-teal-200",      icon: PackageCheck },
-  "Виконано":    { color: "bg-green-100 text-green-700 border-green-200",   icon: CheckCircle2 },
-  "Не вдалося":  { color: "bg-red-100 text-red-700 border-red-200",         icon: XCircle },
-  "Скасовано":   { color: "bg-gray-100 text-gray-500 border-gray-200",      icon: Ban },
+  "Нове":        { color: "bg-blue-900/60 text-blue-300 border-blue-700",        icon: Clock },
+  "В обробці":   { color: "bg-amber-900/60 text-amber-300 border-amber-700",     icon: Loader2 },
+  "Оплачено":    { color: "bg-emerald-900/60 text-emerald-300 border-emerald-700", icon: CreditCard },
+  "Виробництво": { color: "bg-purple-900/60 text-purple-300 border-purple-700",  icon: Factory },
+  "Відправлено": { color: "bg-indigo-900/60 text-indigo-300 border-indigo-700",  icon: Truck },
+  "Доставлено":  { color: "bg-teal-900/60 text-teal-300 border-teal-700",        icon: PackageCheck },
+  "Виконано":    { color: "bg-green-900/60 text-green-300 border-green-700",     icon: CheckCircle2 },
+  "Не вдалося":  { color: "bg-red-900/60 text-red-300 border-red-700",           icon: XCircle },
+  "Скасовано":   { color: "bg-zinc-800 text-zinc-400 border-zinc-600",           icon: Ban },
 };
 
 const STEPS = ["Нове", "В обробці", "Оплачено", "Виробництво", "Відправлено", "Доставлено", "Виконано"];
@@ -32,12 +32,12 @@ function StatusStepper({ status }) {
             <span
               title={step}
               className={`h-1.5 rounded-full transition-all
-                ${active ? "w-6 bg-primary" : done ? "w-3 bg-green-400" : "w-3 bg-muted-foreground/20"}`}
+                ${active ? "w-6 bg-amber-400" : done ? "w-3 bg-green-500" : "w-3 bg-zinc-600"}`}
             />
           </div>
         );
       })}
-      <span className="ml-2 text-xs text-muted-foreground">{status}</span>
+      <span className="ml-2 text-xs text-zinc-400">{status}</span>
     </div>
   );
 }
@@ -45,15 +45,15 @@ function StatusStepper({ status }) {
 function InfoRow({ icon: Icon, label, value, isLink }) {
   if (!value || value === "-----") return null;
   return (
-    <div className="flex items-center gap-1.5 text-xs text-muted-foreground">
-      <Icon className="w-3.5 h-3.5 shrink-0" />
-      <span className="shrink-0">{label}:</span>
+    <div className="flex items-start gap-1.5 text-xs text-zinc-400">
+      <Icon className="w-3.5 h-3.5 shrink-0 mt-0.5" />
+      <span className="shrink-0 font-semibold">{label}:</span>
       {isLink ? (
-        <a href={value} target="_blank" rel="noopener noreferrer" className="text-primary hover:underline font-medium truncate">
+        <a href={value} target="_blank" rel="noopener noreferrer" className="text-amber-400 hover:underline font-medium truncate">
           Переглянути
         </a>
       ) : (
-        <span className="text-foreground font-medium truncate">{value}</span>
+        <span className="text-zinc-200 font-medium break-words">{value}</span>
       )}
     </div>
   );
@@ -69,7 +69,7 @@ export default function OrderCard({ order }) {
     : "—";
 
   return (
-    <div className={`bg-card border rounded-xl shadow-sm overflow-hidden transition-shadow hover:shadow-md`}>
+    <div className="bg-[#2a2a2a] border border-[#3a3a3a] rounded-xl shadow-md overflow-hidden transition-shadow hover:shadow-lg hover:border-[#4a4a4a]">
       {/* Collapsed header */}
       <button
         onClick={() => setExpanded(!expanded)}
@@ -77,9 +77,9 @@ export default function OrderCard({ order }) {
       >
         <div className="flex-1 min-w-0 space-y-2">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="font-bold text-primary text-base">#{order.order_number}</span>
+            <span className="font-bold text-amber-400 text-base">#{order.order_number}</span>
             {order.service_zone && (
-              <span className="text-xs text-muted-foreground flex items-center gap-1">
+              <span className="text-xs text-zinc-400 flex items-center gap-1">
                 <MapPin className="w-3 h-3" />{order.service_zone}
               </span>
             )}
@@ -91,7 +91,7 @@ export default function OrderCard({ order }) {
 
           <StatusStepper status={order.status} />
 
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-muted-foreground">
+          <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs text-zinc-400">
             <span>{formattedDate}</span>
             {order.payment_type && <span>Оплата: {order.payment_type}</span>}
             {order.delivery_type && <span>{order.delivery_type}</span>}
@@ -99,10 +99,10 @@ export default function OrderCard({ order }) {
         </div>
 
         <div className="flex items-center gap-3 shrink-0">
-          <span className="font-bold text-lg text-foreground">
+          <span className="font-bold text-lg text-white">
             {(order.total_amount || 0).toFixed(2)} грн
           </span>
-          <ChevronDown className={`w-4 h-4 text-muted-foreground transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
+          <ChevronDown className={`w-4 h-4 text-zinc-400 transition-transform duration-200 ${expanded ? "rotate-180" : ""}`} />
         </div>
       </button>
 
@@ -116,7 +116,7 @@ export default function OrderCard({ order }) {
             transition={{ duration: 0.2 }}
             className="overflow-hidden"
           >
-            <div className="border-t px-5 py-4 bg-muted/30 space-y-4">
+            <div className="border-t border-[#3a3a3a] px-5 py-4 bg-[#222222] space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2">
                 {/* Left column */}
                 <div className="space-y-2">
@@ -146,7 +146,7 @@ export default function OrderCard({ order }) {
                   <div className="space-y-0.5">
                     <InfoRow icon={Link2} label="Посилання на макети" value={order.layout_url} isLink={!!order.layout_url} />
                     {order.layout_url && (
-                      <div className="pl-5 text-xs text-primary break-all">{order.layout_url}</div>
+                      <div className="pl-5 text-xs text-amber-400/70 break-all">{order.layout_url}</div>
                     )}
                   </div>
                   <InfoRow icon={Hash} label="ТТН замовлення" value={order.ttn || "—"} />
