@@ -23,24 +23,21 @@ function StatusStepper({ status }) {
   const currentIdx = STEPS.indexOf(status);
   if (currentIdx === -1) return null;
   return (
-    <div className="flex items-center gap-1 flex-wrap">
+    <div className="flex items-center gap-0.5 flex-wrap">
       {STEPS.map((step, i) => {
         const done = i < currentIdx;
         const active = i === currentIdx;
         return (
-          <div key={step} className="flex items-center gap-1">
-            <span className={`text-xs px-2 py-0.5 rounded-full border font-medium whitespace-nowrap
-              ${active ? "bg-primary text-primary-foreground border-primary" :
-                done ? "bg-green-100 text-green-700 border-green-200" :
-                "bg-muted text-muted-foreground border-border"}`}>
-              {step}
-            </span>
-            {i < STEPS.length - 1 && (
-              <span className={`text-xs ${done || active ? "text-green-500" : "text-muted-foreground/40"}`}>—</span>
-            )}
+          <div key={step} className="flex items-center gap-0.5">
+            <span
+              title={step}
+              className={`h-1.5 rounded-full transition-all
+                ${active ? "w-6 bg-primary" : done ? "w-3 bg-green-400" : "w-3 bg-muted-foreground/20"}`}
+            />
           </div>
         );
       })}
+      <span className="ml-2 text-xs text-muted-foreground">{status}</span>
     </div>
   );
 }
