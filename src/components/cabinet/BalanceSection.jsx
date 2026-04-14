@@ -2,15 +2,19 @@ import { useState, useEffect } from "react";
 import { base44 } from "@/api/base44Client";
 import { Button } from "@/components/ui/button";
 import { Wallet, PlusCircle } from "lucide-react";
+import { BalanceSectionSkeleton } from "./SectionSkeleton";
 
 export default function BalanceSection() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    base44.auth.me().then(setUser).catch(() => {});
+    base44.auth.me().then((u) => { setUser(u); setLoading(false); }).catch(() => setLoading(false));
   }, []);
 
   const balance = user?.balance || 0;
+
+  if (loading) return <BalanceSectionSkeleton />;
 
   return (
     <div className="bg-card border rounded-xl shadow-sm p-6 space-y-4">

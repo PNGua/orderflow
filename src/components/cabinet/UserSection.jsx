@@ -5,11 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Camera, Save } from "lucide-react";
 import { useToast } from "@/components/ui/use-toast";
+import { UserSectionSkeleton } from "./SectionSkeleton";
 
 const CITIES = ["Київ", "Харків", "Одеса", "Дніпро", "Львів", "Запоріжжя", "Кривий Ріг", "Миколаїв", "Вінниця", "Херсон"];
 
 export default function UserSection() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
   const [form, setForm] = useState({ first_name: "", last_name: "", phone: "", city: "", branch: "" });
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
@@ -25,10 +27,13 @@ export default function UserSection() {
         city: u.city || "",
         branch: u.branch || "",
       });
+      setLoading(false);
     });
   }, []);
 
   const initials = ((form.first_name?.[0] || "") + (form.last_name?.[0] || "")).toUpperCase() || (user?.email?.[0] || "U").toUpperCase();
+
+  if (loading) return <UserSectionSkeleton />;
 
   const handleSave = async () => {
     setSaving(true);

@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Plus, Trash2, Save } from "lucide-react";
+import { PayersSectionSkeleton } from "./SectionSkeleton";
 
 const MAX_PAYERS = 10;
 const CYRILLIC_RE = /^[\u0400-\u04FF\s'"-]+$/;
@@ -50,6 +51,7 @@ function PayerRow({ payer, onChange, onRemove, showErrors }) {
 
 export default function PayersSection() {
   const [payers, setPayers] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [showErrors, setShowErrors] = useState(false);
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
@@ -57,8 +59,11 @@ export default function PayersSection() {
   useEffect(() => {
     base44.auth.me().then((u) => {
       setPayers(u.payers || []);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <PayersSectionSkeleton />;
 
   const addPayer = () => {
     if (payers.length >= MAX_PAYERS) return;

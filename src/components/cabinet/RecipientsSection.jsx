@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { Plus, Save } from "lucide-react";
+import { RecipientsSectionSkeleton } from "./SectionSkeleton";
 
 const MAX_RECIPIENTS = 10;
 
@@ -46,14 +47,18 @@ function RecipientRow({ recipient, onChange, onRemove }) {
 
 export default function RecipientsSection() {
   const [recipients, setRecipients] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const { toast } = useToast();
 
   useEffect(() => {
     base44.auth.me().then((u) => {
       setRecipients(u.recipients || []);
+      setLoading(false);
     });
   }, []);
+
+  if (loading) return <RecipientsSectionSkeleton />;
 
   const addRecipient = () => {
     if (recipients.length >= MAX_RECIPIENTS) return;

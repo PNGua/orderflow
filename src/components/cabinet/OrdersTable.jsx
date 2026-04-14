@@ -4,6 +4,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { Search, ChevronLeft, ChevronRight } from "lucide-react";
 import OrderCard from "./OrderCard";
+import { OrdersSkeleton } from "./SectionSkeleton";
 
 const ACTIVE_STATUSES = ["Нове", "В обробці", "Оплачено", "Виробництво", "Відправлено", "Доставлено"];
 const ALL_STATUSES = ["Нове", "В обробці", "Оплачено", "Виробництво", "Відправлено", "Доставлено", "Виконано", "Не вдалося", "Скасовано"];
@@ -75,14 +76,12 @@ export default function OrdersTable({ orders, isLoading }) {
       </div>
 
       {/* List */}
-      {isLoading ? (
-        <div className="flex items-center justify-center py-16">
-          <div className="w-6 h-6 border-2 border-primary/30 border-t-primary rounded-full animate-spin" />
-        </div>
-      ) : pageData.length === 0 ? (
+      {pageData.length === 0 && !isLoading ? (
         <div className="bg-card border rounded-xl text-center py-16 text-muted-foreground text-sm">
           {search || statusFilter !== "all" ? "Нічого не знайдено" : "У вас ще немає замовлень"}
         </div>
+      ) : isLoading ? (
+        <OrdersSkeleton />
       ) : (
         <div className="space-y-3">
           {pageData.map((order) => <OrderCard key={order.id} order={order} />)}
