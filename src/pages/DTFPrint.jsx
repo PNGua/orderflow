@@ -79,7 +79,7 @@ export default function DTFPrint() {
                 src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85"
                 alt="ДТФ плівка преміум"
                 className={`w-full object-cover transition-transform duration-300 ${imageZoomed ? 'scale-110' : 'group-hover:scale-105'}`}
-                style={{ maxHeight: imageZoomed ? '600px' : '420px' }}
+                style={{ maxHeight: imageZoomed ? '400px' : '260px' }}
               />
               <div className="absolute top-3 right-3 bg-white/80 backdrop-blur-sm rounded-full p-1.5 opacity-0 group-hover:opacity-100 transition-opacity">
                 <ZoomIn className="w-4 h-4 text-foreground" />
