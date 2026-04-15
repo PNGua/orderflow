@@ -7,6 +7,7 @@ import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Cabinet from './pages/Cabinet';
 import DTFPrint from './pages/DTFPrint';
+import Catalog from './pages/Catalog';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -37,6 +38,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Cabinet />} />
       <Route path="/dtf-print" element={<DTFPrint />} />
+      <Route path="/catalog" element={<Catalog />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
