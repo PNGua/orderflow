@@ -2,6 +2,7 @@ import { format } from "date-fns";
 import { uk } from "date-fns/locale";
 import StatusBadge from "./StatusBadge";
 import OrderItems from "./OrderItems";
+import LayoutPreview from "./LayoutPreview";
 import {
   CreditCard, User, Phone, MapPin, Truck, 
   FileText, Link2, Hash, MessageSquare, UserCog
@@ -68,7 +69,7 @@ export default function OrderDetails({ order }) {
           <DetailRow icon={Truck} label="Тип доставки" value={order.delivery_type} />
           <DetailRow icon={User} label="Платник" value={order.payer_name} />
           <DetailRow icon={UserCog} label="Менеджер" value={order.manager_name} />
-          <DetailRow icon={Link2} label="Посилання на макети" value={order.layout_url} isLink={!!order.layout_url} />
+          <LayoutPreview layoutUrl={order.layout_url} />
         </div>
       </div>
 

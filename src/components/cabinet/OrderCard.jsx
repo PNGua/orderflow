@@ -4,6 +4,7 @@ import { uk } from "date-fns/locale";
 import { ChevronDown, Clock, Loader2, CreditCard, Factory, Truck, PackageCheck, CheckCircle2, XCircle, Ban, FileText, Link2, MapPin, User, UserCog, Hash, MessageSquare, Phone } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import OrderItems from "./OrderItems";
+import LayoutPreview from "./LayoutPreview";
 
 const STATUS_CONFIG = {
   "Нове":        { color: "bg-[#037291]/20 text-[#037291] border-[#037291]/40",  icon: Clock },
@@ -143,12 +144,7 @@ export default function OrderCard({ order }) {
                   <InfoRow icon={Truck} label="Тип доставки" value={order.delivery_type} />
                   <InfoRow icon={User} label="Платник" value={order.payer_name} />
                   <InfoRow icon={UserCog} label="Менеджер" value={order.manager_name} />
-                  <div className="space-y-0.5">
-                    <InfoRow icon={Link2} label="Посилання на макети" value={order.layout_url} isLink={!!order.layout_url} />
-                    {order.layout_url && (
-                      <div className="pl-5 text-xs text-[#037291]/70 break-all">{order.layout_url}</div>
-                    )}
-                  </div>
+                  <LayoutPreview layoutUrl={order.layout_url} />
                   <InfoRow icon={Hash} label="ТТН замовлення" value={order.ttn || "—"} />
                 </div>
               </div>
