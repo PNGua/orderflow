@@ -5,6 +5,11 @@ import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import HeroSlider from '@/components/HeroSlider';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
+import PortfolioSection from '@/components/home/PortfolioSection';
+import FAQSection from '@/components/home/FAQSection';
+import HowItWorksSection from '@/components/home/HowItWorksSection';
+import BlogSection from '@/components/home/BlogSection';
 
 const SERVICES = [
   {
@@ -183,6 +188,12 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <HowItWorksSection />
+      <PortfolioSection />
+      <TestimonialsSection />
+      <FAQSection />
+      <BlogSection />
 
       {/* CTA BANNER */}
       <section className="py-14 bg-background">
