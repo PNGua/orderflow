@@ -152,8 +152,8 @@ export default function HeroSlider() {
       </div>
 
       {/* Wave */}
-      <div className="absolute bottom-0 left-0 right-0">
-        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+      <div className="absolute bottom-0 left-0 right-0" style={{ marginBottom: '-2px' }}>
+        <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full" style={{ display: 'block' }}>
           <path d="M0 60L1440 60L1440 20C1200 60 900 0 720 20C540 40 240 0 0 20L0 60Z" fill="hsl(var(--background))" />
         </svg>
       </div>
