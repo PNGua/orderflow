@@ -76,8 +76,6 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="border-t border-border" />
-
       {/* SERVICES */}
       <section className="py-14 bg-background">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
