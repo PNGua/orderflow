@@ -62,6 +62,55 @@ export default function Home() {
 
       <HeroSlider />
 
+      {/* ABOUT */}
+      <section className="py-14 bg-background">
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+          <div className="bg-card border rounded-2xl shadow-sm overflow-hidden">
+            <div className="grid grid-cols-1 lg:grid-cols-2">
+              {/* Text */}
+              <div className="p-8 lg:p-12 flex flex-col justify-center space-y-4">
+                <p className="font-bold text-foreground text-base leading-snug">
+                  Ми — фабрика друку та брендування PNG druk, лідери ДТФ та УФ ДТФ друку в рулонах.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Виконуємо{' '}
+                  <a href="/dtf-print" className="text-primary underline font-medium">ДТФ друк в рулонах</a>{' '}
+                  та{' '}
+                  <a href="/dtf-print" className="text-primary underline font-medium">UV DTF друк в рулонах</a>{' '}
+                  для подальшого перенесення на вашому обладнанні. Також виконуємо перенесення принтів на готову продукцію та використовуємо інші технології друку (шовкотрафарет, сублімація).
+                </p>
+                <ul className="text-sm space-y-1">
+                  <li><a href="/dtf-print" className="text-primary underline">Детальніше про технологію DTF.</a></li>
+                  <li><a href="/dtf-print" className="text-primary underline">Детальніше про технологію УФ DTF.</a></li>
+                </ul>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Для постійних клієнтів, рекламних агенцій, друкарень і швейних підприємств діє гнучка система знижок.
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  Для консультації та замовлення звертайтесь за телефоном:{' '}
+                  <a href="tel:+380739338895" className="text-primary underline font-medium">(073) 933 88 95</a>,
+                  {' '}на пошту{' '}
+                  <a href="mailto:info@pngdruk.com.ua" className="text-primary underline font-medium">info@pngdruk.com.ua</a>,
+                  {' '}або завітайте до наших офісів:
+                </p>
+                <ul className="text-sm text-muted-foreground space-y-1 list-disc list-inside">
+                  <li>м. Львів, вул. Городоцька, 242</li>
+                  <li>м. Київ, вул. Машинобудівна, 44</li>
+                </ul>
+              </div>
+              {/* Image */}
+              <div className="relative min-h-64 lg:min-h-0">
+                <img
+                  src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
+                  alt="PNG Druk виробництво"
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* STATS */}
       <section className="py-10 bg-background">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
