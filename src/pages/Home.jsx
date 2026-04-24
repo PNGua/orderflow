@@ -65,10 +65,9 @@ export default function Home() {
       {/* ABOUT */}
       <section className="py-14 bg-background">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-          <div className="bg-card border rounded-2xl shadow-sm overflow-hidden">
-            <div className="grid grid-cols-1 lg:grid-cols-2">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
               {/* Text */}
-              <div className="p-8 lg:p-12 flex flex-col justify-center space-y-4">
+              <div className="flex flex-col justify-center space-y-4">
                 <p className="font-bold text-foreground text-base leading-snug">
                   Ми — фабрика друку та брендування PNG druk, лідери ДТФ та УФ ДТФ друку в рулонах.
                 </p>
@@ -99,14 +98,13 @@ export default function Home() {
                 </ul>
               </div>
               {/* Image */}
-              <div className="relative min-h-64 lg:min-h-0">
+              <div className="relative min-h-64 lg:min-h-0 rounded-xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
                   alt="PNG Druk виробництво"
                   className="w-full h-full object-cover"
                 />
               </div>
-            </div>
           </div>
         </div>
       </section>
