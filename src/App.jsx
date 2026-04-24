@@ -6,6 +6,7 @@ import PageNotFound from './lib/PageNotFound';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Cabinet from './pages/Cabinet';
+import Home from './pages/Home';
 import DTFPrint from './pages/DTFPrint';
 import Catalog from './pages/Catalog';
 // Add page imports here
@@ -36,7 +37,8 @@ const AuthenticatedApp = () => {
   // Render the main app
   return (
     <Routes>
-      <Route path="/" element={<Cabinet />} />
+      <Route path="/" element={<Home />} />
+      <Route path="/cabinet" element={<Cabinet />} />
       <Route path="/dtf-print" element={<DTFPrint />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="*" element={<PageNotFound />} />
