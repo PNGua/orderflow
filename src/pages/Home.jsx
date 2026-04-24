@@ -4,6 +4,7 @@ import { ArrowRight, CheckCircle2, Zap, Clock, Star, Phone, Mail, MapPin, Chevro
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import HeroSlider from '@/components/HeroSlider';
 
 const SERVICES = [
   {
@@ -59,43 +60,7 @@ export default function Home() {
     <div className="min-h-screen flex flex-col bg-background">
       <Header />
 
-      {/* HERO */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#037291] to-[#025a73] text-white">
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'url(https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1400&q=60)', backgroundSize: 'cover', backgroundPosition: 'center' }} />
-        <div className="relative container mx-auto px-4 lg:px-8 py-20 lg:py-28 max-w-6xl">
-          <div className="max-w-2xl">
-            <span className="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 backdrop-blur-sm">
-              PART OF PNG GROUP · Фабрика друку
-            </span>
-            <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-5">
-              Друк, який<br />
-              <span className="text-yellow-300">виділяє вас</span>
-            </h1>
-            <p className="text-white/80 text-lg mb-8 leading-relaxed max-w-lg">
-              ДТФ, сублімація, банери, термоперенос — швидко, якісно, по всій Україні. Від 175 грн.
-            </p>
-            <div className="flex flex-wrap gap-3">
-              <Link to="/catalog">
-                <Button size="lg" className="bg-white text-[#037291] hover:bg-white/90 font-bold px-6 shadow-lg">
-                  Переглянути послуги
-                  <ArrowRight className="w-4 h-4 ml-1" />
-                </Button>
-              </Link>
-              <Link to="/dtf-print">
-                <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 font-semibold px-6">
-                  ДТФ друк
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </div>
-        {/* Wave */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 60L1440 60L1440 20C1200 60 900 0 720 20C540 40 240 0 0 20L0 60Z" fill="hsl(var(--background))" />
-          </svg>
-        </div>
-      </section>
+      <HeroSlider />
 
       {/* STATS */}
       <section className="py-10 bg-background">
