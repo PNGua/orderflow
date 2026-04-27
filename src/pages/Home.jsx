@@ -103,11 +103,11 @@ export default function Home() {
                 </ul>
               </div>
               {/* Image */}
-              <div className="relative min-h-64 lg:min-h-0 rounded-xl overflow-hidden">
+              <div className="relative min-h-72 lg:min-h-full rounded-xl overflow-hidden">
                 <img
                   src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80"
                   alt="PNG Druk виробництво"
-                  className="w-full h-full object-cover"
+                  className="absolute inset-0 w-full h-full object-cover"
                 />
               </div>
           </div>
