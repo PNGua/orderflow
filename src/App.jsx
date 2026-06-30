@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import DTFPrint from './pages/DTFPrint';
 import Catalog from './pages/Catalog';
 import Contacts from './pages/Contacts';
+import Blog from './pages/Blog';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -43,6 +44,7 @@ const AuthenticatedApp = () => {
       <Route path="/dtf-print" element={<DTFPrint />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/contacts" element={<Contacts />} />
+      <Route path="/blog" element={<Blog />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
