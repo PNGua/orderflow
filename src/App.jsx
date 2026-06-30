@@ -11,6 +11,7 @@ import DTFPrint from './pages/DTFPrint';
 import Catalog from './pages/Catalog';
 import Contacts from './pages/Contacts';
 import Blog from './pages/Blog';
+import QnA from './pages/QnA';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -45,6 +46,7 @@ const AuthenticatedApp = () => {
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/qna" element={<QnA />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
