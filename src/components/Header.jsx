@@ -66,8 +66,8 @@ export default function Header() {
             />
           </Link>
           <div className="flex items-center gap-2">
-            {/* Desktop: compact Замовити друк button inline */}
-            <div className="relative shrink-0 hidden lg:flex" ref={menuRef}>
+            {/* Desktop & tablet: compact Замовити друк button inline */}
+            <div className="relative shrink-0 hidden md:flex" ref={menuRef}>
               <button
                 onClick={() => setServicesOpen((v) => !v)}
                 className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
@@ -131,8 +131,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Row 2 (mobile only): Замовити друк — full width */}
-        <div className="relative w-full lg:hidden" ref={menuRef}>
+        {/* Row 2 (mobile only <md): Замовити друк — full width */}
+        <div className="relative w-full md:hidden" ref={menuRef}>
           <button
             onClick={() => setServicesOpen((v) => !v)}
             className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors"
