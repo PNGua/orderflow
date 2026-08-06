@@ -7,12 +7,18 @@ import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchValue, setSearchValue] = useState('');
   const menuRef = useRef(null);
+  const searchRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setServicesOpen(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(e.target)) {
+        setSearchOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -74,15 +80,35 @@ export default function Header() {
 
         {/* Search + Cart */}
         <div className="flex items-center gap-3 ml-auto">
-          <div className="relative">
-            <Input
-              type="text"
-              placeholder="Я шукаю..."
-              className="pl-4 pr-10 py-2 rounded-full border border-input w-56 lg:w-72"
-            />
-            <button className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-1.5">
-              <Search className="w-3.5 h-3.5" />
-            </button>
+          <div className="relative" ref={searchRef}>
+            {searchOpen ? (
+              <div className="relative animate-in fade-in slide-in-from-right-2 duration-200">
+                <Input
+                  type="text"
+                  autoFocus
+                  placeholder="Я шукаю..."
+                  value={searchValue}
+                  onChange={(e) => setSearchValue(e.target.value)}
+                  onKeyDown={(e) => e.key === 'Escape' && setSearchOpen(false)}
+                  className="pl-4 pr-10 py-2 rounded-full border border-input w-56 lg:w-72"
+                />
+                <button
+                  onClick={() => setSearchOpen(false)}
+                  className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-1.5"
+                >
+                  <Search className="w-3.5 h-3.5" />
+                </button>
+              </div>
+            ) : (
+              <button
+                onClick={() => setSearchOpen(true)}
+                className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+                aria-label="Пошук"
+              >
+                <Search className="w-6 h-6" />
+                <span className="text-xs">Пошук</span>
+              </button>
+            )}
           </div>
           <div className="flex flex-col items-center">
             <div className="relative">
