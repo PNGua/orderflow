@@ -50,13 +50,12 @@ export default function Header() {
       {/* Main Bar */}
       <div className="container mx-auto flex items-center justify-between py-3 px-4 lg:px-8">
         <div className="flex items-center gap-4">
-          <Link to="/" className="flex flex-col items-start leading-tight">
-            <div className="flex items-end gap-1">
-              <span className="text-2xl font-bold text-primary border border-primary px-1">PNG</span>
-              <span className="text-lg font-bold text-foreground">druk</span>
-            </div>
-            <span className="text-[9px] text-muted-foreground font-medium">Фабрика друку та брендування</span>
-            <span className="bg-primary text-primary-foreground text-[8px] px-1 rounded">PART OF PNG GROUP</span>
+          <Link to="/" className="flex items-center">
+            <img
+              src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
+              alt="PNG druk — фабрика друку та брендування"
+              className="h-14 w-auto"
+            />
           </Link>
           <div className="relative" ref={menuRef}>
             <Button
