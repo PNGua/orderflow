@@ -61,7 +61,7 @@ export default function Header() {
         <div className="flex items-center justify-self-start gap-3 order-1">
           <Link to="/" className="flex items-center shrink-0">
             <img
-              src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/0f0fbd11e_PNGdruklogoblack.png"
+              src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/e8922cc81_PNGdruklogohorizontalblack.png"
               alt="PNG druk — фабрика друку та брендування"
               className="h-12 w-auto"
             />
