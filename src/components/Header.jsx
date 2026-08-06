@@ -123,7 +123,7 @@ export default function Header() {
 
       {/* Navigation Row */}
       <div className="border-t border-border/60">
-        <div className="container mx-auto px-4 lg:px-8 py-2">
+        <div className="container mx-auto px-4 lg:px-8 py-1">
           <Navbar className="justify-center lg:justify-start overflow-x-auto" />
         </div>
       </div>
