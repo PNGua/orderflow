@@ -13,6 +13,7 @@ import Contacts from './pages/Contacts';
 import Blog from './pages/Blog';
 import QnA from './pages/QnA';
 import Services from './pages/Services';
+import PrintTechnologies from './pages/PrintTechnologies';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -43,6 +44,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cabinet" element={<Cabinet />} />
+      <Route path="/technologies" element={<PrintTechnologies />} />
       <Route path="/dtf-print" element={<DTFPrint />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/contacts" element={<Contacts />} />

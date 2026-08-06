@@ -54,6 +54,8 @@ export default function DTFPrint() {
         <nav className="flex items-center gap-1 text-xs text-muted-foreground mb-5 flex-wrap">
           <Link to="/" className="hover:text-primary transition-colors">Головна</Link>
           <ChevronRight className="w-3 h-3" />
+          <Link to="/technologies" className="hover:text-primary transition-colors">Технології друку</Link>
+          <ChevronRight className="w-3 h-3" />
           <Link to="/dtf-print" className="hover:text-primary transition-colors">ДТФ друк в рулонах</Link>
           <ChevronRight className="w-3 h-3" />
           <span className="text-foreground font-medium">ДТФ плівка преміум</span>

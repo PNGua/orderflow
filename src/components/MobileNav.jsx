@@ -4,7 +4,7 @@ import { Menu as MenuIcon, ShoppingCart } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Головна', to: '/' },
-  { label: 'Технології друку', to: '/dtf-print' },
+  { label: 'Технології друку', to: '/technologies' },
   { label: 'Послуги', to: '/services' },
   { label: 'Блог', to: '/blog' },
   { label: 'Калькулятор', href: '/#calculator' },
