@@ -57,8 +57,15 @@ export default function Header() {
 
       {/* Main Bar */}
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 py-3 px-4 lg:px-8">
-        {/* Left: Замовити друк (mega-menu) */}
-        <div className="flex items-center justify-self-start order-1">
+        {/* Left: logo + Замовити друк (mega-menu) */}
+        <div className="flex items-center justify-self-start gap-3 order-1">
+          <Link to="/" className="flex items-center shrink-0">
+            <img
+              src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/0f0fbd11e_PNGdruklogoblack.png"
+              alt="PNG druk — фабрика друку та брендування"
+              className="h-12 w-auto"
+            />
+          </Link>
           <div className="relative shrink-0" ref={menuRef}>
             <button
               onClick={() => setServicesOpen((v) => !v)}
