@@ -68,8 +68,6 @@ export default function Home() {
 
       <HeroSlider />
 
-      <Calculator />
-
       {/* ABOUT */}
       <section className="py-14 bg-background">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
@@ -170,6 +168,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <Calculator />
 
       {/* ADVANTAGES */}
       <section className="py-14 bg-muted/40">
