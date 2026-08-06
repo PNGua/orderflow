@@ -68,24 +68,24 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Middle: navigation + Замовити друк button (with mega-menu) */}
+        {/* Middle: navigation */}
         <div className="flex items-center justify-center gap-3 order-3 lg:order-2 w-full lg:w-auto">
           <Navbar />
+        </div>
+
+        {/* Right: Замовити друк + Cart */}
+        <div className="flex items-center justify-end justify-self-end gap-2 order-2 lg:order-3">
           <div className="relative shrink-0" ref={menuRef}>
             <button
               onClick={() => setServicesOpen((v) => !v)}
               className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
             >
               <Menu className="w-4 h-4" />
-              Замовити друк
+              <span className="hidden sm:inline">Замовити друк</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
             {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
           </div>
-        </div>
-
-        {/* Cart */}
-        <div className="flex items-center justify-end justify-self-end order-2 lg:order-3">
           <button
             className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
             aria-label="Кошик"
