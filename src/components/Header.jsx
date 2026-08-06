@@ -55,9 +55,9 @@ export default function Header() {
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 py-3 px-4 lg:px-8">
-        {/* Left: logo + Замовити друк (mega-menu) */}
-        <div className="flex items-center justify-self-start gap-3 order-1">
+      <div className="container mx-auto flex flex-wrap items-center py-3 px-4 lg:px-8 gap-3">
+        {/* Row 1: logo + search + cabinet/cart/burger */}
+        <div className="flex items-center justify-between w-full">
           <Link to="/" className="flex items-center shrink-0">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/e8922cc81_PNGdruklogohorizontalblack.png"
@@ -65,71 +65,71 @@ export default function Header() {
               className="h-12 w-auto"
             />
           </Link>
+          <div className="flex items-center gap-2">
+            <div className="hidden lg:flex items-center max-w-md xl:max-w-lg min-w-0">
+              {searchOpen && (
+                <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
+                  <input
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Пошук товарів..."
+                    className="h-10 w-full px-3 pr-9 rounded-full border border-input bg-muted/40 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                    className="absolute right-2 w-6 h-6 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground"
+                    aria-label="Закрити пошук"
+                  >
+                    <X className="w-3.5 h-3.5" />
+                  </button>
+                </form>
+              )}
+              <button
+                onClick={() => setSearchOpen((v) => !v)}
+                className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+                aria-label="Пошук"
+              >
+                <Search className="w-5 h-5" />
+              </button>
+            </div>
+            <Link
+              to="/cabinet"
+              className="flex items-center gap-2 h-10 px-3 rounded-full text-foreground hover:bg-muted transition-colors"
+              aria-label="Кабінет"
+            >
+              <UserRound className="w-5 h-5" />
+              <span className="text-sm font-medium hidden sm:inline">Вхід / Реєстрація</span>
+            </Link>
+            <button
+              className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+              aria-label="Кошик"
+            >
+              <ShoppingCart className="w-5 h-5" />
+              <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
+            </button>
+            {/* Mobile burger */}
+            <button
+              onClick={() => setNavOpen((v) => !v)}
+              className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+              aria-label="Меню"
+            >
+              {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+          </div>
         </div>
 
-        {/* Right: Search (lg only) + Замовити друк + Cabinet + Cart */}
-        <div className="flex items-center justify-end ml-auto order-2 gap-2">
-          <div className="hidden lg:flex items-center max-w-md xl:max-w-lg flex-1 min-w-0">
-            {searchOpen && (
-              <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
-                <input
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Пошук товарів..."
-                  className="h-10 w-full px-3 pr-9 rounded-full border border-input bg-muted/40 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-                />
-                <button
-                  type="button"
-                  onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
-                  className="absolute right-2 w-6 h-6 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground"
-                  aria-label="Закрити пошук"
-                >
-                  <X className="w-3.5 h-3.5" />
-                </button>
-              </form>
-            )}
-            <button
-              onClick={() => setSearchOpen((v) => !v)}
-              className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
-              aria-label="Пошук"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-          </div>
-          <div className="relative shrink-0 mr-auto" ref={menuRef}>
-            <button
-              onClick={() => setServicesOpen((v) => !v)}
-              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
-            >
-              <Menu className="w-4 h-4" />
-              <span className="inline">Замовити друк</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
-          </div>
-          <Link
-            to="/cabinet"
-            className="flex items-center gap-2 h-10 px-3 rounded-full text-foreground hover:bg-muted transition-colors"
-            aria-label="Кабінет"
-          >
-            <UserRound className="w-5 h-5" />
-            <span className="text-sm font-medium hidden sm:inline">Вхід / Реєстрація</span>
-          </Link>
+        {/* Row 2: Замовити друк — full width */}
+        <div className="relative w-full" ref={menuRef}>
           <button
-            className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
-            aria-label="Кошик"
+            onClick={() => setServicesOpen((v) => !v)}
+            className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors"
           >
-            <ShoppingCart className="w-5 h-5" />
-            <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
+            <Menu className="w-5 h-5" />
+            <span>Замовити друк</span>
+            <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
           </button>
-          {/* Mobile burger */}
-          <button
-            onClick={() => setNavOpen((v) => !v)}
-            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
-            aria-label="Меню"
-          >
-            {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
+          {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
         </div>
       </div>
 
