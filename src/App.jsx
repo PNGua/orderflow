@@ -12,6 +12,7 @@ import Catalog from './pages/Catalog';
 import Contacts from './pages/Contacts';
 import Blog from './pages/Blog';
 import QnA from './pages/QnA';
+import Services from './pages/Services';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -47,6 +48,7 @@ const AuthenticatedApp = () => {
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/qna" element={<QnA />} />
+      <Route path="/services" element={<Services />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
