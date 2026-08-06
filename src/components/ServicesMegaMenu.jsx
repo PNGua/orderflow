@@ -95,7 +95,7 @@ export default function ServicesMegaMenu({ onClose }) {
         </div>
 
         {/* Right: items */}
-        <div className="flex-1 p-5">
+        <div className="flex-1 p-5 min-h-[340px]">
           {activeCategory && (
             <>
               <div className="mb-4 pb-3 border-b border-slate-200 flex items-center justify-between">
