@@ -96,7 +96,7 @@ export default function Header() {
               <Search className="w-5 h-5" />
             </button>
           </div>
-          <div className="relative shrink-0" ref={menuRef}>
+          <div className="relative shrink-0 mr-auto" ref={menuRef}>
             <button
               onClick={() => setServicesOpen((v) => !v)}
               className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
