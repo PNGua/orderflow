@@ -77,16 +77,15 @@ export default function Header() {
         </div>
 
         {/* Right: Search + Cabinet + Cart */}
-        <div className="flex items-center justify-end justify-self-end ml-auto order-2 gap-1">
-          <div className="flex items-center">
+        <div className="flex items-center justify-end ml-auto order-2 gap-2 flex-1 min-w-0">
+          <div className="flex items-center flex-1 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg min-w-0">
             {searchOpen && (
-              <form onSubmit={submitSearch} className="relative flex items-center mr-1">
+              <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
                 <input
-                  autoFocus
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Пошук товарів..."
-                  className="h-10 w-40 sm:w-64 px-3 pr-9 rounded-full border border-input bg-muted/40 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                  className="h-10 w-full px-3 pr-9 rounded-full border border-input bg-muted/40 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
                 />
                 <button
                   type="button"
@@ -100,7 +99,7 @@ export default function Header() {
             )}
             <button
               onClick={() => setSearchOpen((v) => !v)}
-              className="w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+              className="w-10 h-10 shrink-0 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
               aria-label="Пошук"
             >
               <Search className="w-5 h-5" />
