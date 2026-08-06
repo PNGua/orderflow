@@ -2,11 +2,9 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import {
   Printer,
-  Sun,
   Shirt,
   Maximize2,
   Flame,
-  BookOpen,
   ChevronRight,
 } from 'lucide-react';
 
@@ -14,67 +12,86 @@ const SERVICE_CATEGORIES = [
   {
     title: 'ДТФ друк',
     icon: Printer,
-    description: 'Преміум друк на плівці для будь-яких тканин',
     link: '/dtf-print',
-    subcategories: [
-      { label: 'ДТФ друк в рулонах', link: '/dtf-print' },
-      { label: 'Преміум ДТФ плівка', link: '/dtf-print' },
-      { label: 'Золота фольга ДТФ', link: '/dtf-print' },
-      { label: 'Срібло глітер ДТФ', link: '/dtf-print' },
-    ],
-  },
-  {
-    title: 'УФ ДТФ друк',
-    icon: Sun,
-    description: 'Друк високої стійкості для твердих поверхонь',
-    link: '/catalog',
-    subcategories: [
-      { label: 'Преміум УФ ДТФ плівка', link: '/catalog' },
-      { label: 'Золота УФ ДТФ плівка', link: '/catalog' },
-      { label: 'Срібна УФ ДТФ плівка', link: '/catalog' },
+    groups: [
+      {
+        title: 'ДТФ друк в рулонах',
+        link: '/dtf-print',
+        items: [
+          { label: 'ДТФ плівка преміум', link: '/dtf-print' },
+          { label: 'ДТФ плівка золота фольга', link: '/dtf-print', highlight: true },
+          { label: 'ДТФ плівка золото глітер', link: '/dtf-print' },
+          { label: 'ДТФ плівка срібло глітер', link: '/dtf-print' },
+          { label: 'ДТФ плівка хамелеон/глітер', link: '/dtf-print' },
+          { label: 'ДТФ плівка люмінісцентна', link: '/dtf-print' },
+          { label: 'ДТФ плівка рефлектив', link: '/dtf-print' },
+        ],
+      },
+      {
+        title: 'УФ ДТФ друк в рулонах',
+        link: '/dtf-print',
+        items: [
+          { label: 'Преміум УФ ДТФ плівка', link: '/dtf-print' },
+          { label: 'Золота УФ ДТФ плівка', link: '/dtf-print' },
+          { label: 'Срібна УФ ДТФ плівка', link: '/dtf-print' },
+        ],
+      },
+      {
+        title: 'Взірці',
+        link: '/dtf-print',
+        items: [
+          { label: 'Папка з взірцями DTF та UV DTF', link: '/dtf-print' },
+          { label: 'Взірці УФ ДТФ друку та плівки', link: '/dtf-print' },
+          { label: 'Взірці DTF друку та плівки', link: '/dtf-print' },
+        ],
+      },
     ],
   },
   {
     title: 'Сублімаційний друк',
     icon: Shirt,
-    description: 'Яскраві кольори на тканинах та сувенірах',
     link: '/catalog',
-    subcategories: [
-      { label: 'На футболках', link: '/catalog' },
-      { label: 'На кружках', link: '/catalog' },
-      { label: 'На кепках', link: '/catalog' },
+    groups: [
+      {
+        title: 'Сублімація',
+        link: '/catalog',
+        items: [
+          { label: 'На футболках', link: '/catalog' },
+          { label: 'На кружках', link: '/catalog' },
+          { label: 'На кепках', link: '/catalog' },
+        ],
+      },
     ],
   },
   {
     title: 'Широкоформатний друк',
     icon: Maximize2,
-    description: 'Банери, плакати, вивіски будь-яких розмірів',
     link: '/catalog',
-    subcategories: [
-      { label: 'Банери', link: '/catalog' },
-      { label: 'Самоклеючі плівки', link: '/catalog' },
-      { label: 'Плакати', link: '/catalog' },
+    groups: [
+      {
+        title: 'Широкоформат',
+        link: '/catalog',
+        items: [
+          { label: 'Банери', link: '/catalog' },
+          { label: 'Самоклеючі плівки', link: '/catalog' },
+          { label: 'Плакати', link: '/catalog' },
+        ],
+      },
     ],
   },
   {
     title: 'Термоперенос',
     icon: Flame,
-    description: 'Нанесення логотипів та зображень на тканину',
     link: '/catalog',
-    subcategories: [
-      { label: 'Флекс плівки', link: '/catalog' },
-      { label: 'Флок плівки', link: '/catalog' },
-    ],
-  },
-  {
-    title: 'Взірці',
-    icon: BookOpen,
-    description: 'Замовте зразки для оцінки якості',
-    link: '/catalog',
-    subcategories: [
-      { label: 'Папка з взірцями DTF та UV DTF', link: '/catalog' },
-      { label: 'Взірці УФ ДТФ плівки', link: '/catalog' },
-      { label: 'Взірці ДТФ плівки', link: '/catalog' },
+    groups: [
+      {
+        title: 'Термоперенос',
+        link: '/catalog',
+        items: [
+          { label: 'Флекс плівки', link: '/catalog' },
+          { label: 'Флок плівки', link: '/catalog' },
+        ],
+      },
     ],
   },
 ];
@@ -83,10 +100,10 @@ export default function ServicesMegaMenu({ onClose }) {
   const [activeCategory, setActiveCategory] = useState(SERVICE_CATEGORIES[0]);
 
   return (
-    <div className="absolute top-full left-0 mt-1 w-[680px] rounded-2xl overflow-hidden shadow-2xl z-50 bg-[#025a73]/95 backdrop-blur-md border border-white/10 text-white">
+    <div className="absolute top-full left-0 mt-1 w-[760px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl z-50 bg-[#025a73]/95 backdrop-blur-md border border-white/10 text-white">
       <div className="flex">
         {/* Left: category list */}
-        <div className="w-56 bg-black/20 p-3 flex flex-col gap-1">
+        <div className="w-52 bg-black/20 p-3 flex flex-col gap-1">
           {SERVICE_CATEGORIES.map((cat) => {
             const Icon = cat.icon;
             const isActive = activeCategory.title === cat.title;
@@ -113,35 +130,54 @@ export default function ServicesMegaMenu({ onClose }) {
           })}
         </div>
 
-        {/* Right: subcategories panel */}
+        {/* Right: groups grid */}
         <div className="flex-1 p-5">
           {activeCategory && (
             <>
-              <div className="mb-4 pb-3 border-b border-white/10">
-                <h3 className="font-bold text-white text-base">{activeCategory.title}</h3>
-                <p className="text-white/60 text-xs mt-0.5">{activeCategory.description}</p>
+              <div className="mb-4 pb-3 border-b border-white/10 flex items-center justify-between">
+                <div>
+                  <h3 className="font-bold text-white text-base">{activeCategory.title}</h3>
+                  <p className="text-white/60 text-xs mt-0.5">Оберіть категорію продукції</p>
+                </div>
+                <Link
+                  to={activeCategory.link}
+                  onClick={onClose}
+                  className="inline-flex items-center gap-1.5 text-xs text-yellow-400 hover:text-yellow-300 font-medium transition-colors"
+                >
+                  Переглянути всі <ChevronRight className="w-3 h-3" />
+                </Link>
               </div>
-              <ul className="space-y-1">
-                {activeCategory.subcategories.map((sub) => (
-                  <li key={sub.label}>
+              <div className="grid grid-cols-3 gap-5">
+                {activeCategory.groups.map((group) => (
+                  <div key={group.title}>
                     <Link
-                      to={sub.link}
+                      to={group.link}
                       onClick={onClose}
-                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm text-white/70 hover:text-white hover:bg-white/10 transition-all group"
+                      className="block text-xs font-bold uppercase tracking-wide text-yellow-400 hover:text-yellow-300 mb-2 transition-colors"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-yellow-400/50 group-hover:bg-yellow-400 transition-colors shrink-0" />
-                      {sub.label}
+                      {group.title}
                     </Link>
-                  </li>
+                    <ul className="space-y-0.5">
+                      {group.items.map((item) => (
+                        <li key={item.label}>
+                          <Link
+                            to={item.link}
+                            onClick={onClose}
+                            className={`flex items-center gap-2 px-2.5 py-1.5 rounded-lg text-sm transition-all ${
+                              item.highlight
+                                ? 'bg-cyan-400/20 text-cyan-200 hover:bg-cyan-400/30'
+                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                            }`}
+                          >
+                            <span className={`w-1.5 h-1.5 rounded-full ${item.highlight ? 'bg-cyan-300' : 'bg-white/30'} shrink-0`} />
+                            {item.label}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 ))}
-              </ul>
-              <Link
-                to={activeCategory.link}
-                onClick={onClose}
-                className="mt-4 inline-flex items-center gap-1.5 text-xs text-yellow-400 hover:text-yellow-300 font-medium transition-colors"
-              >
-                Переглянути всі <ChevronRight className="w-3 h-3" />
-              </Link>
+              </div>
             </>
           )}
         </div>
