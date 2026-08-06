@@ -1,12 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, ChevronDown } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, ChevronDown, Search, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+
+  const submitSearch = (e) => {
+    e.preventDefault();
+    if (!searchQuery.trim()) return;
+    navigate(`/catalog?q=${encodeURIComponent(searchQuery.trim())}`);
+    setSearchOpen(false);
+    setSearchQuery('');
+  };
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -52,7 +63,7 @@ export default function Header() {
               className="h-12 w-auto"
             />
           </Link>
-          <div className="relative shrink-0" ref={menuRef}>
+          <div className="relative shrink-0 ml-1" ref={menuRef}>
             <button
               onClick={() => setServicesOpen((v) => !v)}
               className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
@@ -65,8 +76,36 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Right: Cabinet + Cart */}
+        {/* Right: Search + Cabinet + Cart */}
         <div className="flex items-center justify-end justify-self-end ml-auto order-2 gap-1">
+          <div className="flex items-center">
+            {searchOpen && (
+              <form onSubmit={submitSearch} className="relative flex items-center mr-1">
+                <input
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Пошук товарів..."
+                  className="h-10 w-40 sm:w-64 px-3 pr-9 rounded-full border border-input bg-muted/40 text-sm text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                />
+                <button
+                  type="button"
+                  onClick={() => { setSearchOpen(false); setSearchQuery(''); }}
+                  className="absolute right-2 w-6 h-6 flex items-center justify-center rounded-full text-muted-foreground hover:text-foreground"
+                  aria-label="Закрити пошук"
+                >
+                  <X className="w-3.5 h-3.5" />
+                </button>
+              </form>
+            )}
+            <button
+              onClick={() => setSearchOpen((v) => !v)}
+              className="w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+              aria-label="Пошук"
+            >
+              <Search className="w-5 h-5" />
+            </button>
+          </div>
           <Link
             to="/cabinet"
             className="flex items-center gap-2 h-10 px-3 rounded-full text-foreground hover:bg-muted transition-colors"

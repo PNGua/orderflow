@@ -7,7 +7,7 @@
 
 @layer base {
   :root {
-    --font-inter: 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
+    --font-inter: 'Inter', 'Century Gothic', 'CenturyGothic', 'AppleGothic', sans-serif;
 
     --background: 220 20% 97%;
     --foreground: 220 20% 10%;

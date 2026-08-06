@@ -92,7 +92,7 @@ export default function Catalog() {
   const [activeCategory, setActiveCategory] = useState(
     initialCat && validCats.includes(initialCat) ? initialCat : 'all'
   );
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState(urlParams.get('q') || '');
 
   const filtered = useMemo(() => {
     return PRODUCTS.filter((p) => {
