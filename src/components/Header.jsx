@@ -2,12 +2,14 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, ChevronDown, Search, X } from 'lucide-react';
 import Navbar from '@/components/Navbar';
+import MobileNav from '@/components/MobileNav';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
+  const [navOpen, setNavOpen] = useState(false);
   const menuRef = useRef(null);
   const navigate = useNavigate();
 
@@ -120,15 +122,18 @@ export default function Header() {
             <ShoppingCart className="w-5 h-5" />
             <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
           </button>
+          {/* Mobile burger */}
+          <button
+            onClick={() => setNavOpen((v) => !v)}
+            className="lg:hidden w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+            aria-label="Меню"
+          >
+            {navOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
         </div>
       </div>
 
-      {/* Navigation Row (mobile + tablet only) */}
-      <div className="border-t border-border/60 lg:hidden">
-        <div className="container mx-auto px-4 py-1">
-          <Navbar className="justify-center overflow-x-auto" />
-        </div>
-      </div>
+      {navOpen && <MobileNav onClose={() => setNavOpen(false)} />}
     </header>
   );
 }
