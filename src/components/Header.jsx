@@ -36,18 +36,16 @@ export default function Header() {
       {/* Top Bar */}
       <div className="bg-primary text-primary-foreground py-1.5">
         <div className="container mx-auto flex items-center justify-between text-xs px-4 lg:px-8 gap-3">
-          {/* Left: phone + socials */}
-          <div className="flex items-center gap-3 shrink-0">
-            <div className="flex items-center gap-2">
-              <Phone className="w-3 h-3" />
-              <span>+38 073 933 88 95</span>
-            </div>
-            <span className="w-px h-3 bg-white/30 hidden sm:block" />
-            <div className="hidden sm:flex items-center gap-2">
-              <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
-            </div>
+          {/* Left: socials (desktop) */}
+          <div className="hidden lg:flex items-center gap-2 shrink-0">
+            <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
+            <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
+            <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+          </div>
+          {/* Phone: right on mobile/tablet, left on desktop */}
+          <div className="flex items-center gap-3 shrink-0 order-last lg:order-none lg:mr-auto">
+            <Phone className="w-3 h-3" />
+            <span>+38 073 933 88 95</span>
           </div>
           {/* Desktop: navigation in top bar */}
           <Navbar light className="hidden lg:flex justify-end ml-auto" />
