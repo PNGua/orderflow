@@ -5,7 +5,6 @@ const NAV_ITEMS = [
   { label: 'Головна', to: '/' },
   { label: 'Технології друку', to: '/dtf-print' },
   { label: 'Послуги', to: '/services' },
-  { label: 'Товари', to: '/catalog' },
   { label: 'Блог', to: '/blog' },
   { label: 'Контакти', to: '/contacts' },
 ];

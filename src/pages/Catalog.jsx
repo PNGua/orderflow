@@ -86,7 +86,12 @@ function ProductCard({ product }) {
 }
 
 export default function Catalog() {
-  const [activeCategory, setActiveCategory] = useState('all');
+  const urlParams = new URLSearchParams(window.location.search);
+  const initialCat = urlParams.get('cat');
+  const validCats = CATEGORIES.map((c) => c.id);
+  const [activeCategory, setActiveCategory] = useState(
+    initialCat && validCats.includes(initialCat) ? initialCat : 'all'
+  );
   const [search, setSearch] = useState('');
 
   const filtered = useMemo(() => {

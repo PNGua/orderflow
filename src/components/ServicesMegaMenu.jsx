@@ -5,12 +5,13 @@ import { Printer, ChevronRight } from 'lucide-react';
 const SERVICE_CATEGORIES = [
   {
     title: 'ДТФ друк',
+    cat: 'dtf',
     icon: Printer,
-    link: '/dtf-print',
+    link: '/catalog?cat=dtf',
     groups: [
       {
         title: 'ДТФ друк в рулонах',
-        link: '/dtf-print',
+        link: '/catalog?cat=dtf',
         items: [
           { label: 'ДТФ плівка преміум', link: '/dtf-print' },
           { label: 'ДТФ плівка золота фольга', link: '/dtf-print', highlight: true },
@@ -25,12 +26,13 @@ const SERVICE_CATEGORIES = [
   },
   {
     title: 'УФ ДТФ друк',
+    cat: 'uv_dtf',
     icon: Printer,
-    link: '/dtf-print',
+    link: '/catalog?cat=uv_dtf',
     groups: [
       {
         title: 'УФ ДТФ друк в рулонах',
-        link: '/dtf-print',
+        link: '/catalog?cat=uv_dtf',
         items: [
           { label: 'Преміум УФ ДТФ плівка', link: '/dtf-print' },
           { label: 'Золота УФ ДТФ плівка', link: '/dtf-print' },
@@ -41,12 +43,13 @@ const SERVICE_CATEGORIES = [
   },
   {
     title: 'Взірці',
+    cat: 'samples',
     icon: Printer,
-    link: '/dtf-print',
+    link: '/catalog?cat=samples',
     groups: [
       {
         title: 'Взірці',
-        link: '/dtf-print',
+        link: '/catalog?cat=samples',
         items: [
           { label: 'Папка з взірцями DTF та UV DTF', link: '/dtf-print' },
           { label: 'Взірці УФ ДТФ друку та плівки', link: '/dtf-print' },
