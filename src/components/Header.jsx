@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, ShoppingCart, User, Menu, ChevronDown } from 'lucide-react';
+import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
@@ -51,10 +51,6 @@ export default function Header() {
             <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
             <Link to="/qna" className="hover:opacity-80">Q&A</Link>
             <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
-            <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
-              <User className="w-3 h-3" />
-              Вхід/Реєстрація
-            </Link>
           </div>
         </div>
       </div>
@@ -83,8 +79,16 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Right: Cart */}
-        <div className="flex items-center justify-end justify-self-end ml-auto order-2">
+        {/* Right: Cabinet + Cart */}
+        <div className="flex items-center justify-end justify-self-end ml-auto order-2 gap-1">
+          <Link
+            to="/cabinet"
+            className="flex items-center gap-2 h-10 px-3 rounded-full text-foreground hover:bg-muted transition-colors"
+            aria-label="Кабінет"
+          >
+            <UserRound className="w-5 h-5" />
+            <span className="text-sm font-medium hidden sm:inline">Вхід / Реєстрація</span>
+          </Link>
           <button
             className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
             aria-label="Кошик"
