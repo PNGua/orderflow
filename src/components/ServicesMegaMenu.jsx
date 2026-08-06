@@ -64,7 +64,7 @@ export default function ServicesMegaMenu({ onClose }) {
   const [activeCategory, setActiveCategory] = useState(SERVICE_CATEGORIES[0]);
 
   return (
-    <div className="absolute top-full left-0 mt-1 w-[520px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl z-50 bg-white border border-slate-200 text-foreground">
+    <div className="absolute top-full left-0 mt-1 w-[720px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl z-50 bg-white border border-slate-200 text-foreground">
       <div className="flex">
         {/* Left: category list */}
         <div className="w-52 bg-slate-50 p-3 flex flex-col gap-1 border-r border-slate-200">
