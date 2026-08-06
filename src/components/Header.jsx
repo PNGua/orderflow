@@ -53,8 +53,8 @@ export default function Header() {
 
       {/* Main Bar */}
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 py-3 px-4 lg:px-8">
-        {/* Left: logo + Замовити друк button (with mega-menu) */}
-        <div className="flex items-center gap-4 justify-self-start order-1">
+        {/* Left: logo */}
+        <div className="flex items-center justify-self-start order-1">
           <Link to="/" className="flex items-center shrink-0">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
@@ -62,6 +62,11 @@ export default function Header() {
               className="h-14 w-auto"
             />
           </Link>
+        </div>
+
+        {/* Middle: navigation + Замовити друк button (with mega-menu) */}
+        <div className="flex items-center justify-center gap-3 order-3 lg:order-2 w-full lg:w-auto">
+          <Navbar />
           <div className="relative shrink-0" ref={menuRef}>
             <button
               onClick={() => setServicesOpen((v) => !v)}
@@ -74,9 +79,6 @@ export default function Header() {
             {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
           </div>
         </div>
-
-        {/* Middle navigation */}
-        <Navbar />
 
         {/* Search + Cart */}
         <div className="flex items-center justify-end gap-2 justify-self-end order-2 lg:order-3">
