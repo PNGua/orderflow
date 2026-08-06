@@ -1,23 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
-  const navigate = useNavigate();
   const [servicesOpen, setServicesOpen] = useState(false);
   const menuRef = useRef(null);
-
-  const goToCalculator = (e) => {
-    e.preventDefault();
-    if (window.location.pathname !== '/') {
-      navigate('/');
-      setTimeout(() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
-    } else {
-      document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
-  };
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -41,16 +30,11 @@ export default function Header() {
           </div>
           {/* Center: navigation */}
           <Navbar light className="order-3 w-full lg:order-2 lg:w-auto basis-full lg:basis-0 mt-2 lg:mt-0" />
-          {/* Right: utility links */}
-          <div className="flex flex-wrap items-center gap-3 shrink-0">
-            <div className="flex items-center gap-2">
-              <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
-            </div>
-            <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
-            <Link to="/qna" className="hover:opacity-80">Q&A</Link>
-            <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
+          {/* Right: social networks */}
+          <div className="flex items-center gap-3 shrink-0">
+            <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
+            <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
+            <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
           </div>
         </div>
       </div>
