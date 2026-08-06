@@ -113,13 +113,14 @@ export default function Header() {
               <UserRound className="w-5 h-5" />
               <span className="text-sm font-medium hidden sm:inline">Вхід / Реєстрація</span>
             </Link>
-            <button
+            <Link
+              to="/cart"
               className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
               aria-label="Кошик"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
-            </button>
+              <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">1</span>
+            </Link>
             {/* Mobile burger */}
             <button
               onClick={() => setNavOpen((v) => !v)}
