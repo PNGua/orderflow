@@ -21,6 +21,13 @@ const SERVICE_CATEGORIES = [
           { label: 'ДТФ плівка рефлектив', link: '/dtf-print' },
         ],
       },
+    ],
+  },
+  {
+    title: 'УФ ДТФ друк',
+    icon: Printer,
+    link: '/dtf-print',
+    groups: [
       {
         title: 'УФ ДТФ друк в рулонах',
         link: '/dtf-print',
@@ -30,6 +37,13 @@ const SERVICE_CATEGORIES = [
           { label: 'Срібна УФ ДТФ плівка', link: '/dtf-print' },
         ],
       },
+    ],
+  },
+  {
+    title: 'Взірці',
+    icon: Printer,
+    link: '/dtf-print',
+    groups: [
       {
         title: 'Взірці',
         link: '/dtf-print',
@@ -47,7 +61,7 @@ export default function ServicesMegaMenu({ onClose }) {
   const [activeCategory, setActiveCategory] = useState(SERVICE_CATEGORIES[0]);
 
   return (
-    <div className="absolute top-full left-0 mt-1 w-[760px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl z-50 bg-white border border-slate-200 text-foreground">
+    <div className="absolute top-full left-0 mt-1 w-[520px] max-w-[calc(100vw-2rem)] rounded-2xl overflow-hidden shadow-2xl z-50 bg-white border border-slate-200 text-foreground">
       <div className="flex">
         {/* Left: category list */}
         <div className="w-52 bg-slate-50 p-3 flex flex-col gap-1 border-r border-slate-200">
@@ -77,14 +91,14 @@ export default function ServicesMegaMenu({ onClose }) {
           })}
         </div>
 
-        {/* Right: groups grid */}
+        {/* Right: items */}
         <div className="flex-1 p-5">
           {activeCategory && (
             <>
               <div className="mb-4 pb-3 border-b border-slate-200 flex items-center justify-between">
                 <div>
                   <h3 className="font-bold text-foreground text-base">{activeCategory.title}</h3>
-                  <p className="text-muted-foreground text-xs mt-0.5">Оберіть категорію продукції</p>
+                  <p className="text-muted-foreground text-xs mt-0.5">Оберіть продукцію</p>
                 </div>
                 <Link
                   to={activeCategory.link}
@@ -94,7 +108,7 @@ export default function ServicesMegaMenu({ onClose }) {
                   Переглянути всі <ChevronRight className="w-3 h-3" />
                 </Link>
               </div>
-              <div className="grid grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 gap-x-5 gap-y-1">
                 {activeCategory.groups.map((group) => (
                   <div key={group.title}>
                     <Link
