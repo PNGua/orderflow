@@ -65,20 +65,9 @@ export default function Header() {
               className="h-12 w-auto"
             />
           </Link>
-          <div className="relative shrink-0 ml-1" ref={menuRef}>
-            <button
-              onClick={() => setServicesOpen((v) => !v)}
-              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
-            >
-              <Menu className="w-4 h-4" />
-              Замовити друк
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
-          </div>
         </div>
 
-        {/* Right: Search (lg only) + Cabinet + Cart */}
+        {/* Right: Search (lg only) + Замовити друк + Cabinet + Cart */}
         <div className="flex items-center justify-end ml-auto order-2 gap-2">
           <div className="hidden lg:flex items-center max-w-md xl:max-w-lg flex-1 min-w-0">
             {searchOpen && (
@@ -106,6 +95,17 @@ export default function Header() {
             >
               <Search className="w-5 h-5" />
             </button>
+          </div>
+          <div className="relative shrink-0" ref={menuRef}>
+            <button
+              onClick={() => setServicesOpen((v) => !v)}
+              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
+            >
+              <Menu className="w-4 h-4" />
+              <span className="hidden sm:inline">Замовити друк</span>
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
           </div>
           <Link
             to="/cabinet"
