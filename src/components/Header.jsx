@@ -47,8 +47,6 @@ export default function Header() {
               <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
             </div>
           </div>
-          {/* Right: navigation (last item aligns with cart) */}
-          <Navbar light className="flex-1 justify-end basis-full sm:basis-0 order-3 sm:order-2 mt-2 sm:mt-0" />
         </div>
       </div>
 
@@ -76,9 +74,9 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Right: Search + Cabinet + Cart */}
-        <div className="flex items-center justify-end ml-auto order-2 gap-2 flex-1 min-w-0">
-          <div className="flex items-center flex-1 max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg min-w-0">
+        {/* Right: Search (lg only) + Cabinet + Cart */}
+        <div className="flex items-center justify-end ml-auto order-2 gap-2">
+          <div className="hidden lg:flex items-center max-w-md xl:max-w-lg flex-1 min-w-0">
             {searchOpen && (
               <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
                 <input
@@ -120,6 +118,13 @@ export default function Header() {
             <ShoppingCart className="w-5 h-5" />
             <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
           </button>
+        </div>
+      </div>
+
+      {/* Navigation Row */}
+      <div className="border-t border-border/60">
+        <div className="container mx-auto px-4 lg:px-8 py-2">
+          <Navbar className="justify-center lg:justify-start overflow-x-auto" />
         </div>
       </div>
     </header>
