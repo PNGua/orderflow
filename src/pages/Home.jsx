@@ -10,6 +10,7 @@ import PortfolioSection from '@/components/home/PortfolioSection';
 import FAQSection from '@/components/home/FAQSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import BlogSection from '@/components/home/BlogSection';
+import ProductsSection from '@/components/home/ProductsSection';
 import Calculator from '@/components/Calculator';
 
 const SERVICES = [
@@ -168,6 +169,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ProductsSection />
 
       <Calculator />
 
