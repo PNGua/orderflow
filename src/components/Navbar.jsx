@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 const NAV_ITEMS = [
   { label: 'Головна', to: '/' },
   { label: 'Технології друку', to: '/dtf-print' },
+  { label: 'Послуги', to: '/catalog' },
+  { label: 'Блог', to: '/blog' },
   { label: 'Контакти', to: '/contacts' },
 ];
 
