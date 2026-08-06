@@ -11,12 +11,12 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   return (
-    <nav className="flex items-center gap-1">
+    <nav className="flex-1 flex items-center justify-center gap-1">
       {NAV_ITEMS.map((item) => (
         <Link
           key={item.to}
           to={item.to}
-          className="px-3 py-2 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-muted/50 transition-colors whitespace-nowrap"
+          className="px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-muted/50 transition-colors whitespace-nowrap"
         >
           {item.label}
         </Link>

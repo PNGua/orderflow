@@ -106,16 +106,16 @@ export default function Header() {
                 aria-label="Пошук"
               >
                 <Search className="w-6 h-6" />
-                <span className="text-xs">Пошук</span>
+                <span className="text-xs text-muted-foreground mt-1">Пошук</span>
               </button>
             )}
           </div>
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col items-center leading-none">
             <div className="relative">
               <ShoppingCart className="w-6 h-6 text-foreground" />
               <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
             </div>
-            <span className="text-xs text-muted-foreground">Кошик</span>
+            <span className="text-xs text-muted-foreground mt-1">Кошик</span>
           </div>
         </div>
       </div>
