@@ -10,6 +10,7 @@ import PortfolioSection from '@/components/home/PortfolioSection';
 import FAQSection from '@/components/home/FAQSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import BlogSection from '@/components/home/BlogSection';
+import Calculator from '@/components/Calculator';
 
 const SERVICES = [
   {
@@ -66,6 +67,8 @@ export default function Home() {
       <Header />
 
       <HeroSlider />
+
+      <Calculator />
 
       {/* ABOUT */}
       <section className="py-14 bg-background">

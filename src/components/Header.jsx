@@ -1,12 +1,23 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Phone, Facebook, Instagram, Youtube, ShoppingCart, User, Menu, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
+  const navigate = useNavigate();
   const [servicesOpen, setServicesOpen] = useState(false);
   const menuRef = useRef(null);
+
+  const goToCalculator = (e) => {
+    e.preventDefault();
+    if (window.location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' }), 200);
+    } else {
+      document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
 
   useEffect(() => {
     function handleClickOutside(e) {
@@ -33,7 +44,7 @@ export default function Header() {
               <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
               <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
             </div>
-            <Link to="/calculator" className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors">Калькулятор</Link>
+            <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
             <Link to="/qna" className="hover:opacity-80">Q&A</Link>
             <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
             <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
