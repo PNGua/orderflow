@@ -47,35 +47,34 @@ export default function Header() {
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto flex items-center justify-between gap-4 py-3 px-4 lg:px-8">
-        <div className="flex items-center gap-4">
-          <Link to="/" className="flex items-center shrink-0">
+      <div className="container mx-auto flex items-center gap-6 py-3 px-4 lg:px-8">
+        {/* Left: logo + Замовити друк button (with mega-menu) */}
+        <div className="flex items-center gap-4 shrink-0">
+          <Link to="/" className="flex items-center">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
               alt="PNG druk — фабрика друку та брендування"
               className="h-14 w-auto"
             />
           </Link>
-        </div>
-
-        {/* Замовити друк button (with mega-menu) */}
-        <div className="relative shrink-0" ref={menuRef}>
-          <button
-            onClick={() => setServicesOpen((v) => !v)}
-            className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
-          >
-            <Menu className="w-4 h-4" />
-            Замовити друк
-            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-          </button>
-          {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
+          <div className="relative shrink-0" ref={menuRef}>
+            <button
+              onClick={() => setServicesOpen((v) => !v)}
+              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
+            >
+              <Menu className="w-4 h-4" />
+              Замовити друк
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
+          </div>
         </div>
 
         {/* Middle navigation */}
         <Navbar />
 
         {/* Search + Cart */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 ml-auto">
           <div className="relative">
             <Input
               type="text"
