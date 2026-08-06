@@ -9,9 +9,9 @@ const NAV_ITEMS = [
   { label: 'Контакти', to: '/contacts' },
 ];
 
-export default function Navbar() {
+export default function Navbar({ className = '' }) {
   return (
-    <nav className="flex-1 flex items-center justify-center gap-1">
+    <nav className={`flex items-center justify-center gap-1 flex-1 order-3 lg:order-2 w-full lg:w-auto overflow-x-auto ${className}`}>
       {NAV_ITEMS.map((item) => (
         <Link
           key={item.to}

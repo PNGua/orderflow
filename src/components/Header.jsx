@@ -52,9 +52,9 @@ export default function Header() {
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-6 py-3 px-4 lg:px-8">
+      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 py-3 px-4 lg:px-8">
         {/* Left: logo + Замовити друк button (with mega-menu) */}
-        <div className="flex items-center gap-4 justify-self-start">
+        <div className="flex items-center gap-4 justify-self-start order-1">
           <Link to="/" className="flex items-center shrink-0">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
@@ -79,7 +79,7 @@ export default function Header() {
         <Navbar />
 
         {/* Search + Cart */}
-        <div className="flex items-center justify-end gap-2 justify-self-end">
+        <div className="flex items-center justify-end gap-2 justify-self-end order-2 lg:order-3">
           <div className="relative" ref={searchRef}>
             {searchOpen ? (
               <div className="relative animate-in fade-in slide-in-from-right-2 duration-200">
