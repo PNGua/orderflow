@@ -47,6 +47,8 @@ export default function Header() {
               <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
             </div>
           </div>
+          {/* Desktop: navigation in top bar */}
+          <Navbar light className="hidden lg:flex justify-end ml-auto" />
         </div>
       </div>
 
@@ -121,10 +123,10 @@ export default function Header() {
         </div>
       </div>
 
-      {/* Navigation Row */}
-      <div className="border-t border-border/60">
-        <div className="container mx-auto px-4 lg:px-8 py-1">
-          <Navbar className="justify-center lg:justify-start overflow-x-auto" />
+      {/* Navigation Row (mobile + tablet only) */}
+      <div className="border-t border-border/60 lg:hidden">
+        <div className="container mx-auto px-4 py-1">
+          <Navbar className="justify-center overflow-x-auto" />
         </div>
       </div>
     </header>
