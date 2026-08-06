@@ -66,6 +66,18 @@ export default function Header() {
             />
           </Link>
           <div className="flex items-center gap-2">
+            {/* Desktop: compact Замовити друк button inline */}
+            <div className="relative shrink-0 hidden lg:flex" ref={menuRef}>
+              <button
+                onClick={() => setServicesOpen((v) => !v)}
+                className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
+              >
+                <Menu className="w-4 h-4" />
+                <span>Замовити друк</span>
+                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+              </button>
+              {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
+            </div>
             <div className="hidden lg:flex items-center max-w-md xl:max-w-lg min-w-0">
               {searchOpen && (
                 <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
@@ -119,8 +131,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Row 2: Замовити друк — full width */}
-        <div className="relative w-full" ref={menuRef}>
+        {/* Row 2 (mobile only): Замовити друк — full width */}
+        <div className="relative w-full lg:hidden" ref={menuRef}>
           <button
             onClick={() => setServicesOpen((v) => !v)}
             className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors"
