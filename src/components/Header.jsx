@@ -1,24 +1,10 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, Search, ShoppingCart, Menu, User } from 'lucide-react';
-import { Button } from "@/components/ui/button";
+import { Phone, Facebook, Instagram, Youtube, Search, ShoppingCart, User } from 'lucide-react';
 import { Input } from "@/components/ui/input";
-import ServicesMegaMenu from '@/components/ServicesMegaMenu';
+import Navbar from '@/components/Navbar';
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const menuRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
-        setMenuOpen(false);
-      }
-    }
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, []);
-
   return (
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
@@ -57,16 +43,7 @@ export default function Header() {
               className="h-14 w-auto"
             />
           </Link>
-          <div className="relative" ref={menuRef}>
-            <Button
-              className="gap-2 bg-primary hover:bg-primary/90 text-primary-foreground"
-              onClick={() => setMenuOpen((v) => !v)}
-            >
-              <Menu className="w-4 h-4" />
-              Замовити друк
-            </Button>
-            {menuOpen && <ServicesMegaMenu onClose={() => setMenuOpen(false)} />}
-          </div>
+          <Navbar />
         </div>
 
         <div className="flex items-center gap-3">
