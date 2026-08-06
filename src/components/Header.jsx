@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, Search, ShoppingCart, User } from 'lucide-react';
+import { Phone, Facebook, Instagram, Youtube, Search, ShoppingCart, User, Menu, ChevronDown } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import Navbar from '@/components/Navbar';
+import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
+  const [servicesOpen, setServicesOpen] = useState(false);
+  const menuRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(e) {
+      if (menuRef.current && !menuRef.current.contains(e.target)) {
+        setServicesOpen(false);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   return (
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
@@ -24,28 +38,43 @@ export default function Header() {
             <Link to="/qna" className="hover:opacity-80">Q&A</Link>
             <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
             <Link to="/blog" className="hover:opacity-80">Блог</Link>
-            <Link to="/contacts" className="hover:opacity-80">Контакти</Link>
             <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
               <User className="w-3 h-3" />
-              Усік Андрій
+              Вхід/Реєстрація
             </Link>
           </div>
         </div>
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto flex items-center justify-between py-3 px-4 lg:px-8">
+      <div className="container mx-auto flex items-center justify-between gap-4 py-3 px-4 lg:px-8">
         <div className="flex items-center gap-4">
-          <Link to="/" className="flex items-center">
+          <Link to="/" className="flex items-center shrink-0">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
               alt="PNG druk — фабрика друку та брендування"
               className="h-14 w-auto"
             />
           </Link>
-          <Navbar />
         </div>
 
+        {/* Замовити друк button (with mega-menu) */}
+        <div className="relative shrink-0" ref={menuRef}>
+          <button
+            onClick={() => setServicesOpen((v) => !v)}
+            className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
+          >
+            <Menu className="w-4 h-4" />
+            Замовити друк
+            <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+          </button>
+          {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
+        </div>
+
+        {/* Middle navigation */}
+        <Navbar />
+
+        {/* Search + Cart */}
         <div className="flex items-center gap-3">
           <div className="relative">
             <Input
