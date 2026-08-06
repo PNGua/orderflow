@@ -127,13 +127,13 @@ export default function HeroSlider() {
       {/* Arrows (desktop only) */}
       <button
         onClick={scrollPrev}
-        className="hidden md:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-2 transition-all items-center justify-center"
+        className="hidden lg:flex absolute left-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-2 transition-all items-center justify-center"
       >
         <ChevronLeft className="w-6 h-6" />
       </button>
       <button
         onClick={scrollNext}
-        className="hidden md:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-2 transition-all items-center justify-center"
+        className="hidden lg:flex absolute right-4 top-1/2 -translate-y-1/2 z-10 bg-white/20 hover:bg-white/30 backdrop-blur-sm text-white rounded-full p-2 transition-all items-center justify-center"
       >
         <ChevronRight className="w-6 h-6" />
       </button>
