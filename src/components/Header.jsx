@@ -66,8 +66,8 @@ export default function Header() {
                 className="h-12 w-auto"
               />
             </Link>
-            {/* Desktop: Замовити друк button next to logo */}
-            <div className="relative shrink-0 hidden lg:block" ref={menuRef}>
+            {/* Desktop & Tablet: Замовити друк button next to logo */}
+            <div className="relative shrink-0 hidden md:block" ref={menuRef}>
               <button
                 onClick={() => setServicesOpen((v) => !v)}
                 className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
@@ -80,17 +80,6 @@ export default function Header() {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            {/* Tablet: compact Замовити друк button inline */}
-            <div className="relative shrink-0 hidden md:flex lg:hidden" ref={menuRef}>
-              <button
-                onClick={() => setServicesOpen((v) => !v)}
-                className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
-              >
-                <span>Замовити друк</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-              </button>
-              {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
-            </div>
             <div className="hidden lg:flex items-center max-w-md xl:max-w-lg min-w-0">
               {searchOpen && (
                 <form onSubmit={submitSearch} className="relative flex items-center mr-1 flex-1 min-w-0">
