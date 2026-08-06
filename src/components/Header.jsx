@@ -102,7 +102,7 @@ export default function Header() {
               className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
             >
               <Menu className="w-4 h-4" />
-              <span className="hidden sm:inline">Замовити друк</span>
+              <span className="inline">Замовити друк</span>
               <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
             </button>
             {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
