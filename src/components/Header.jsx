@@ -52,10 +52,10 @@ export default function Header() {
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto flex items-center gap-6 py-3 px-4 lg:px-8">
+      <div className="container mx-auto grid grid-cols-[1fr_auto_1fr] items-center gap-6 py-3 px-4 lg:px-8">
         {/* Left: logo + Замовити друк button (with mega-menu) */}
-        <div className="flex items-center gap-4 shrink-0">
-          <Link to="/" className="flex items-center">
+        <div className="flex items-center gap-4 justify-self-start">
+          <Link to="/" className="flex items-center shrink-0">
             <img
               src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
               alt="PNG druk — фабрика друку та брендування"
@@ -79,7 +79,7 @@ export default function Header() {
         <Navbar />
 
         {/* Search + Cart */}
-        <div className="flex items-center gap-3 ml-auto">
+        <div className="flex items-center justify-end gap-2 justify-self-end">
           <div className="relative" ref={searchRef}>
             {searchOpen ? (
               <div className="relative animate-in fade-in slide-in-from-right-2 duration-200">
@@ -102,21 +102,20 @@ export default function Header() {
             ) : (
               <button
                 onClick={() => setSearchOpen(true)}
-                className="flex flex-col items-center text-muted-foreground hover:text-foreground transition-colors"
+                className="w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
                 aria-label="Пошук"
               >
-                <Search className="w-6 h-6" />
-                <span className="text-xs text-muted-foreground mt-1">Пошук</span>
+                <Search className="w-5 h-5" />
               </button>
             )}
           </div>
-          <div className="flex flex-col items-center leading-none">
-            <div className="relative">
-              <ShoppingCart className="w-6 h-6 text-foreground" />
-              <span className="absolute -top-1 -right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
-            </div>
-            <span className="text-xs text-muted-foreground mt-1">Кошик</span>
-          </div>
+          <button
+            className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
+            aria-label="Кошик"
+          >
+            <ShoppingCart className="w-5 h-5" />
+            <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">0</span>
+          </button>
         </div>
       </div>
     </header>
