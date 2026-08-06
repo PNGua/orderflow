@@ -92,27 +92,27 @@ export default function HeroSlider() {
               <div className="absolute inset-0 bg-gradient-to-br from-[#037291]/90 to-[#025a73]/85" />
 
               {/* Content */}
-              <div className="relative container mx-auto px-4 lg:px-8 py-20 lg:py-28 max-w-6xl">
+              <div className="relative container mx-auto px-4 lg:px-8 py-10 sm:py-14 lg:py-28 max-w-6xl">
                 <div className="max-w-2xl">
                   <span className="inline-block bg-white/20 text-white text-xs font-semibold px-3 py-1 rounded-full mb-4 backdrop-blur-sm">
                     {slide.badge}
                   </span>
-                  <h1 className="text-4xl lg:text-6xl font-bold leading-tight mb-5 text-white">
+                  <h1 className="text-3xl sm:text-4xl lg:text-6xl font-bold leading-tight mb-5 text-white">
                     {slide.title}<br />
                     <span className="text-yellow-300">{slide.highlight}</span>
                   </h1>
-                  <p className="text-white/80 text-lg mb-8 leading-relaxed max-w-lg">
+                  <p className="text-white/80 text-sm sm:text-base lg:text-lg mb-6 sm:mb-8 leading-relaxed max-w-lg">
                     {slide.text}
                   </p>
                   <div className="flex flex-wrap gap-3">
                     <Link to={slide.primaryLink}>
-                      <Button size="lg" className="bg-white text-[#037291] hover:bg-white/90 font-bold px-6 shadow-lg">
+                      <Button size="default" className="bg-white text-[#037291] hover:bg-white/90 font-bold px-5 sm:px-6 shadow-lg sm:size-lg">
                         {slide.primaryLabel}
                         <ArrowRight className="w-4 h-4 ml-1" />
                       </Button>
                     </Link>
                     <Link to={slide.secondaryLink}>
-                      <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 font-semibold px-6">
+                      <Button size="default" variant="outline" className="border-white/50 text-white hover:bg-white/10 font-semibold px-5 sm:px-6 sm:size-lg">
                         {slide.secondaryLabel}
                       </Button>
                     </Link>
