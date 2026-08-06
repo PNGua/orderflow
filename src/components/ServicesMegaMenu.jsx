@@ -133,9 +133,9 @@ export default function ServicesMegaMenu({ onClose }) {
       </div>
 
       {/* Desktop: two-column layout */}
-      <div className="hidden sm:flex">
+      <div className="hidden sm:flex min-h-[360px]">
         {/* Left: category list */}
-        <div className="w-52 bg-slate-50 p-3 flex flex-col gap-1 border-r border-slate-200">
+        <div className="w-52 bg-slate-50 p-3 flex flex-col gap-1 border-r border-slate-200 min-h-[360px]">
           {SERVICE_CATEGORIES.map((cat) => {
             const Icon = cat.icon;
             const isActive = openCategory?.title === cat.title;
