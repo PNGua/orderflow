@@ -6,7 +6,7 @@ import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const menuRef = useRef(null);
   const navigate = useNavigate();
