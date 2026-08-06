@@ -72,7 +72,6 @@ export default function Header() {
                 onClick={() => setServicesOpen((v) => !v)}
                 className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
               >
-                <Menu className="w-4 h-4" />
                 <span>Замовити друк</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -86,7 +85,6 @@ export default function Header() {
                 onClick={() => setServicesOpen((v) => !v)}
                 className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors whitespace-nowrap"
               >
-                <Menu className="w-4 h-4" />
                 <span>Замовити друк</span>
                 <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
               </button>
@@ -151,7 +149,6 @@ export default function Header() {
             onClick={() => setServicesOpen((v) => !v)}
             className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors"
           >
-            <Menu className="w-5 h-5" />
             <span>Замовити друк</span>
             <ChevronDown className={`w-4 h-4 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
           </button>
