@@ -139,7 +139,7 @@ export default function HeroSlider() {
       </button>
 
       {/* Dots */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex gap-2">
+      <div className="absolute bottom-16 lg:bottom-24 left-1/2 -translate-x-1/2 z-10 flex gap-2">
         {SLIDES.map((_, i) => (
           <button
             key={i}
