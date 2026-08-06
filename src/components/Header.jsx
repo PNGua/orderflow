@@ -32,31 +32,40 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground py-2">
-        <div className="container mx-auto flex flex-wrap items-center justify-between text-xs px-4 lg:px-8 gap-2">
-          <div className="flex items-center gap-2">
-            <Phone className="w-3 h-3" />
-            <span>+38 073 933 88 95</span>
-          </div>
-          <div className="flex flex-wrap items-center gap-3">
+      <div className="bg-primary text-primary-foreground">
+        {/* Utility row */}
+        <div className="py-2">
+          <div className="container mx-auto flex flex-wrap items-center justify-between text-xs px-4 lg:px-8 gap-2">
             <div className="flex items-center gap-2">
-              <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
-              <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+              <Phone className="w-3 h-3" />
+              <span>+38 073 933 88 95</span>
             </div>
-            <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
-            <Link to="/qna" className="hover:opacity-80">Q&A</Link>
-            <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
-            <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
-              <User className="w-3 h-3" />
-              Вхід/Реєстрація
-            </Link>
+            <div className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2">
+                <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
+                <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
+                <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+              </div>
+              <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
+              <Link to="/qna" className="hover:opacity-80">Q&A</Link>
+              <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
+              <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
+                <User className="w-3 h-3" />
+                Вхід/Реєстрація
+              </Link>
+            </div>
+          </div>
+        </div>
+        {/* Navigation row */}
+        <div className="border-t border-white/15 py-1">
+          <div className="container mx-auto flex items-center justify-center px-4 lg:px-8">
+            <Navbar light />
           </div>
         </div>
       </div>
 
       {/* Main Bar */}
-      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 py-3 px-4 lg:px-8">
+      <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 py-3 px-4 lg:px-8">
         {/* Left: logo + Замовити друк (mega-menu) */}
         <div className="flex items-center justify-self-start gap-3 order-1">
           <Link to="/" className="flex items-center shrink-0">
@@ -79,13 +88,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Middle: navigation */}
-        <div className="flex items-center justify-center gap-3 order-3 lg:order-2 w-full lg:w-auto">
-          <Navbar />
-        </div>
-
         {/* Right: Cart */}
-        <div className="flex items-center justify-end justify-self-end order-2 lg:order-3">
+        <div className="flex items-center justify-end justify-self-end ml-auto order-2">
           <button
             className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
             aria-label="Кошик"
