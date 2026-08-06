@@ -1,24 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Facebook, Instagram, Youtube, Search, ShoppingCart, User, Menu, ChevronDown } from 'lucide-react';
-import { Input } from "@/components/ui/input";
+import { Phone, Facebook, Instagram, Youtube, ShoppingCart, User, Menu, ChevronDown } from 'lucide-react';
 import Navbar from '@/components/Navbar';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
-  const [searchValue, setSearchValue] = useState('');
   const menuRef = useRef(null);
-  const searchRef = useRef(null);
 
   useEffect(() => {
     function handleClickOutside(e) {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
         setServicesOpen(false);
-      }
-      if (searchRef.current && !searchRef.current.contains(e.target)) {
-        setSearchOpen(false);
       }
     }
     document.addEventListener('mousedown', handleClickOutside);
@@ -80,38 +73,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Search + Cart */}
-        <div className="flex items-center justify-end gap-2 justify-self-end order-2 lg:order-3">
-          <div className="relative" ref={searchRef}>
-            <button
-              onClick={() => setSearchOpen((v) => !v)}
-              className="w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
-              aria-label="Пошук"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-            {searchOpen && (
-              <div className="absolute right-0 top-full mt-2 z-50 animate-in fade-in slide-in-from-top-1 duration-200">
-                <div className="relative">
-                  <Input
-                    type="text"
-                    autoFocus
-                    placeholder="Я шукаю..."
-                    value={searchValue}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onKeyDown={(e) => e.key === 'Escape' && setSearchOpen(false)}
-                    className="pl-4 pr-10 py-2 rounded-full border border-input bg-white shadow-xl w-56 lg:w-72"
-                  />
-                  <button
-                    onClick={() => setSearchOpen(false)}
-                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-primary hover:bg-primary/90 text-primary-foreground rounded-full p-1.5"
-                  >
-                    <Search className="w-3.5 h-3.5" />
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
+        {/* Cart */}
+        <div className="flex items-center justify-end justify-self-end order-2 lg:order-3">
           <button
             className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
             aria-label="Кошик"
