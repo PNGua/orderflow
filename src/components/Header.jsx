@@ -57,15 +57,19 @@ export default function Header() {
 
       {/* Main Bar */}
       <div className="container mx-auto flex flex-wrap items-center justify-between gap-3 lg:grid lg:grid-cols-[1fr_auto_1fr] lg:items-center lg:gap-6 py-3 px-4 lg:px-8">
-        {/* Left: logo */}
+        {/* Left: Замовити друк (mega-menu) */}
         <div className="flex items-center justify-self-start order-1">
-          <Link to="/" className="flex items-center shrink-0">
-            <img
-              src="https://media.base44.com/images/public/69d39217874c6fe682eac60a/6122d3bff_PNGdruklogohorizontalblack.png"
-              alt="PNG druk — фабрика друку та брендування"
-              className="h-14 w-auto"
-            />
-          </Link>
+          <div className="relative shrink-0" ref={menuRef}>
+            <button
+              onClick={() => setServicesOpen((v) => !v)}
+              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
+            >
+              <Menu className="w-4 h-4" />
+              Замовити друк
+              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
+            </button>
+            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
+          </div>
         </div>
 
         {/* Middle: navigation */}
@@ -73,19 +77,8 @@ export default function Header() {
           <Navbar />
         </div>
 
-        {/* Right: Замовити друк + Cart */}
-        <div className="flex items-center justify-end justify-self-end gap-2 order-2 lg:order-3">
-          <div className="relative shrink-0" ref={menuRef}>
-            <button
-              onClick={() => setServicesOpen((v) => !v)}
-              className="flex items-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-2.5 rounded-lg font-semibold text-sm shadow-sm transition-colors"
-            >
-              <Menu className="w-4 h-4" />
-              <span className="hidden sm:inline">Замовити друк</span>
-              <ChevronDown className={`w-3.5 h-3.5 transition-transform ${servicesOpen ? 'rotate-180' : ''}`} />
-            </button>
-            {servicesOpen && <ServicesMegaMenu onClose={() => setServicesOpen(false)} />}
-          </div>
+        {/* Right: Cart */}
+        <div className="flex items-center justify-end justify-self-end order-2 lg:order-3">
           <button
             className="relative w-10 h-10 flex items-center justify-center rounded-full text-foreground hover:bg-muted transition-colors"
             aria-label="Кошик"
