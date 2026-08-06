@@ -32,34 +32,29 @@ export default function Header() {
   return (
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
-      <div className="bg-primary text-primary-foreground">
-        {/* Utility row */}
-        <div className="py-2">
-          <div className="container mx-auto flex flex-wrap items-center justify-between text-xs px-4 lg:px-8 gap-2">
-            <div className="flex items-center gap-2">
-              <Phone className="w-3 h-3" />
-              <span>+38 073 933 88 95</span>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2">
-                <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
-                <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
-                <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
-              </div>
-              <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
-              <Link to="/qna" className="hover:opacity-80">Q&A</Link>
-              <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
-              <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
-                <User className="w-3 h-3" />
-                Вхід/Реєстрація
-              </Link>
-            </div>
+      <div className="bg-primary text-primary-foreground py-1.5">
+        <div className="container mx-auto flex items-center justify-between text-xs px-4 lg:px-8 gap-4">
+          {/* Left: phone */}
+          <div className="flex items-center gap-2 shrink-0">
+            <Phone className="w-3 h-3" />
+            <span>+38 073 933 88 95</span>
           </div>
-        </div>
-        {/* Navigation row */}
-        <div className="border-t border-white/15 py-1">
-          <div className="container mx-auto flex items-center justify-center px-4 lg:px-8">
-            <Navbar light />
+          {/* Center: navigation */}
+          <Navbar light className="order-3 w-full lg:order-2 lg:w-auto basis-full lg:basis-0 mt-2 lg:mt-0" />
+          {/* Right: utility links */}
+          <div className="flex flex-wrap items-center gap-3 shrink-0">
+            <div className="flex items-center gap-2">
+              <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
+              <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
+              <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+            </div>
+            <a href="/#calculator" onClick={goToCalculator} className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors cursor-pointer">Калькулятор</a>
+            <Link to="/qna" className="hover:opacity-80">Q&A</Link>
+            <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
+            <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
+              <User className="w-3 h-3" />
+              Вхід/Реєстрація
+            </Link>
           </div>
         </div>
       </div>
