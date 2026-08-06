@@ -37,7 +37,6 @@ export default function Header() {
             <Link to="/calculator" className="px-3 py-1 rounded-full border border-white/60 hover:bg-white/20 transition-colors">Калькулятор</Link>
             <Link to="/qna" className="hover:opacity-80">Q&A</Link>
             <Link to="/delivery" className="hover:opacity-80">Оплата і доставка</Link>
-            <Link to="/blog" className="hover:opacity-80">Блог</Link>
             <Link to="/cabinet" className="flex items-center gap-1 hover:opacity-80">
               <User className="w-3 h-3" />
               Вхід/Реєстрація
