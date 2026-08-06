@@ -22,20 +22,22 @@ export default function Header() {
     <header className="bg-white shadow-sm">
       {/* Top Bar */}
       <div className="bg-primary text-primary-foreground py-1.5">
-        <div className="container mx-auto flex items-center justify-between text-xs px-4 lg:px-8 gap-4">
-          {/* Left: phone */}
-          <div className="flex items-center gap-2 shrink-0">
-            <Phone className="w-3 h-3" />
-            <span>+38 073 933 88 95</span>
-          </div>
-          {/* Center: navigation */}
-          <Navbar light className="order-3 w-full lg:order-2 lg:w-auto basis-full lg:basis-0 mt-2 lg:mt-0" />
-          {/* Right: social networks */}
+        <div className="container mx-auto flex items-center justify-between text-xs px-4 lg:px-8 gap-3">
+          {/* Left: phone + socials */}
           <div className="flex items-center gap-3 shrink-0">
-            <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
-            <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
-            <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+            <div className="flex items-center gap-2">
+              <Phone className="w-3 h-3" />
+              <span>+38 073 933 88 95</span>
+            </div>
+            <span className="w-px h-3 bg-white/30 hidden sm:block" />
+            <div className="hidden sm:flex items-center gap-2">
+              <a href="#" className="hover:opacity-80"><Facebook className="w-3.5 h-3.5" /></a>
+              <a href="#" className="hover:opacity-80"><Instagram className="w-3.5 h-3.5" /></a>
+              <a href="#" className="hover:opacity-80"><Youtube className="w-3.5 h-3.5" /></a>
+            </div>
           </div>
+          {/* Right: navigation (last item aligns with cart) */}
+          <Navbar light className="flex-1 justify-end basis-full sm:basis-0 order-3 sm:order-2 mt-2 sm:mt-0" />
         </div>
       </div>
 

@@ -6,10 +6,10 @@ const NAV_ITEMS = [
   { label: 'Технології друку', to: '/dtf-print' },
   { label: 'Послуги', to: '/services' },
   { label: 'Блог', to: '/blog' },
-  { label: 'Контакти', to: '/contacts' },
   { label: 'Калькулятор', href: '/#calculator' },
   { label: 'Q&A', to: '/qna' },
   { label: 'Оплата і доставка', to: '/delivery' },
+  { label: 'Контакти', to: '/contacts' },
 ];
 
 export default function Navbar({ className = '', light = false }) {
@@ -17,7 +17,7 @@ export default function Navbar({ className = '', light = false }) {
     ? 'px-3 py-2 rounded-lg text-sm font-medium text-white/90 hover:text-white hover:bg-white/15 transition-colors whitespace-nowrap'
     : 'px-3 py-2.5 rounded-lg text-sm font-medium text-foreground hover:text-primary hover:bg-muted/50 transition-colors whitespace-nowrap';
   return (
-    <nav className={`flex items-center justify-center gap-1 flex-1 overflow-x-auto ${className}`}>
+    <nav className={`flex items-center gap-1 flex-1 overflow-x-auto ${className}`}>
       {NAV_ITEMS.map((item) =>
         item.href ? (
           <a key={item.label} href={item.href} className={links}>
