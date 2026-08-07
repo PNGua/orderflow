@@ -88,18 +88,21 @@ export default function Cart() {
                 {/* Items list */}
                 <div className="lg:col-span-2 space-y-4">
                   {items.map((it) => (
-                    <div key={it.id} className="bg-card border rounded-2xl overflow-hidden shadow-sm">
+                    <article
+                      key={it.id}
+                      className="group bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
+                    >
                       {/* Main row */}
-                      <div className="p-4 sm:p-5 flex items-start gap-4">
-                        <div className="w-16 h-16 rounded-xl overflow-hidden shrink-0 bg-muted">
+                      <div className="p-4 sm:p-5 flex items-center gap-4">
+                        <div className="w-20 h-20 rounded-xl overflow-hidden shrink-0 bg-muted ring-1 ring-border">
                           <img src={it.image} alt={it.name} className="w-full h-full object-cover" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <div className="flex items-start justify-between gap-3">
-                            <h3 className="font-bold text-foreground leading-tight">{it.name}</h3>
+                          <div className="flex items-start justify-between gap-2">
+                            <h3 className="font-bold text-foreground leading-tight group-hover:text-primary transition-colors">{it.name}</h3>
                             <button
                               onClick={() => removeItem(it.id)}
-                              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-destructive hover:bg-destructive/10 transition-colors"
+                              className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                               aria-label="Видалити"
                             >
                               <Trash2 className="w-4 h-4" />
@@ -107,7 +110,7 @@ export default function Cart() {
                           </div>
 
                           {/* Attribute chips */}
-                          <div className="flex flex-wrap gap-2 mt-2">
+                          <div className="flex flex-wrap gap-1.5 mt-2">
                             {Object.entries(it.attrs).map(([k, v]) => (
                               <span key={k} className="inline-flex items-center text-[11px] bg-muted text-foreground/80 rounded-md px-2 py-0.5">
                                 <span className="text-muted-foreground mr-1">{k}:</span>
@@ -115,49 +118,51 @@ export default function Cart() {
                               </span>
                             ))}
                           </div>
+
+                          {/* Quick actions */}
+                          <a
+                            href={it.maket_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline mt-3"
+                          >
+                            <FileImage className="w-3.5 h-3.5 shrink-0" />
+                            <span>Переглянути макет</span>
+                            <ExternalLink className="w-3 h-3 shrink-0" />
+                          </a>
                         </div>
                       </div>
 
-                      {/* Sub-row */}
-                      <div className="bg-sky-50/70 px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-3 border-t border-sky-100">
-                        <a
-                          href={it.maket_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline max-w-[60%] truncate"
-                        >
-                          <FileImage className="w-3.5 h-3.5 shrink-0" />
-                          <span className="truncate">Посилання на макет</span>
-                          <ExternalLink className="w-3 h-3 shrink-0" />
-                        </a>
-
-                        <div className="flex items-center gap-4 ml-auto">
-                          {/* Quantity stepper */}
-                          <div className="flex items-center border rounded-full bg-white">
+                      {/* Bottom row: stepper + price */}
+                      <div className="flex items-center justify-between px-4 sm:px-5 py-3 border-t border-border bg-muted/30">
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs text-muted-foreground hidden sm:inline">Кількість</span>
+                          <div className="flex items-center border rounded-full bg-card">
                             <button
                               onClick={() => updateQty(it.id, -1)}
-                              className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted transition-colors"
+                              className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                               aria-label="Зменшити"
                             >
                               <Minus className="w-3.5 h-3.5" />
                             </button>
-                            <span className="w-7 text-center text-sm font-semibold text-foreground">{it.qty}</span>
+                            <span className="w-8 text-center text-sm font-bold text-foreground">{it.qty}</span>
                             <button
                               onClick={() => updateQty(it.id, 1)}
-                              className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted transition-colors"
-                              aria-label="Збільшити"
+                              className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
+                              aria-label="Збільшьити"
                             >
                               <Plus className="w-3.5 h-3.5" />
                             </button>
                           </div>
-
-                          {/* Price */}
-                          <span className="font-bold text-foreground whitespace-nowrap">
+                        </div>
+                        <div className="text-right">
+                          <span className="text-[11px] text-muted-foreground block leading-none">Сума</span>
+                          <span className="font-bold text-lg text-foreground whitespace-nowrap leading-tight">
                             {it.price * it.qty} грн
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </article>
                   ))}
 
                   <Link to="/catalog" className="inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:underline">
@@ -168,30 +173,48 @@ export default function Cart() {
 
                 {/* Summary */}
                 <div className="lg:col-span-1">
-                  <div className="bg-card border rounded-2xl p-6 shadow-sm sticky top-6">
-                    <h2 className="font-bold text-foreground mb-4 text-lg">Підсумок замовлення</h2>
-                    <div className="space-y-2.5 mb-4">
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Товарів</span>
-                        <span className="font-medium text-foreground">{items.length}</span>
-                      </div>
-                      <div className="flex items-center justify-between text-sm">
-                        <span className="text-muted-foreground">Сума</span>
-                        <span className="font-medium text-foreground">{total} грн</span>
-                      </div>
-                      <div className="border-t pt-2.5 mt-1 flex items-center justify-between">
-                        <span className="font-bold text-foreground">До сплати</span>
-                        <span className="text-xl font-bold text-primary">{total} грн</span>
+                  <div className="bg-card border border-border rounded-2xl shadow-sm sticky top-6 overflow-hidden">
+                    <div className="p-6">
+                      <h2 className="font-bold text-foreground mb-5 text-lg flex items-center gap-2">
+                        <ShoppingBag className="w-5 h-5 text-primary" />
+                        Підсумок замовлення
+                      </h2>
+                      <div className="space-y-3">
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Товарів</span>
+                          <span className="font-medium text-foreground">{items.length}</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Сума позицій</span>
+                          <span className="font-medium text-foreground">{total} грн</span>
+                        </div>
+                        <div className="flex items-center justify-between text-sm">
+                          <span className="text-muted-foreground">Доставка</span>
+                          <span className="font-medium text-muted-foreground">розраховується</span>
+                        </div>
                       </div>
                     </div>
-                    <Link to="/cabinet">
-                      <Button className="w-full bg-primary hover:bg-primary/90 font-semibold h-11 text-base">
-                        Перейти до оформлення <ArrowRight className="w-4 h-4 ml-1.5" />
-                      </Button>
-                    </Link>
-                    <p className="text-[11px] text-muted-foreground text-center mt-3">
-                      Доставка та знижки розраховуються на етапі оформлення
-                    </p>
+
+                    {/* Total */}
+                    <div className="bg-primary/5 border-t border-border p-6 flex items-center justify-between">
+                      <div>
+                        <p className="text-xs text-muted-foreground leading-none">До сплати</p>
+                        <p className="text-2xl font-bold text-primary leading-tight mt-1">{total} грн</p>
+                      </div>
+                      <ShoppingBag className="w-8 h-8 text-primary/40" />
+                    </div>
+
+                    {/* CTA */}
+                    <div className="p-4">
+                      <Link to="/cabinet">
+                        <Button className="w-full bg-primary hover:bg-primary/90 font-bold h-12 text-base gap-2 shadow-sm">
+                          Оформити замовлення <ArrowRight className="w-4 h-4" />
+                        </Button>
+                      </Link>
+                      <p className="text-[11px] text-muted-foreground text-center mt-3 flex items-center justify-center gap-1">
+                        Знижки та доставку розрахує менеджер
+                      </p>
+                    </div>
                   </div>
                 </div>
               </div>
