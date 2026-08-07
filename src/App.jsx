@@ -11,6 +11,7 @@ import DTFPrint from './pages/DTFPrint';
 import Catalog from './pages/Catalog';
 import Contacts from './pages/Contacts';
 import Blog from './pages/Blog';
+import BlogPost from './pages/BlogPost';
 import QnA from './pages/QnA';
 import Services from './pages/Services';
 import PrintTechnologies from './pages/PrintTechnologies';
@@ -56,6 +57,7 @@ const AuthenticatedApp = () => {
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog" element={<Blog />} />
+      <Route path="/blog/:slug" element={<BlogPost />} />
       <Route path="/qna" element={<QnA />} />
       <Route path="/services" element={<Services />} />
       <Route path="/delivery" element={<PaymentDelivery />} />
