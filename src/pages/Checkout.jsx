@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ChevronRight } from 'lucide-react';
 import { useToast } from '@/components/ui/use-toast';
 import { base44 } from '@/api/base44Client';
+import { useAuth } from '@/lib/AuthContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ContactSection from '@/components/checkout/ContactSection';
@@ -22,6 +23,7 @@ const SAMPLE_ITEMS = [
 export default function Checkout() {
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user, isAuthenticated } = useAuth();
   const [showPass, setShowPass] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -32,14 +34,31 @@ export default function Checkout() {
     email: '',
     other_recipient: false,
     create_account: true,
+    choose_manager: false,
     password: '',
     delivery_type: 'Нова Пошта',
-    service_zone: 'Львів',
+    service_zone: user?.city || 'Львів',
     address: '',
+    address_branch: '',
+    address_area: '',
     payment_type: 'Рахунок-фактура',
     comment: '',
     confirmed: false,
   });
+
+  // Prefill contact & zone fields from logged-in user profile
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      setForm((prev) => ({
+        ...prev,
+        first_name: user.first_name || prev.first_name,
+        last_name: user.last_name || prev.last_name,
+        phone: user.phone || prev.phone,
+        email: user.email || prev.email,
+        service_zone: user.city || prev.service_zone,
+      }));
+    }
+  }, [isAuthenticated, user]);
 
   const setField = (k, v) => setForm((prev) => ({ ...prev, [k]: v }));
 
@@ -52,7 +71,7 @@ export default function Checkout() {
       toast({ title: 'Заповніть обовʼязкові поля контактів', variant: 'destructive' });
       return;
     }
-    if (form.create_account && !form.password) {
+    if (!isAuthenticated && form.create_account && !form.password) {
       toast({ title: 'Вкажіть пароль для облікового запису', variant: 'destructive' });
       return;
     }
@@ -111,6 +130,7 @@ export default function Checkout() {
             <ContactSection
               form={form}
               setField={setField}
+              isAuthenticated={isAuthenticated}
               showPass={showPass}
               setShowPass={setShowPass}
             />

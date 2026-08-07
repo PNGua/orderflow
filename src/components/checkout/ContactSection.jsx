@@ -4,7 +4,7 @@ import { Label } from '@/components/ui/label';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Eye, EyeOff } from 'lucide-react';
 
-export default function ContactSection({ form, setField, showPass, setShowPass }) {
+export default function ContactSection({ form, setField, isAuthenticated, showPass, setShowPass }) {
   const set = (k) => (e) => setField(k, e.target.value);
 
   return (
@@ -44,19 +44,32 @@ export default function ContactSection({ form, setField, showPass, setShowPass }
             Отримуватиме інша людина? (необов'язково)
           </Label>
         </div>
-        <div className="flex items-center gap-2">
-          <Checkbox
-            id="create-account"
-            checked={form.create_account}
-            onCheckedChange={(v) => setField('create_account', !!v)}
-          />
-          <Label htmlFor="create-account" className="text-sm text-foreground cursor-pointer">
-            Створити обліковий запис?
-          </Label>
-        </div>
+        {isAuthenticated ? (
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="choose-manager"
+              checked={form.choose_manager}
+              onCheckedChange={(v) => setField('choose_manager', !!v)}
+            />
+            <Label htmlFor="choose-manager" className="text-sm text-foreground cursor-pointer">
+              Бажаєте обрати менеджера? (необов'язково)
+            </Label>
+          </div>
+        ) : (
+          <div className="flex items-center gap-2">
+            <Checkbox
+              id="create-account"
+              checked={form.create_account}
+              onCheckedChange={(v) => setField('create_account', !!v)}
+            />
+            <Label htmlFor="create-account" className="text-sm text-foreground cursor-pointer">
+              Створити обліковий запис?
+            </Label>
+          </div>
+        )}
       </div>
 
-      {form.create_account && (
+      {!isAuthenticated && form.create_account && (
         <div className="space-y-1.5 max-w-sm">
           <Label className="text-sm text-foreground">Пароль<span className="text-destructive">*</span></Label>
           <div className="relative">

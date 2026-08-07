@@ -2,7 +2,8 @@ import React from 'react';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { MapPin } from 'lucide-react';
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select';
+import { HelpCircle } from 'lucide-react';
 
 const DELIVERY = [
   { id: 'Нова Пошта', label: 'Доставка службою Нова пошта' },
@@ -15,7 +16,22 @@ const ZONES = [
   { id: 'Київ', label: 'Київ' },
 ];
 
+const BRANCHES = {
+  Львів: [
+    'Відділення №1 — вул. Городоцька, 242',
+    'Відділення №2 — вул. Дорошенка, 12',
+    'Відділення №3 — пр. Свободи, 25',
+  ],
+  Київ: [
+    'Відділення №1 — вул. Машинобудівна, 44',
+    'Відділення №2 — пр. Перемоги, 100',
+  ],
+};
+
+const AREAS = ['Львівська', 'Городоцька', 'Шевченка', 'Франка'];
+
 export default function DeliverySection({ form, setField }) {
+  const branches = BRANCHES[form.service_zone] || [];
   return (
     <div className="space-y-5">
       <h2 className="text-lg font-bold text-foreground flex items-center gap-2">
@@ -44,7 +60,7 @@ export default function DeliverySection({ form, setField }) {
         {/* Service zone */}
         <div className="space-y-3">
           <p className="text-sm font-medium text-foreground flex items-center gap-1.5">
-            <MapPin className="w-3.5 h-3.5 text-primary" />
+            <HelpCircle className="w-3.5 h-3.5 text-primary" />
             Вкажіть бажану зону обслуговування
           </p>
           <RadioGroup
@@ -65,11 +81,36 @@ export default function DeliverySection({ form, setField }) {
       {/* Address */}
       <div className="space-y-1.5">
         <Label className="text-sm text-foreground">Вкажіть адресу доставки</Label>
-        <Input
-          value={form.address}
-          onChange={(e) => setField('address', e.target.value)}
-          placeholder="Відділення / адреса доставки"
-        />
+        {form.delivery_type === 'Нова Пошта' ? (
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Select value={form.address_branch} onValueChange={(v) => setField('address_branch', v)}>
+              <SelectTrigger className="h-10">
+                <SelectValue placeholder="Відділення-відділення" />
+              </SelectTrigger>
+              <SelectContent>
+                {branches.map((b) => (
+                  <SelectItem key={b} value={b}>{b}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={form.address_area} onValueChange={(v) => setField('address_area', v)}>
+              <SelectTrigger className="h-10">
+                <SelectValue placeholder="Львівська" />
+              </SelectTrigger>
+              <SelectContent>
+                {AREAS.map((a) => (
+                  <SelectItem key={a} value={a}>{a}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+          </div>
+        ) : (
+          <Input
+            value={form.address}
+            onChange={(e) => setField('address', e.target.value)}
+            placeholder={form.delivery_type === 'Самовивіз' ? 'Відділення самовивізу' : 'Номер будинку, вулиця'}
+          />
+        )}
       </div>
     </div>
   );
