@@ -85,6 +85,7 @@ export default function Checkout() {
     setSubmitting(true);
     try {
       const orderNumber = `PNG-${Date.now().toString().slice(-8)}`;
+      const addressLine = form.address_branch || form.address;
       await base44.entities.Order.create({
         order_number: orderNumber,
         order_date: new Date().toISOString(),
@@ -92,15 +93,19 @@ export default function Checkout() {
         total_amount: total,
         payment_type: form.payment_type,
         payer_name: `${form.first_name} ${form.last_name}`.trim(),
+        payer_email: form.email,
         delivery_type: form.delivery_type,
         recipient_name: `${form.first_name} ${form.last_name}`.trim(),
         recipient_phone: form.phone,
+        address_branch: addressLine,
+        address_area: form.address_area || '',
+        address_city: form.address_city || form.service_zone,
         service_zone: form.service_zone,
         comment: form.comment,
         items: SAMPLE_ITEMS,
       });
       toast({ title: 'Замовлення оформлено!', description: `Номер: ${orderNumber}` });
-      navigate('/cabinet');
+      navigate(`/thank-you?order=${orderNumber}`);
     } catch (err) {
       toast({ title: 'Помилка оформлення', description: err?.message || 'Спробуйте ще раз', variant: 'destructive' });
     } finally {

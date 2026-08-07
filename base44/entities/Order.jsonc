@@ -39,6 +39,10 @@
       "type": "string",
       "description": "\u041f\u043b\u0430\u0442\u043d\u0438\u043a"
     },
+    "payer_email": {
+      "type": "string",
+      "description": "Email \u043f\u043b\u0430\u0442\u043d\u0438\u043a\u0430"
+    },
     "delivery_type": {
       "type": "string",
       "enum": [
@@ -57,6 +61,18 @@
       "type": "string",
       "description": "\u0422\u0435\u043b\u0435\u0444\u043e\u043d \u043e\u0442\u0440\u0438\u043c\u0443\u0432\u0430\u0447\u0430"
     },
+    "address_branch": {
+      "type": "string",
+      "description": "\u041e\u0431\u0440\u0430\u043d\u0435 \u0432\u0456\u0434\u0434\u0456\u043b\u0435\u043d\u043d\u044f/\u0430\u0434\u0440\u0435\u0441\u0430 \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438"
+    },
+    "address_area": {
+      "type": "string",
+      "description": "\u0420\u0430\u0439\u043e\u043d \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438"
+    },
+    "address_city": {
+      "type": "string",
+      "description": "\u041c\u0456\u0441\u0442\u043e \u0434\u043e\u0441\u0442\u0430\u0432\u043a\u0438"
+    },
     "manager_name": {
       "type": "string",
       "description": "\u041c\u0435\u043d\u0435\u0434\u0436\u0435\u0440"
@@ -67,7 +83,7 @@
     },
     "invoice_url": {
       "type": "string",
-      "description": "\u0420\u0430\u0445\u0443\u043d\u043e\u043a \u0444\u0430\u043a\u0442\u0443\u0440\u0430 URL"
+      "description": "\u0420\u0430\u0445\u0443\u043d\u043e\u043a \u0444\u0430\u043a\u0442\u0443\u0440\u0438 URL"
     },
     "ttn": {
       "type": "string",
@@ -91,6 +107,9 @@
             "type": "string"
           },
           "product_image": {
+            "type": "string"
+          },
+          "product_url": {
             "type": "string"
           },
           "quantity": {
