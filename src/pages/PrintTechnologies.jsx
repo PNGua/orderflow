@@ -23,8 +23,8 @@ const TECHNOLOGIES = [
     description: 'УФ-полімеризаційний друк на плівці з об\'ємним рельєфом та глянсовою поверхнею для твердих поверхонь.',
     features: ['Об\'ємний ефект', 'Підвищена стійкість', 'Скло, метало, пластик'],
     image: 'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=800&q=80',
-    link: '/dtf-print',
-    available: false,
+    link: '/uv-dtf-print',
+    available: true,
     accent: 'from-violet-500/15 to-violet-500/5',
   },
   {
@@ -34,8 +34,8 @@ const TECHNOLOGIES = [
     description: 'Яскравий фотодрук на синтетичних тканинах, кружках, тарілках та сувенірній продукції.',
     features: ['Фотореалістична якість', 'Без вигорання', 'Для синтетичних матеріалів'],
     image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80',
-    link: '/dtf-print',
-    available: false,
+    link: '/sublimation-print',
+    available: true,
     accent: 'from-amber-500/15 to-amber-500/5',
   },
   {
@@ -45,8 +45,8 @@ const TECHNOLOGIES = [
     description: 'Друк на банерній тканині, плівці та папері для зовнішньої реклами будь-яких розмірів.',
     features: ['Будь-які розміри', 'Внутрішня/зовнішня реклама', 'Стійкість до УФ'],
     image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&q=80',
-    link: '/dtf-print',
-    available: false,
+    link: '/wide-format-print',
+    available: true,
     accent: 'from-emerald-500/15 to-emerald-500/5',
   },
   {
@@ -56,8 +56,8 @@ const TECHNOLOGIES = [
     description: 'Класичний термоперенос та флекс для однотонних логотипів, написів та номерів на текстилі.',
     features: ['Однотонні принти', 'Швидкий тираж', 'Флекс, флок, металік'],
     image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&q=80',
-    link: '/dtf-print',
-    available: false,
+    link: '/heat-transfer-print',
+    available: true,
     accent: 'from-rose-500/15 to-rose-500/5',
   },
 ];

@@ -19,6 +19,10 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import PaymentDelivery from './pages/PaymentDelivery';
+import UvDtfPrint from './pages/UvDtfPrint';
+import SublimationPrint from './pages/SublimationPrint';
+import WideFormatPrint from './pages/WideFormatPrint';
+import HeatTransferPrint from './pages/HeatTransferPrint';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -54,6 +58,10 @@ const AuthenticatedApp = () => {
       <Route path="/cabinet" element={<Cabinet />} />
       <Route path="/technologies" element={<PrintTechnologies />} />
       <Route path="/dtf-print" element={<DTFPrint />} />
+      <Route path="/uv-dtf-print" element={<UvDtfPrint />} />
+      <Route path="/sublimation-print" element={<SublimationPrint />} />
+      <Route path="/wide-format-print" element={<WideFormatPrint />} />
+      <Route path="/heat-transfer-print" element={<HeatTransferPrint />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog" element={<Blog />} />
