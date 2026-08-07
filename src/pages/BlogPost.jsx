@@ -168,7 +168,7 @@ export default function BlogPost() {
 
       {/* Hero */}
       <section className="bg-gradient-to-br from-primary to-[#0a8fa8] text-white">
-        <div className="container mx-auto px-4 lg:px-8 max-w-4xl py-10 lg:py-14">
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-10 lg:py-14">
           <nav className="flex items-center gap-1 text-xs text-white/70 mb-4">
             <Link to="/" className="hover:text-white">Головна</Link>
             <ChevronRight className="w-3 h-3" />
@@ -192,21 +192,15 @@ export default function BlogPost() {
         </div>
       </section>
 
-      <main className="container mx-auto px-4 lg:px-8 max-w-4xl py-10 flex-1">
-        {/* Cover media */}
-        {post.video ? (
-          <div className="rounded-2xl overflow-hidden border border-border shadow-lg mb-10">
-            <video src={post.video} poster={post.image} controls playsInline className="w-full h-auto bg-black" />
-          </div>
-        ) : (
-          <div className="rounded-2xl overflow-hidden border border-border shadow-lg mb-10">
-            <img src={post.image} alt={post.title} className="w-full h-72 sm:h-96 object-cover" />
-          </div>
-        )}
-
-        <article className="bg-card border border-border rounded-2xl p-6 sm:p-10 shadow-sm">
+      <main className="container mx-auto px-4 lg:px-8 max-w-6xl py-10 flex-1">
+        <article className="bg-card border border-border rounded-2xl p-6 sm:p-12 shadow-sm">
           <p className="text-lg leading-8 text-foreground font-medium mb-6">{post.excerpt}</p>
-          <div>{content.map((b, i) => <Block key={i} block={b} />)}</div>
+          <div>
+            {post.video
+              ? <Block block={{ type: 'video', src: post.video, poster: post.image, caption: 'Головне відео статті' }} />
+              : <Block block={{ type: 'image', src: post.image, alt: post.title, caption: 'Ілюстрація до статті' }} />}
+            {content.map((b, i) => <Block key={i} block={b} />)}
+          </div>
 
           <div className="flex items-center justify-between border-t border-border pt-6 mt-8">
             <Link to="/blog" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors">
