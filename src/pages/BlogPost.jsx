@@ -124,7 +124,7 @@ function Block({ block }) {
       );
     case 'image':
       return (
-        <figure className="my-6 rounded-xl overflow-hidden border border-border shadow-sm">
+        <figure className="my-6 mx-auto max-w-xl rounded-xl overflow-hidden border border-border shadow-sm">
           <img src={block.src} alt={block.alt} className="w-full h-auto object-cover" />
           {block.caption && (
             <figcaption className="text-xs text-muted-foreground text-center py-2 bg-muted/40">{block.caption}</figcaption>
