@@ -7,11 +7,11 @@ const SERVICE_CATEGORIES = [
     title: 'ДТФ друк',
     cat: 'dtf',
     icon: Printer,
-    link: '/catalog?cat=dtf',
+    link: '/dtf-print',
     groups: [
       {
         title: 'ДТФ друк в рулонах',
-        link: '/catalog?cat=dtf',
+        link: '/dtf-print',
         items: [
           { label: 'ДТФ плівка преміум', link: '/dtf-print' },
           { label: 'ДТФ плівка золота фольга', link: '/dtf-print', highlight: true },
@@ -28,15 +28,15 @@ const SERVICE_CATEGORIES = [
     title: 'УФ ДТФ друк',
     cat: 'uv_dtf',
     icon: Printer,
-    link: '/catalog?cat=uv_dtf',
+    link: '/uv-dtf-print',
     groups: [
       {
         title: 'УФ ДТФ друк в рулонах',
-        link: '/catalog?cat=uv_dtf',
+        link: '/uv-dtf-print',
         items: [
-          { label: 'Преміум УФ ДТФ плівка', link: '/dtf-print' },
-          { label: 'Золота УФ ДТФ плівка', link: '/dtf-print' },
-          { label: 'Срібна УФ ДТФ плівка', link: '/dtf-print' },
+          { label: 'Преміум УФ ДТФ плівка', link: '/uv-dtf-print' },
+          { label: 'Золота УФ ДТФ плівка', link: '/uv-dtf-print' },
+          { label: 'Срібна УФ ДТФ плівка', link: '/uv-dtf-print' },
         ],
       },
     ],
