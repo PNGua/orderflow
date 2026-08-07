@@ -147,54 +147,6 @@ export default function Contacts() {
                   </a>
                 </div>
               </div>
-
-              {/* Form */}
-              <div className="bg-card border rounded-xl p-6 shadow-sm">
-                <h2 className="text-lg font-bold text-foreground mb-1">Напишіть нам</h2>
-                <p className="text-sm text-muted-foreground mb-5">Залиште запит і ми зв'яжемося з вами найближчим часом</p>
-                {sent ? (
-                  <div className="flex flex-col items-center justify-center py-8 text-center gap-3">
-                    <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                      <Check className="w-7 h-7 text-green-600" />
-                    </div>
-                    <p className="font-semibold text-foreground">Дякуємо! Ми отримали ваш запит.</p>
-                    <p className="text-sm text-muted-foreground text-center">Менеджер зв'яжеться з вами найближчим часом.</p>
-                    <Button variant="outline" onClick={() => setSent(false)}>Надіслати ще</Button>
-                  </div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-1">Ім'я</label>
-                      <Input
-                        placeholder="Ваше ім'я"
-                        value={form.name}
-                        onChange={e => setForm({ ...form, name: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-1">Телефон або e-mail</label>
-                      <Input
-                        placeholder="+380..."
-                        value={form.phone}
-                        onChange={e => setForm({ ...form, phone: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground block mb-1">Повідомлення</label>
-                      <textarea
-                        className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px] resize-none"
-                        placeholder="Опишіть ваш запит..."
-                        value={form.message}
-                        onChange={e => setForm({ ...form, message: e.target.value })}
-                        required
-                      />
-                    </div>
-                    <Button type="submit" className="w-full">Надіслати запит</Button>
-                  </form>
-                )}
-              </div>
             </div>
 
             {/* Right: Stacked Maps */}
@@ -240,6 +192,55 @@ export default function Contacts() {
             </div>
           </div>
 
+          {/* Full-width Form */}
+          <div className="mt-12 bg-card border rounded-xl p-6 lg:p-8 shadow-sm">
+            <div className="max-w-2xl mx-auto">
+              <h2 className="text-lg font-bold text-foreground mb-1">Напишіть нам</h2>
+              <p className="text-sm text-muted-foreground mb-5">Залиште запит і ми зв'яжемося з вами найближчим часом</p>
+              {sent ? (
+                <div className="flex flex-col items-center justify-center py-10 text-center gap-3">
+                  <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
+                    <Check className="w-7 h-7 text-green-600" />
+                  </div>
+                  <p className="font-semibold text-foreground">Дякуємо! Ми отримали ваш запит.</p>
+                  <p className="text-sm text-muted-foreground">Менеджер зв'яжеться з вами найближчим часом.</p>
+                  <Button variant="outline" onClick={() => setSent(false)}>Надіслати ще</Button>
+                </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-4">
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-1">Ім'я</label>
+                    <Input
+                      placeholder="Ваше ім'я"
+                      value={form.name}
+                      onChange={e => setForm({ ...form, name: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-1">Телефон або e-mail</label>
+                    <Input
+                      placeholder="+380..."
+                      value={form.phone}
+                      onChange={e => setForm({ ...form, phone: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <label className="text-sm font-medium text-foreground block mb-1">Повідомлення</label>
+                    <textarea
+                      className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px] resize-none"
+                      placeholder="Опишіть ваш запит..."
+                      value={form.message}
+                      onChange={e => setForm({ ...form, message: e.target.value })}
+                      required
+                    />
+                  </div>
+                  <Button type="submit" className="w-full">Надіслати запит</Button>
+                </form>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 
