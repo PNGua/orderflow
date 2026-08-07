@@ -35,13 +35,6 @@ const OFFICES = [
   },
 ];
 
-const SOCIALS = [
-  { label: 'Facebook', href: 'https://www.facebook.com/pngdruk', color: 'bg-blue-600', icon: '𝔽' },
-  { label: 'Instagram', href: 'https://www.instagram.com/png_druk/', color: 'bg-gradient-to-br from-purple-500 to-pink-500', icon: '📷' },
-  { label: 'Telegram', href: 'https://t.me/png_dtf', color: 'bg-sky-500', icon: '✈' },
-  { label: 'YouTube', href: 'https://www.youtube.com/@png.group2025', color: 'bg-red-600', icon: '▶' },
-];
-
 function CopyButton({ text }) {
   const [copied, setCopied] = useState(false);
   const handleCopy = () => {
@@ -50,8 +43,8 @@ function CopyButton({ text }) {
     setTimeout(() => setCopied(false), 2000);
   };
   return (
-    <button onClick={handleCopy} className="ml-2 text-muted-foreground hover:text-primary transition-colors">
-      {copied ? <Check className="w-3.5 h-3.5 text-green-500" /> : <Copy className="w-3.5 h-3.5" />}
+    <button onClick={handleCopy} className="ml-2 text-zinc-400 hover:text-primary transition-colors">
+      {copied ? <Check className="w-3.5 h-3.5 text-green-400" /> : <Copy className="w-3.5 h-3.5" />}
     </button>
   );
 }
@@ -67,81 +60,87 @@ export default function Contacts() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-black text-zinc-100">
       <Header />
 
-      {/* Hero */}
-      <section className="bg-primary text-primary-foreground py-12">
-        <div className="container mx-auto px-4 lg:px-8 max-w-6xl text-center">
-          <h1 className="text-3xl lg:text-4xl font-bold mb-2">Зв'яжіться з нами</h1>
-          <p className="text-primary-foreground/80 max-w-md mx-auto">Менеджер відповість протягом 15 хвилин у робочий час</p>
+      {/* Hero with dark gradient */}
+      <section className="relative bg-gradient-to-r from-black via-[#0a0a0a] to-[#1a1a1a] py-16 lg:py-24 overflow-hidden">
+        <div className="absolute inset-0 bg-gradient-to-tr from-black/60 to-transparent pointer-events-none" />
+        <div className="relative container mx-auto px-4 lg:px-8 max-w-6xl text-center">
+          <p className="text-xs text-primary font-semibold uppercase tracking-[0.3em] mb-3">Контакти</p>
+          <h1 className="text-3xl lg:text-5xl font-bold mb-4 text-white">Зв'яжіться з нами</h1>
+          <p className="text-zinc-400 max-w-md mx-auto text-base">
+            Менеджер відповість протягом 15 хвилин у робочий час
+          </p>
         </div>
       </section>
 
       {/* Contacts + Form */}
-      <section className="py-14 bg-background">
+      <section className="py-14 bg-gradient-to-r from-black via-[#0a0a0a] to-[#141414]">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
 
             {/* Left: Contact Info */}
             <div className="space-y-6">
-              {/* Phone & Email */}
-              <div className="bg-card border rounded-xl p-6 space-y-4 shadow-sm">
+              {/* Phone & Email & Hours */}
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 space-y-5 backdrop-blur-sm">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <div className="w-11 h-11 bg-primary/15 rounded-xl flex items-center justify-center">
                     <Phone className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground mb-0.5">Телефон</p>
-                    <a href="tel:+380739338895" className="font-semibold text-foreground hover:text-primary transition-colors">
+                    <p className="text-xs text-zinc-500 mb-0.5 uppercase tracking-wider">Телефон</p>
+                    <a href="tel:+380739338895" className="font-semibold text-white hover:text-primary transition-colors">
                       +380 73 933 88 95
                     </a>
                   </div>
                 </div>
+                <div className="h-px bg-white/10" />
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center">
+                  <div className="w-11 h-11 bg-primary/15 rounded-xl flex items-center justify-center">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground mb-0.5">Електронна пошта</p>
+                    <p className="text-xs text-zinc-500 mb-0.5 uppercase tracking-wider">Електронна пошта</p>
                     <div className="flex items-center">
-                      <a href="mailto:info@pngdruk.com.ua" className="font-semibold text-foreground hover:text-primary transition-colors">
+                      <a href="mailto:info@pngdruk.com.ua" className="font-semibold text-white hover:text-primary transition-colors">
                         info@pngdruk.com.ua
                       </a>
                       <CopyButton text="info@pngdruk.com.ua" />
                     </div>
                   </div>
                 </div>
+                <div className="h-px bg-white/10" />
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-11 h-11 bg-primary/15 rounded-xl flex items-center justify-center flex-shrink-0">
                     <Clock className="w-5 h-5 text-primary" />
                   </div>
                   <div>
-                    <p className="text-xs text-muted-foreground mb-0.5">Графік роботи</p>
-                    <p className="font-semibold text-foreground text-sm">ПН–ПТ: 10:00 – 18:00</p>
-                    <p className="text-sm text-foreground">СБ: 10:00 – 16:00</p>
-                    <p className="text-sm text-muted-foreground">НД — вихідний</p>
+                    <p className="text-xs text-zinc-500 mb-0.5 uppercase tracking-wider">Графік роботи</p>
+                    <p className="font-semibold text-white text-sm">ПН–ПТ: 10:00 – 18:00</p>
+                    <p className="text-sm text-zinc-300">СБ: 10:00 – 16:00</p>
+                    <p className="text-sm text-zinc-500">НД — вихідний</p>
                   </div>
                 </div>
               </div>
 
               {/* Messenger buttons */}
-              <div className="bg-card border rounded-xl p-6 shadow-sm">
-                <p className="text-sm font-semibold text-muted-foreground mb-3 uppercase tracking-wider">Месенджери та соціальні мережі</p>
+              <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 backdrop-blur-sm">
+                <p className="text-sm font-semibold text-zinc-400 mb-4 uppercase tracking-wider">Месенджери та соціальні мережі</p>
                 <div className="flex flex-wrap gap-2">
-                  <a href="viber://chat?number=%2B380977410048" className="flex items-center gap-2 bg-purple-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                  <a href="viber://chat?number=%2B380977410048" className="flex items-center gap-2 bg-purple-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-purple-500 transition-colors">
                     <MessageCircle className="w-4 h-4" /> Viber
                   </a>
-                  <a href="https://t.me/png_dtf" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-sky-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                  <a href="https://t.me/png_dtf" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-sky-500 text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-sky-400 transition-colors">
                     <Send className="w-4 h-4" /> Telegram
                   </a>
-                  <a href="https://www.instagram.com/png_druk/" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                  <a href="https://www.instagram.com/png_druk/" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-gradient-to-r from-purple-500 to-pink-500 text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:opacity-90 transition-opacity">
                     Instagram
                   </a>
-                  <a href="https://www.facebook.com/pngdruk" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                  <a href="https://www.facebook.com/pngdruk" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-blue-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-blue-500 transition-colors">
                     Facebook
                   </a>
-                  <a href="https://www.youtube.com/@png.group2025" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-red-600 text-white text-sm font-medium px-4 py-2 rounded-lg hover:opacity-90 transition-opacity">
+                  <a href="https://www.youtube.com/@png.group2025" target="_blank" rel="noreferrer" className="flex items-center gap-2 bg-red-600 text-white text-sm font-medium px-4 py-2.5 rounded-lg hover:bg-red-500 transition-colors">
                     YouTube
                   </a>
                 </div>
@@ -149,42 +148,46 @@ export default function Contacts() {
             </div>
 
             {/* Right: Form */}
-            <div className="bg-card border rounded-xl p-6 shadow-sm">
-              <h2 className="text-lg font-bold text-foreground mb-1">Напишіть нам</h2>
-              <p className="text-sm text-muted-foreground mb-5">Залиште запит і ми зв'яжемося з вами найближчим часом</p>
+            <div className="bg-white/[0.03] border border-white/10 rounded-2xl p-6 lg:p-8 backdrop-blur-sm">
+              <h2 className="text-xl font-bold text-white mb-1">Напишіть нам</h2>
+              <p className="text-sm text-zinc-400 mb-6">Залиште запит і ми зв'яжемося з вами найближчим часом</p>
               {sent ? (
                 <div className="flex flex-col items-center justify-center py-10 text-center gap-3">
-                  <div className="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center">
-                    <Check className="w-7 h-7 text-green-600" />
+                  <div className="w-14 h-14 bg-green-500/15 rounded-full flex items-center justify-center">
+                    <Check className="w-7 h-7 text-green-400" />
                   </div>
-                  <p className="font-semibold text-foreground">Дякуємо! Ми отримали ваш запит.</p>
-                  <p className="text-sm text-muted-foreground">Менеджер зв'яжеться з вами найближчим часом.</p>
-                  <Button variant="outline" onClick={() => setSent(false)}>Надіслати ще</Button>
+                  <p className="font-semibold text-white">Дякуємо! Ми отримали ваш запит.</p>
+                  <p className="text-sm text-zinc-400">Менеджер зв'яжеться з вами найближчим часом.</p>
+                  <Button variant="outline" onClick={() => setSent(false)} className="border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
+                    Надіслати ще
+                  </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground block mb-1">Ім'я</label>
+                    <label className="text-sm font-medium text-zinc-300 block mb-1.5">Ім'я</label>
                     <Input
                       placeholder="Ваше ім'я"
                       value={form.name}
                       onChange={e => setForm({ ...form, name: e.target.value })}
                       required
+                      className="bg-white/5 border-white/15 text-white placeholder:text-zinc-500 focus-visible:ring-primary"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground block mb-1">Телефон або e-mail</label>
+                    <label className="text-sm font-medium text-zinc-300 block mb-1.5">Телефон або e-mail</label>
                     <Input
                       placeholder="+380..."
                       value={form.phone}
                       onChange={e => setForm({ ...form, phone: e.target.value })}
                       required
+                      className="bg-white/5 border-white/15 text-white placeholder:text-zinc-500 focus-visible:ring-primary"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground block mb-1">Повідомлення</label>
+                    <label className="text-sm font-medium text-zinc-300 block mb-1.5">Повідомлення</label>
                     <textarea
-                      className="w-full border border-input rounded-md px-3 py-2 text-sm bg-background focus:outline-none focus:ring-2 focus:ring-ring min-h-[100px] resize-none"
+                      className="w-full border border-white/15 rounded-md px-3 py-2 text-sm bg-white/5 text-white placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-primary min-h-[100px] resize-none"
                       placeholder="Опишіть ваш запит..."
                       value={form.message}
                       onChange={e => setForm({ ...form, message: e.target.value })}
@@ -200,12 +203,15 @@ export default function Contacts() {
       </section>
 
       {/* Maps */}
-      <section className="py-10 bg-muted/40">
+      <section className="py-14 bg-gradient-to-r from-black via-[#0a0a0a] to-[#1a1a1a]">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-          <h2 className="text-2xl font-bold text-foreground mb-8 text-center">Наші офіси</h2>
+          <div className="text-center mb-10">
+            <p className="text-xs text-primary font-semibold uppercase tracking-[0.3em] mb-2">Завітайте до нас</p>
+            <h2 className="text-2xl lg:text-3xl font-bold text-white">Наші офіси</h2>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {OFFICES.map((office) => (
-              <div key={office.city} className="bg-card border rounded-xl overflow-hidden shadow-sm">
+              <div key={office.city} className="bg-white/[0.03] border border-white/10 rounded-2xl overflow-hidden backdrop-blur-sm">
                 <div className="h-56">
                   <MapContainer
                     center={office.coords}
@@ -224,13 +230,13 @@ export default function Contacts() {
                 </div>
                 <div className="p-5 flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3">
-                    <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <div className="w-9 h-9 bg-primary/15 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
                       <MapPin className="w-4 h-4 text-primary" />
                     </div>
                     <div>
-                      <p className="font-bold text-foreground">м. {office.city}</p>
-                      <p className="text-sm text-muted-foreground">{office.address}</p>
-                      <p className="text-xs text-yellow-500 font-medium mt-1">{office.rating} на Google Maps</p>
+                      <p className="font-bold text-white">м. {office.city}</p>
+                      <p className="text-sm text-zinc-400">{office.address}</p>
+                      <p className="text-xs text-yellow-400 font-medium mt-1">{office.rating} на Google Maps</p>
                     </div>
                   </div>
                   <a
@@ -239,7 +245,7 @@ export default function Contacts() {
                     rel="noreferrer"
                     className="flex-shrink-0"
                   >
-                    <Button variant="outline" size="sm" className="gap-1.5">
+                    <Button variant="outline" size="sm" className="gap-1.5 border-white/20 bg-transparent text-white hover:bg-white/10 hover:text-white">
                       <ExternalLink className="w-3.5 h-3.5" />
                       Маршрут
                     </Button>
