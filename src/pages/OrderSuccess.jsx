@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Heart, ArrowRight, Phone, Mail, MapPin } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import Header from '@/components/Header';
@@ -13,11 +13,13 @@ const PAYMENT_DETAILS = {
 };
 
 export default function OrderSuccess() {
-  const [order, setOrder] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const location = useLocation();
+  const [order, setOrder] = useState(location.state?.order || null);
+  const [loading, setLoading] = useState(!location.state?.order);
   const orderNumber = new URLSearchParams(window.location.search).get('order');
 
   useEffect(() => {
+    if (order) return;
     if (!orderNumber) {
       setLoading(false);
       return;
@@ -32,7 +34,7 @@ export default function OrderSuccess() {
         setLoading(false);
       }
     })();
-  }, [orderNumber]);
+  }, [order, orderNumber]);
 
   const fmt = (n) => (Number(n || 0)).toFixed(2);
   const itemsTotal = (order?.items || []).reduce((s, it) => s + (it.price || 0) * (it.quantity || 1), 0);
@@ -100,6 +102,15 @@ export default function OrderSuccess() {
                             <a href={it.product_url} target="_blank" rel="noreferrer" className="text-[11px] text-violet-600 hover:underline break-all">
                               {it.product_url}
                             </a>
+                          )}
+                          {it.material_type && (
+                            <p className="text-xs text-muted-foreground">Тип матеріалу: {it.material_type}</p>
+                          )}
+                          {it.size && (
+                            <p className="text-xs text-muted-foreground">Розмір: {it.size}</p>
+                          )}
+                          {it.print_quality && (
+                            <p className="text-xs text-muted-foreground">Якість друку: {it.print_quality}</p>
                           )}
                         </div>
                         <span className="text-sm font-semibold text-foreground whitespace-nowrap">{fmt(it.price)} грн</span>

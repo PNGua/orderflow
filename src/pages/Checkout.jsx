@@ -13,10 +13,14 @@ import SummarySection from '@/components/checkout/SummarySection';
 
 const SAMPLE_ITEMS = [
   {
-    product_name: 'ДТФ плівка преміум',
+    product_name: 'ДТФ плівка рефлектив',
     product_image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=160&q=80',
+    product_url: 'https://pngdruk.com.ua/product/wideformat/large-format-printing/dtf-plivka-reflektiv-40sm/',
+    material_type: 'Плівка на холодну',
+    size: '580 * 2000 мм',
+    print_quality: 'Цифрова',
     quantity: 1,
-    price: 980,
+    price: 800,
   },
 ];
 
@@ -86,7 +90,7 @@ export default function Checkout() {
     try {
       const orderNumber = `PNG-${Date.now().toString().slice(-8)}`;
       const addressLine = form.address_branch || form.address;
-      await base44.entities.Order.create({
+      const orderRecord = {
         order_number: orderNumber,
         order_date: new Date().toISOString(),
         status: 'Нове',
@@ -103,9 +107,10 @@ export default function Checkout() {
         service_zone: form.service_zone,
         comment: form.comment,
         items: SAMPLE_ITEMS,
-      });
+      };
+      await base44.entities.Order.create(orderRecord);
       toast({ title: 'Замовлення оформлено!', description: `Номер: ${orderNumber}` });
-      navigate(`/thank-you?order=${orderNumber}`);
+      navigate(`/thank-you?order=${orderNumber}`, { state: { order: orderRecord } });
     } catch (err) {
       toast({ title: 'Помилка оформлення', description: err?.message || 'Спробуйте ще раз', variant: 'destructive' });
     } finally {
