@@ -11,6 +11,7 @@ import FAQSection from '@/components/home/FAQSection';
 import HowItWorksSection from '@/components/home/HowItWorksSection';
 import BlogSection from '@/components/home/BlogSection';
 import ProductsSection from '@/components/home/ProductsSection';
+import ComplexBrandingSection from '@/components/home/ComplexBrandingSection';
 import Calculator from '@/components/Calculator';
 
 const SERVICES = [
@@ -200,6 +201,8 @@ export default function Home() {
       <TestimonialsSection />
       <FAQSection />
       <BlogSection />
+
+      <ComplexBrandingSection />
 
       {/* CTA BANNER */}
       <section className="py-14 bg-background">
