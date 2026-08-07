@@ -11,6 +11,7 @@ export default function Header() {
   const [searchQuery, setSearchQuery] = useState('');
   const [navOpen, setNavOpen] = useState(false);
   const menuRef = useRef(null);
+  const menuRefMobile = useRef(null);
   const navigate = useNavigate();
 
   const submitSearch = (e) => {
@@ -23,7 +24,9 @@ export default function Header() {
 
   useEffect(() => {
     function handleClickOutside(e) {
-      if (menuRef.current && !menuRef.current.contains(e.target)) {
+      const insideDesktop = menuRef.current && menuRef.current.contains(e.target);
+      const insideMobile = menuRefMobile.current && menuRefMobile.current.contains(e.target);
+      if (!insideDesktop && !insideMobile) {
         setServicesOpen(false);
       }
     }
@@ -133,7 +136,7 @@ export default function Header() {
         </div>
 
         {/* Row 2 (mobile only <md): Замовити друк — full width */}
-        <div className="relative w-full md:hidden" ref={menuRef}>
+        <div className="relative w-full md:hidden" ref={menuRefMobile}>
           <button
             onClick={() => setServicesOpen((v) => !v)}
             className="w-full flex items-center justify-center gap-2 bg-primary text-primary-foreground hover:bg-primary/90 px-4 py-3 rounded-lg font-semibold text-base shadow-sm transition-colors"
