@@ -202,22 +202,20 @@ export default function Home() {
       <FAQSection />
       <BlogSection />
 
-      <ComplexBrandingSection />
-
       {/* CTA BANNER */}
       <section className="py-14 bg-background">
         <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-          <div className="bg-gradient-to-r from-[#037291] to-[#025a73] rounded-2xl p-10 text-white text-center shadow-xl">
+          <div className="bg-[#076478] rounded-2xl p-12 text-white text-center shadow-xl">
             <h2 className="text-2xl lg:text-3xl font-bold mb-3">Готові замовити друк?</h2>
-            <p className="text-white/80 mb-6 max-w-md mx-auto">Залиште заявку або зв'яжіться з нами — менеджер відповість протягом 15 хвилин.</p>
+            <p className="text-white/85 mb-7 max-w-lg mx-auto">Залиште заявку або зв'яжіться з нами — менеджер відповість протягом 15 хвилин.</p>
             <div className="flex flex-wrap justify-center gap-3">
               <Link to="/dtf-print">
-                <Button size="lg" className="bg-white text-[#037291] hover:bg-white/90 font-bold px-8 shadow">
+                <Button size="lg" className="bg-white text-[#076478] hover:bg-white/90 font-bold px-8 shadow">
                   Замовити зараз
                 </Button>
               </Link>
               <a href="tel:+380739338895">
-                <Button size="lg" variant="outline" className="border-white/50 text-white hover:bg-white/10 font-semibold px-8">
+                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 font-semibold px-8">
                   <Phone className="w-4 h-4 mr-2" />
                   Зателефонувати
                 </Button>
@@ -226,6 +224,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <ComplexBrandingSection />
 
       <Footer />
     </div>
