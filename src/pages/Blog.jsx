@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, Calendar, Clock, ChevronRight } from 'lucide-react';
+import { ArrowRight, Calendar, Clock, ChevronRight, PlayCircle, Search, BookOpen } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -13,6 +13,7 @@ export const BLOG_POSTS = [
     date: '18 червня 2026',
     readTime: '5 хв',
     image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&q=80',
+    video: 'https://media.base44.com/images/public/69d39217874c6fe682eac60a/bcd44447f_image.png',
     featured: true,
   },
   {
@@ -82,51 +83,99 @@ function CategoryBadge({ category }) {
   );
 }
 
+/* Media block: shows video (autoplay-muted loop) when available, else image. Optional play badge for cards. */
+function PostMedia({ post, badge = false, className = '' }) {
+  if (post.video) {
+    return (
+      <div className={`relative overflow-hidden ${className}`}>
+        <video
+          src={post.video}
+          poster={post.image}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+          muted
+          loop
+          playsInline
+          autoPlay
+        />
+        {badge && (
+          <div className="absolute inset-0 bg-black/20 flex items-center justify-center pointer-events-none">
+            <PlayCircle className="w-12 h-12 text-white drop-shadow-lg" />
+          </div>
+        )}
+      </div>
+    );
+  }
+  return (
+    <div className={`relative overflow-hidden ${className}`}>
+      <img
+        src={post.image}
+        alt={post.title}
+        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+      />
+    </div>
+  );
+}
+
 export default function Blog() {
-  const featured = BLOG_POSTS.find(p => p.featured);
-  const rest = BLOG_POSTS.filter(p => !p.featured);
+  const [activeCat, setActiveCat] = useState('Усі');
+  const [query, setQuery] = useState('');
+
+  const categories = ['Усі', ...Array.from(new Set(BLOG_POSTS.map((p) => p.category)))];
+  const featured = BLOG_POSTS.find((p) => p.featured);
+
+  const filtered = BLOG_POSTS.filter((p) => {
+    if (p.featured) return false;
+    const catOk = activeCat === 'Усі' || p.category === activeCat;
+    const qOk = !query.trim() || (p.title + p.excerpt).toLowerCase().includes(query.trim().toLowerCase());
+    return catOk && qOk;
+  });
 
   return (
-    <div className="min-h-screen flex flex-col bg-background">
+    <div className="min-h-screen flex flex-col bg-muted/30">
       <Header />
 
-      {/* Breadcrumb */}
-      <div className="container mx-auto px-4 lg:px-8 max-w-6xl pt-5 pb-2">
-        <nav className="flex items-center gap-1 text-xs text-muted-foreground">
-          <Link to="/" className="hover:text-primary">Головна</Link>
-          <ChevronRight className="w-3 h-3" />
-          <span className="text-foreground font-medium">Блог</span>
-        </nav>
-      </div>
+      {/* Hero */}
+      <section className="bg-gradient-to-br from-primary to-[#0a8fa8] text-white">
+        <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-12 lg:py-16">
+          <nav className="flex items-center gap-1 text-xs text-white/70 mb-4">
+            <Link to="/" className="hover:text-white">Головна</Link>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-white font-medium">Блог</span>
+          </nav>
+          <div className="flex items-center gap-2 text-white/80 text-xs font-semibold uppercase tracking-widest mb-3">
+            <BookOpen className="w-4 h-4" /> Журнал PNG druk
+          </div>
+          <h1 className="text-3xl lg:text-5xl font-bold leading-tight mb-3">Блог</h1>
+          <p className="text-white/85 max-w-2xl text-sm lg:text-base">
+            Технології друку, поради з підготовки файлів, огляди обладнання та матеріалів — усе, що потрібно для якісного брендування.
+          </p>
+        </div>
+      </section>
 
-      <main className="container mx-auto px-4 lg:px-8 max-w-6xl py-8 flex-1">
-        <h1 className="text-3xl font-bold text-foreground mb-8">Блог</h1>
-
-        {/* Featured Post */}
+      <main className="container mx-auto px-4 lg:px-8 max-w-6xl py-10 flex-1">
+        {/* Featured */}
         {featured && (
           <Link
             to={`/blog/${featured.slug}`}
-            className="group block mb-10 bg-card border rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300"
+            className="group block mb-12 bg-card border border-border rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
           >
             <div className="grid grid-cols-1 lg:grid-cols-2">
-              <div className="relative overflow-hidden h-56 lg:h-auto">
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:to-transparent" />
-                <div className="absolute top-4 left-4">
+              <PostMedia post={featured} className="h-56 lg:h-full min-h-72" badge={false} />
+              <div className="p-7 lg:p-10 flex flex-col justify-center">
+                <div className="flex items-center gap-2 mb-4">
                   <span className="bg-primary text-primary-foreground text-xs font-bold px-3 py-1 rounded-full">Головна стаття</span>
+                  {featured.video && (
+                    <span className="inline-flex items-center gap-1 bg-violet-100 text-violet-700 text-xs font-semibold px-2.5 py-1 rounded-full">
+                      <PlayCircle className="w-3.5 h-3.5" /> Відео
+                    </span>
+                  )}
                 </div>
-              </div>
-              <div className="p-7 flex flex-col justify-center">
-                <CategoryBadge category={featured.category} />
-                <h2 className="text-xl lg:text-2xl font-bold text-foreground mt-3 mb-3 group-hover:text-primary transition-colors leading-snug">
+                <div className="mb-3"><CategoryBadge category={featured.category} /></div>
+                <h2 className="text-xl lg:text-3xl font-bold text-foreground mb-3 group-hover:text-primary transition-colors leading-snug">
                   {featured.title}
                 </h2>
                 <p className="text-sm text-muted-foreground leading-relaxed mb-5 line-clamp-3">{featured.excerpt}</p>
-                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-5">
+                <div className="flex items-center gap-4 text-xs text-muted-foreground mb-6">
                   <span className="flex items-center gap-1"><Calendar className="w-3.5 h-3.5" />{featured.date}</span>
                   <span className="flex items-center gap-1"><Clock className="w-3.5 h-3.5" />{featured.readTime} читання</span>
                 </div>
@@ -138,44 +187,70 @@ export default function Blog() {
           </Link>
         )}
 
-        {/* Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {rest.map((post) => (
-            <Link
-              key={post.slug}
-              to={`/blog/${post.slug}`}
-              className="group bg-card border rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-all duration-200 flex flex-col"
-            >
-              <div className="relative overflow-hidden h-48">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-              <div className="p-5 flex flex-col flex-1">
-                <div className="flex items-center justify-between mb-3">
-                  <CategoryBadge category={post.category} />
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Clock className="w-3 h-3" />{post.readTime}
-                  </span>
-                </div>
-                <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors leading-snug line-clamp-2">
-                  {post.title}
-                </h3>
-                <p className="text-sm text-muted-foreground leading-relaxed flex-1 line-clamp-3">{post.excerpt}</p>
-                <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-                  <span className="text-xs text-muted-foreground flex items-center gap-1">
-                    <Calendar className="w-3 h-3" />{post.date}
-                  </span>
-                  <span className="text-primary text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
-                    Читати <ArrowRight className="w-3 h-3" />
-                  </span>
-                </div>
-              </div>
-            </Link>
-          ))}
+        {/* Filters */}
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
+          <div className="flex flex-wrap gap-2">
+            {categories.map((c) => (
+              <button
+                key={c}
+                onClick={() => setActiveCat(c)}
+                className={`text-sm px-4 py-2 rounded-full border transition-colors ${
+                  activeCat === c
+                    ? 'bg-primary text-primary-foreground border-primary font-semibold'
+                    : 'bg-card text-foreground border-border hover:border-primary hover:text-primary'
+                }`}
+              >
+                {c}
+              </button>
+            ))}
+          </div>
+          <div className="relative w-full sm:w-64">
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground" />
+            <input
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Пошук статей..."
+              className="h-10 w-full pl-9 pr-3 rounded-full border border-input bg-card text-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+            />
+          </div>
         </div>
+
+        {/* Grid */}
+        {filtered.length === 0 ? (
+          <p className="text-center text-sm text-muted-foreground py-16">Нічого не знайдено за вашим запитом.</p>
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {filtered.map((post) => (
+              <Link
+                key={post.slug}
+                to={`/blog/${post.slug}`}
+                className="group bg-card border border-border rounded-xl overflow-hidden shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-200 flex flex-col"
+              >
+                <PostMedia post={post} className="h-48" badge={!!post.video} />
+                <div className="p-5 flex flex-col flex-1">
+                  <div className="flex items-center justify-between mb-3">
+                    <CategoryBadge category={post.category} />
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Clock className="w-3 h-3" />{post.readTime}
+                    </span>
+                  </div>
+                  <h3 className="font-bold text-foreground mb-2 group-hover:text-primary transition-colors leading-snug line-clamp-2">
+                    {post.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed flex-1 line-clamp-3">{post.excerpt}</p>
+                  <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
+                    <span className="text-xs text-muted-foreground flex items-center gap-1">
+                      <Calendar className="w-3 h-3" />{post.date}
+                    </span>
+                    <span className="text-primary text-xs font-semibold flex items-center gap-1 group-hover:gap-2 transition-all">
+                      Читати <ArrowRight className="w-3 h-3" />
+                    </span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </main>
 
       <Footer />
