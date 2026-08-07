@@ -17,6 +17,7 @@ import PrintTechnologies from './pages/PrintTechnologies';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import PaymentDelivery from './pages/PaymentDelivery';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
       <Route path="/blog" element={<Blog />} />
       <Route path="/qna" element={<QnA />} />
       <Route path="/services" element={<Services />} />
+      <Route path="/delivery" element={<PaymentDelivery />} />
       <Route path="*" element={<PageNotFound />} />
     </Routes>
   );
