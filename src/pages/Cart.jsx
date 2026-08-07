@@ -206,7 +206,7 @@ export default function Cart() {
 
                     {/* CTA */}
                     <div className="p-4">
-                      <Link to="/cabinet">
+                      <Link to="/checkout">
                         <Button className="w-full bg-primary hover:bg-primary/90 font-bold h-12 text-base gap-2 shadow-sm">
                           Оформити замовлення <ArrowRight className="w-4 h-4" />
                         </Button>

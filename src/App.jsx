@@ -15,6 +15,7 @@ import QnA from './pages/QnA';
 import Services from './pages/Services';
 import PrintTechnologies from './pages/PrintTechnologies';
 import Cart from './pages/Cart';
+import Checkout from './pages/Checkout';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -45,6 +46,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/cart" element={<Cart />} />
+      <Route path="/checkout" element={<Checkout />} />
       <Route path="/cabinet" element={<Cabinet />} />
       <Route path="/technologies" element={<PrintTechnologies />} />
       <Route path="/dtf-print" element={<DTFPrint />} />
