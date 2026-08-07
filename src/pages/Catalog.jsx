@@ -44,7 +44,7 @@ const TONE_STYLES = {
 function ProductCard({ product }) {
   return (
     <Link
-      to="/dtf-print"
+      to={`/catalog?cat=${product.category}&q=${encodeURIComponent(product.title)}`}
       className="group bg-card border rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col"
     >
       <div className={`relative overflow-hidden bg-gradient-to-br ${TONE_STYLES[product.tone]} aspect-[4/3]`}>
