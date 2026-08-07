@@ -28,7 +28,9 @@ const BRANCHES = {
   ],
 };
 
-const AREAS = ['Львівська', 'Городоцька', 'Шевченка', 'Франка'];
+const AREAS = ['Львівська', 'Галицька', 'Залізнична', 'Сихівська'];
+const CITIES = ['Львів', 'Київ'];
+const BRANCH_TYPES = ['Відділення', 'Поштомат', 'Вантажне відділення'];
 
 export default function DeliverySection({ form, setField }) {
   const branches = BRANCHES[form.service_zone] || [];
@@ -82,13 +84,13 @@ export default function DeliverySection({ form, setField }) {
       <div className="space-y-1.5">
         <Label className="text-sm text-foreground">Вкажіть адресу доставки</Label>
         {form.delivery_type === 'Нова Пошта' ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Select value={form.address_branch} onValueChange={(v) => setField('address_branch', v)}>
+          <div className="space-y-3">
+            <Select value={form.address_branch_type} onValueChange={(v) => setField('address_branch_type', v)}>
               <SelectTrigger className="h-10">
                 <SelectValue placeholder="Відділення-відділення" />
               </SelectTrigger>
               <SelectContent>
-                {branches.map((b) => (
+                {BRANCH_TYPES.map((b) => (
                   <SelectItem key={b} value={b}>{b}</SelectItem>
                 ))}
               </SelectContent>
@@ -100,6 +102,26 @@ export default function DeliverySection({ form, setField }) {
               <SelectContent>
                 {AREAS.map((a) => (
                   <SelectItem key={a} value={a}>{a}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={form.address_city} onValueChange={(v) => setField('address_city', v)}>
+              <SelectTrigger className="h-10">
+                <SelectValue placeholder="Львів" />
+              </SelectTrigger>
+              <SelectContent>
+                {CITIES.map((c) => (
+                  <SelectItem key={c} value={c}>{c}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <Select value={form.address_branch} onValueChange={(v) => setField('address_branch', v)}>
+              <SelectTrigger className="h-10">
+                <SelectValue placeholder="Відділення №10 (до 10 кг): вул. Левицького, 7" />
+              </SelectTrigger>
+              <SelectContent>
+                {branches.map((b) => (
+                  <SelectItem key={b} value={b}>{b}</SelectItem>
                 ))}
               </SelectContent>
             </Select>

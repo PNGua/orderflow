@@ -41,6 +41,8 @@ export default function Checkout() {
     address: '',
     address_branch: '',
     address_area: '',
+    address_city: '',
+    address_branch_type: '',
     payment_type: 'Рахунок-фактура',
     comment: '',
     confirmed: false,
