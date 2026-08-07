@@ -1,5 +1,5 @@
-import React, { useState, useMemo } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useMemo, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Search, ChevronRight, ArrowRight, Star, Sparkles, FolderOpen, Layers, Printer } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
@@ -86,13 +86,18 @@ function ProductCard({ product }) {
 }
 
 export default function Catalog() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const initialCat = urlParams.get('cat');
+  const location = useLocation();
   const validCats = CATEGORIES.map((c) => c.id);
-  const [activeCategory, setActiveCategory] = useState(
-    initialCat && validCats.includes(initialCat) ? initialCat : 'all'
-  );
-  const [search, setSearch] = useState(urlParams.get('q') || '');
+  const [activeCategory, setActiveCategory] = useState('all');
+  const [search, setSearch] = useState('');
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const cat = urlParams.get('cat');
+    const q = urlParams.get('q') || '';
+    setActiveCategory(cat && validCats.includes(cat) ? cat : 'all');
+    setSearch(q);
+  }, [location.search]);
 
   const filtered = useMemo(() => {
     return PRODUCTS.filter((p) => {
