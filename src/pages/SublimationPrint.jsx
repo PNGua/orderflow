@@ -1,28 +1,37 @@
 import React from 'react';
-import TechnologyLanding from '@/components/TechnologyLanding';
+import { Link } from 'react-router-dom';
+import { ArrowRight, ChevronRight, Image, Palette, Shirt, Sparkles, Sun } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+
+const FEATURES = [
+  { icon: Image, title: 'Фотореалістична якість', text: 'Плавні градієнти, насичені кольори та точне відтворення дрібних деталей.' },
+  { icon: Sun, title: 'Не вигорає', text: 'Фарба проникає в матеріал і зберігає яскравість під час використання.' },
+  { icon: Shirt, title: 'М’яке нанесення', text: 'На тканині немає додаткового шару — принт залишається легким і повітропроникним.' },
+  { icon: Palette, title: 'Широка палітра', text: 'Повноколірні макети без обмежень за кількістю відтінків.' },
+];
+
+const SPECS = [
+  ['Тип друку', 'Dye Sublimation'], ['Матеріали', 'Світлий поліестер від 65%, сувенірні заготовки'],
+  ['Кольорова схема', 'CMYK'], ['Роздільна здатність', 'До 1200 dpi'],
+  ['Мінімальна ширина', '0,3 м'], ['Застосування', 'Одяг, прапори, кружки, панелі, декор'],
+];
+
+const STEPS = [
+  ['01', 'Оберіть основу', 'Визначте текстиль або сувенірну заготовку для нанесення.'],
+  ['02', 'Надішліть макет', 'Ми перевіримо кольори, розмір та придатність файлу до друку.'],
+  ['03', 'Термоперенесення', 'Зображення друкується на папері та під температурою переходить у матеріал.'],
+  ['04', 'Контроль і доставка', 'Перевіряємо результат, пакуємо та передаємо готове замовлення.'],
+];
 
 export default function SublimationPrint() {
   return (
-    <TechnologyLanding
-      title="Сублімаційний друк"
-      subtitle="Dye Sublimation"
-      badge="Фотоякість"
-      image="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&q=85"
-      description={
-        "Сублімаційний друк — це технологія перенесення фарб у газоподібний стан під дією високої температури та тиску. Дає яскраве, фотореалістичне зображення, що проникає в структуру матеріалу та не вигорає з часом. Ідеально підходить для синтетичних тканин, сувенірної та промо-продукції: кружки, тарілки, панелі."
-      }
-      features={[
-        { text: 'Фотореалістична якість' },
-        { text: 'Без вигорання' },
-        { text: 'Для синтетичних матеріалів' },
-        { text: 'Сувеніри та промо' },
-      ]}
-      notes={[
-        'Сублімація наноситься на світлі синтетичні тканини (мінімум 65% поліестеру). Темні вироби потребують попереднього покрытия.',
-      ]}
-      pricePerSqm={380}
-      minPrice={175}
-      minWidth={0.3}
-    />
+    <div className="min-h-screen flex flex-col bg-background"><Header /><main className="flex-1">
+      <div className="container mx-auto px-4 lg:px-8 max-w-6xl pt-6"><nav className="flex items-center gap-1 text-xs text-muted-foreground flex-wrap"><Link to="/" className="hover:text-primary">Головна</Link><ChevronRight className="w-3 h-3" /><Link to="/technologies" className="hover:text-primary">Технології друку</Link><ChevronRight className="w-3 h-3" /><span className="text-foreground font-medium">Сублімаційний друк</span></nav></div>
+      <section className="py-8 lg:py-12"><div className="container mx-auto px-4 lg:px-8 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"><div className="space-y-5"><div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full"><Sparkles className="w-3.5 h-3.5" />Dye Sublimation</div><h1 className="text-3xl lg:text-5xl font-bold leading-tight">Сублімаційний друк — <span className="text-primary">фотоякість без зайвого шару</span></h1><p className="text-muted-foreground text-base lg:text-lg leading-relaxed">Під дією температури фарба переходить у газоподібний стан і проникає безпосередньо в структуру матеріалу. Таке зображення не тріскається, не відшаровується та зберігає природну фактуру виробу.</p><Link to="/catalog?cat=sublimation" className="inline-flex items-center gap-2 bg-primary text-primary-foreground font-semibold text-sm px-5 py-3 rounded-xl hover:bg-primary/90">Перейти в каталог сублімації <ArrowRight className="w-4 h-4" /></Link></div><div className="rounded-2xl overflow-hidden shadow-lg border"><img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=1000&q=85" alt="Сублімаційний друк на текстилі" className="w-full h-72 lg:h-96 object-cover" /></div></div></section>
+      <section className="py-12 bg-muted/30"><div className="container mx-auto px-4 lg:px-8 max-w-6xl"><h2 className="text-2xl lg:text-3xl font-bold text-center mb-2">Переваги сублімації</h2><p className="text-muted-foreground text-center mb-10">Яскравий друк для спортивного текстилю, промо та сувенірів.</p><div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">{FEATURES.map(({ icon: Icon, title, text }) => <div key={title} className="bg-card border rounded-2xl p-6 shadow-sm"><div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-primary" /></div><h3 className="font-bold mb-2">{title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{text}</p></div>)}</div></div></section>
+      <section className="py-14"><div className="container mx-auto px-4 lg:px-8 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-10"><div><h2 className="text-2xl font-bold mb-6">Технічні характеристики</h2><div className="bg-card border rounded-2xl divide-y overflow-hidden">{SPECS.map(([label, value]) => <div key={label} className="flex justify-between gap-4 px-5 py-4"><span className="text-muted-foreground text-sm">{label}</span><span className="font-semibold text-sm text-right">{value}</span></div>)}</div></div><div><h2 className="text-2xl font-bold mb-6">Як замовити</h2><ol className="space-y-4">{STEPS.map(([n, title, text]) => <li key={n} className="flex gap-4"><span className="shrink-0 w-10 h-10 rounded-full bg-primary text-primary-foreground font-bold text-sm flex items-center justify-center">{n}</span><div><h3 className="font-semibold">{title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{text}</p></div></li>)}</ol></div></div></section>
+      <section className="pb-14"><div className="container mx-auto px-4 lg:px-8 max-w-6xl"><div className="bg-primary text-primary-foreground rounded-3xl p-8 lg:p-12 flex flex-col lg:flex-row items-center justify-between gap-6"><div><h2 className="text-2xl lg:text-3xl font-bold mb-2">Оберіть продукцію для сублімації</h2><p className="text-primary-foreground/80">Перейдіть до каталогу та знайдіть формат під ваше завдання.</p></div><Link to="/catalog?cat=sublimation" className="shrink-0 inline-flex items-center gap-2 bg-card text-primary font-semibold text-sm px-5 py-3 rounded-xl">Перейти в каталог <ArrowRight className="w-4 h-4" /></Link></div></div></section>
+    </main><Footer /></div>
   );
 }
