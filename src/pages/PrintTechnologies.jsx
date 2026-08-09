@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Printer, Layers, Flame, Image as ImageIcon, SprayCan, Sparkles } from 'lucide-react';
+import { ArrowRight, ChevronRight, Printer, Layers, Sparkles } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 
@@ -28,35 +28,13 @@ const TECHNOLOGIES = [
     accent: 'from-violet-500/15 to-violet-500/5',
   },
   {
-    icon: ImageIcon,
-    title: 'Сублімаційний друк',
-    subtitle: 'Dye Sublimation',
-    description: 'Яскравий фотодрук на синтетичних тканинах, кружках, тарілках та сувенірній продукції.',
-    features: ['Фотореалістична якість', 'Без вигорання', 'Для синтетичних матеріалів'],
-    image: 'https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=800&q=80',
-    link: '/sublimation-print',
-    available: true,
-    accent: 'from-amber-500/15 to-amber-500/5',
-  },
-  {
-    icon: SprayCan,
-    title: 'Широкоформатний друк',
-    subtitle: 'Large Format',
-    description: 'Друк на банерній тканині, плівці та папері для зовнішньої реклами будь-яких розмірів.',
-    features: ['Будь-які розміри', 'Внутрішня/зовнішня реклама', 'Стійкість до УФ'],
-    image: 'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=800&q=80',
-    link: '/wide-format-print',
-    available: true,
-    accent: 'from-emerald-500/15 to-emerald-500/5',
-  },
-  {
-    icon: Flame,
-    title: 'Термоперенос',
-    subtitle: 'Heat Transfer',
-    description: 'Класичний термоперенос та флекс для однотонних логотипів, написів та номерів на текстилі.',
-    features: ['Однотонні принти', 'Швидкий тираж', 'Флекс, флок, металік'],
+    icon: Layers,
+    title: 'Шовкотрафаретний друк',
+    subtitle: 'Screen Printing',
+    description: 'Класична технологія прямого нанесення фарби для насичених кольорів, високої стійкості та серійних тиражів.',
+    features: ['Щільні кольори', 'Стійкість до прання', 'Вигідно для тиражів'],
     image: 'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=800&q=80',
-    link: '/heat-transfer-print',
+    link: '/screen-print',
     available: true,
     accent: 'from-rose-500/15 to-rose-500/5',
   },

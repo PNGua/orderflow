@@ -6,6 +6,7 @@ import {
 } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import YoutubeVideoPlaceholder from '@/components/YoutubeVideoPlaceholder';
 
 const FEATURES = [
   {
@@ -103,6 +104,21 @@ export default function DTFPrint() {
                 />
               </div>
             </div>
+          </div>
+        </section>
+
+        {/* Technology description and video */}
+        <section className="pb-12">
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Про технологію</p>
+              <h2 className="text-2xl lg:text-3xl font-bold text-foreground mb-4">Як працює ДТФ друк</h2>
+              <div className="space-y-3 text-sm lg:text-base text-muted-foreground leading-relaxed">
+                <p>Макет друкується дзеркально на спеціальній PET-плівці кольоровими та білими чорнилами. На свіжий шар наноситься термоклей, після чого трансфер проходить полімеризацію.</p>
+                <p>Готове зображення переноситься на тканину термопресом. Технологія не потребує підготовки текстилю та дозволяє працювати з повноколірними макетами, тонкими лініями й невеликими тиражами.</p>
+              </div>
+            </div>
+            <YoutubeVideoPlaceholder title="Відео про технологію ДТФ друку" />
           </div>
         </section>
 

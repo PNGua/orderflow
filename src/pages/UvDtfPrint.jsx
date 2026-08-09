@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { ArrowRight, Box, ChevronRight, Droplets, Layers, Sparkles, Sun } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import YoutubeVideoPlaceholder from '@/components/YoutubeVideoPlaceholder';
 
 const FEATURES = [
   { icon: Layers, title: "Об'ємний 3D-рельєф", text: 'Пошарове нанесення чорнил створює виразну фактуру та преміальний вигляд.' },
@@ -41,6 +42,8 @@ export default function UvDtfPrint() {
         </div>
         <div className="rounded-2xl overflow-hidden shadow-lg border"><img src="https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=1000&q=85" alt="УФ ДТФ друк на твердих поверхнях" className="w-full h-72 lg:h-96 object-cover" /></div>
       </div></section>
+
+      <section className="pb-12"><div className="container mx-auto px-4 lg:px-8 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"><div><p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Про технологію</p><h2 className="text-2xl lg:text-3xl font-bold mb-4">Як працює УФ ДТФ друк</h2><div className="space-y-3 text-sm lg:text-base text-muted-foreground leading-relaxed"><p>Зображення пошарово друкується УФ-чорнилами на клейовій плівці: спочатку біла основа, потім колір і захисний лак. Кожен шар одразу полімеризується ультрафіолетовим світлом.</p><p>Після ламінування трансфер переноситься на чисту тверду поверхню без нагрівання. Результат має виразний рельєф, точні контури та добре витримує щоденне використання.</p></div></div><YoutubeVideoPlaceholder title="Відео про технологію УФ ДТФ друку" /></div></section>
 
       <section className="py-12 bg-muted/30"><div className="container mx-auto px-4 lg:px-8 max-w-6xl"><h2 className="text-2xl lg:text-3xl font-bold text-center mb-2">Переваги УФ ДТФ</h2><p className="text-muted-foreground text-center mb-10">Технологія для брендованих виробів, пакування та сувенірної продукції.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">{FEATURES.map(({ icon: Icon, title, text }) => <div key={title} className="bg-card border rounded-2xl p-6 shadow-sm"><div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-primary" /></div><h3 className="font-bold mb-2">{title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{text}</p></div>)}</div>
