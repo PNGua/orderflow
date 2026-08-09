@@ -24,6 +24,7 @@ import SublimationPrint from './pages/SublimationPrint';
 import WideFormatPrint from './pages/WideFormatPrint';
 import HeatTransferPrint from './pages/HeatTransferPrint';
 import ScreenPrint from './pages/ScreenPrint';
+import ProductDetail from './pages/ProductDetail';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -65,6 +66,7 @@ const AuthenticatedApp = () => {
       <Route path="/heat-transfer-print" element={<HeatTransferPrint />} />
       <Route path="/screen-print" element={<ScreenPrint />} />
       <Route path="/catalog" element={<Catalog />} />
+      <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/contacts" element={<Contacts />} />
       <Route path="/blog" element={<Blog />} />
       <Route path="/blog/:slug" element={<BlogPost />} />
