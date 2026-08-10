@@ -43,7 +43,7 @@ export default function ProductShowcase({ product }) {
     navigate('/cart');
   };
 
-  const dimensionsValid = product.price === 0 || (Number(width) > 0 && Number(height) > 0);
+  const dimensionsValid = (product.price === 0 || (Number(width) > 0 && Number(height) > 0)) && !!attachedUrl;
 
   return (
     <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-stretch gap-5">
