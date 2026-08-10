@@ -19,12 +19,21 @@ export default function ProductShowcase({ product }) {
     return Math.round(product.price * area * (urgent ? 1.3 : 1));
   }, [product.price, width, height, urgent]);
 
-  const handleModalSubmit = ({ layoutUrl, phone }) => {
+  const addToCart = (layoutUrl = '', phone = '') => {
     addItem({ id: product.id, name: product.title, image: product.image, price: total, qty: 1, maket_url: layoutUrl, attrs: {
       'Ширина': `${width || 0} м`, 'Лист': `${height || 0} м`, 'Терміново': urgent ? 'Так (+30%)' : 'Ні',
       ...(phone ? { 'Телефон': phone } : {}),
     }});
+  };
+
+  const handleModalSubmit = ({ layoutUrl, phone }) => {
+    addToCart(layoutUrl, phone);
     setModalOpen(false);
+    navigate('/cart');
+  };
+
+  const orderPrint = () => {
+    addToCart();
     navigate('/cart');
   };
 
@@ -65,7 +74,7 @@ export default function ProductShowcase({ product }) {
 
           <div className="mt-auto pt-6 border-t border-border">
             <div className="flex items-center justify-between gap-4 mb-4"><span className="text-lg font-medium text-foreground">До сплати:</span><strong className="text-3xl leading-none text-foreground">{total} грн</strong></div>
-            <button onClick={() => setModalOpen(true)} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
+            <button onClick={orderPrint} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
             <Link to={`/catalog?cat=${product.category}`} className="mt-3 w-full inline-flex items-center justify-center gap-2 text-muted-foreground hover:text-primary text-sm font-semibold"><Grid2X2 className="w-4 h-4" />До каталогу</Link>
           </div>
         </div>
