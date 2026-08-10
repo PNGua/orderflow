@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { FileUp, Grid2X2, HelpCircle } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
+import { FileUp, HelpCircle } from 'lucide-react';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
 import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
@@ -83,7 +83,6 @@ export default function ProductShowcase({ product }) {
               </div>
             </div>
             <button onClick={orderPrint} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
-            <Link to={`/catalog?cat=${product.category}`} className="mt-3 w-full inline-flex items-center justify-center gap-2 text-muted-foreground hover:text-primary text-sm font-semibold"><Grid2X2 className="w-4 h-4" />До каталогу</Link>
           </div>
         </div>
 
