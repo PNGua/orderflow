@@ -4,6 +4,7 @@ import { FileUp, Grid2X2, HelpCircle, Loader2 } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
+import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
 
 export default function ProductShowcase({ product }) {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ export default function ProductShowcase({ product }) {
   const [layoutUrl, setLayoutUrl] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploading, setUploading] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const total = useMemo(() => {
     if (product.price === 0) return 0;
@@ -69,12 +71,19 @@ export default function ProductShowcase({ product }) {
               <div className="flex items-center gap-1.5 text-xl font-bold text-foreground mb-3">Терміново <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-4 h-4 text-muted-foreground" /></span></div>
               <label className="inline-flex items-center gap-2.5 text-xs text-foreground cursor-pointer mb-5"><input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} className="w-5 h-5 accent-primary" />Термінове виготовлення (+30%)</label>
               <input ref={fileRef} type="file" onChange={uploadLayout} className="hidden" />
-              <button type="button" onClick={() => fileRef.current?.click()} disabled={uploading} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5 disabled:opacity-50">
+              <button type="button" onClick={() => setModalOpen(true)} disabled={uploading} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5 disabled:opacity-50">
                 {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileUp className="w-5 h-5" />}{uploading ? 'Завантаження...' : fileName || 'Завантажити макет'}
               </button>
             </div>
           </div>
         </div>
+
+        <LayoutUploadModal
+          open={modalOpen}
+          onClose={() => setModalOpen(false)}
+          uploading={uploading}
+          onUploadClick={() => { setModalOpen(false); fileRef.current?.click(); }}
+        />
 
         <div className="bg-primary px-5 lg:px-6 py-6 text-primary-foreground">
           <div className="flex items-center justify-between gap-4 mb-5"><span className="text-xl font-medium">До сплати:</span><strong className="text-4xl leading-none">{total} грн</strong></div>
