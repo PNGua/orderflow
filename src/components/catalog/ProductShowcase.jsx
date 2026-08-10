@@ -44,12 +44,12 @@ export default function ProductShowcase({ product }) {
   const dimensionsValid = product.price === 0 || (Number(width) > 0 && Number(height) > 0);
 
   return (
-    <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-start gap-5">
+    <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-stretch gap-5">
       <div className="bg-muted border rounded-xl overflow-hidden min-h-72 lg:min-h-[500px]">
         <img src={product.image} alt={product.title} className="w-full h-full min-h-72 lg:min-h-[500px] object-cover" />
       </div>
-      <div className="bg-card border rounded-2xl shadow-sm overflow-hidden">
-        <div className="p-5 lg:p-6">
+      <div className="bg-card border rounded-2xl shadow-sm overflow-hidden flex flex-col">
+        <div className="p-5 lg:p-6 flex-1 flex flex-col">
           <div className="rounded-xl bg-muted px-4 py-3 text-xs leading-relaxed text-foreground/80">
             Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Інструкція з підготовки файлів до друку. Для консультації звертайтеся за номером <a href="tel:+380739338895" className="text-primary font-semibold">+38 073 933 88 95</a> або через месенджер. Наші адреси: м. Львів, вул. Городоцька 242 та м. Київ, вул. Машинобудівна 44.
           </div>
@@ -76,6 +76,12 @@ export default function ProductShowcase({ product }) {
               </button>
             </div>
           </div>
+
+          <div className="mt-auto pt-6 border-t border-border">
+            <div className="flex items-center justify-between gap-4 mb-4"><span className="text-lg font-medium text-foreground">До сплати:</span><strong className="text-3xl leading-none text-foreground">{total} грн</strong></div>
+            <button onClick={orderPrint} disabled={!dimensionsValid || uploading} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
+            <Link to={`/catalog?cat=${product.category}`} className="mt-3 w-full inline-flex items-center justify-center gap-2 text-muted-foreground hover:text-primary text-sm font-semibold"><Grid2X2 className="w-4 h-4" />До каталогу</Link>
+          </div>
         </div>
 
         <LayoutUploadModal
@@ -84,12 +90,6 @@ export default function ProductShowcase({ product }) {
           uploading={uploading}
           onUploadClick={() => { setModalOpen(false); fileRef.current?.click(); }}
         />
-
-        <div className="bg-primary px-5 lg:px-6 py-6 text-primary-foreground">
-          <div className="flex items-center justify-between gap-4 mb-5"><span className="text-xl font-medium">До сплати:</span><strong className="text-4xl leading-none">{total} грн</strong></div>
-          <button onClick={orderPrint} disabled={!dimensionsValid || uploading} className="w-full bg-foreground text-background rounded-xl py-3.5 font-semibold text-base hover:bg-foreground/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
-          <Link to={`/catalog?cat=${product.category}`} className="mt-4 w-full inline-flex items-center justify-center gap-2 text-primary-foreground hover:opacity-80 text-sm font-semibold"><Grid2X2 className="w-4 h-4" />До каталогу</Link>
-        </div>
       </div>
     </section>
   );
