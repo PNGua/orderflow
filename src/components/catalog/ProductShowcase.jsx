@@ -102,10 +102,12 @@ export default function ProductShowcase({ product }) {
 
         {/* Price + CTA — single strip, no divider */}
         <div className="flex items-center gap-4 px-5 lg:px-6 pb-5 lg:pb-6">
-          <div className="flex items-baseline gap-2 shrink-0">
-            <span className="text-sm font-medium text-muted-foreground">До сплати:</span>
-            {total > 0 && <span className="text-sm text-muted-foreground line-through">{retailTotal} грн</span>}
-            <strong className="text-2xl leading-none text-primary">{total} грн</strong>
+          <div className="shrink-0">
+            <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-0.5">До сплати</div>
+            <div className="flex items-baseline gap-2">
+              {total > 0 && <span className="text-xs text-muted-foreground line-through decoration-1">{retailTotal} грн</span>}
+              <strong className="text-2xl font-bold text-primary leading-none">{total} <span className="text-sm font-semibold">грн</span></strong>
+            </div>
           </div>
           <button onClick={orderPrint} disabled={!dimensionsValid} className="ml-auto sm:flex-1 max-sm:w-full bg-primary text-primary-foreground rounded-xl py-3.5 px-5 font-semibold text-sm hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground whitespace-nowrap">
             {attachedUrl ? 'Перейти до оформлення' : 'Додати в кошик'}
