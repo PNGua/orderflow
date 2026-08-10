@@ -42,7 +42,7 @@ export default function ProductShowcase({ product }) {
   const dimensionsValid = product.price === 0 || (Number(width) > 0 && Number(height) > 0);
 
   return (
-    <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 items-start gap-5">
+    <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[3fr_7fr] items-start gap-5">
       <div className="bg-muted border rounded-xl overflow-hidden min-h-72 lg:min-h-[500px]">
         <img src={product.image} alt={product.title} className="w-full h-full min-h-72 lg:min-h-[500px] object-cover" />
       </div>
