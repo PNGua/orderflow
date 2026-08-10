@@ -47,53 +47,69 @@ export default function ProductShowcase({ product }) {
 
   return (
     <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-stretch gap-5">
-      <div className="bg-muted border rounded-xl overflow-hidden min-h-72 lg:min-h-[500px]">
-        <img src={product.image} alt={product.title} className="w-full h-full min-h-72 lg:min-h-[500px] object-cover" />
+      <div className="bg-muted border rounded-2xl overflow-hidden min-h-72 lg:min-h-[420px]">
+        <img src={product.image} alt={product.title} className="w-full h-full min-h-72 lg:min-h-[420px] object-cover" />
       </div>
       <div className="bg-card border rounded-2xl shadow-sm overflow-hidden flex flex-col">
-        <div className="p-5 lg:p-6 flex-1 flex flex-col">
-          <div className="rounded-xl bg-muted px-4 py-3 text-xs leading-relaxed text-foreground/80">
-            Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Інструкція з підготовки файлів до друку. Для консультації звертайтеся за номером <a href="tel:+380739338895" className="text-primary font-semibold">+38 073 933 88 95</a> або через месенджер. Наші адреси: м. Львів, вул. Городоцька 242 та м. Київ, вул. Машинобудівна 44.
+        <div className="p-5 lg:p-6 flex-1 flex flex-col gap-4">
+          {/* Condensed info strip */}
+          <div className="rounded-lg bg-muted px-3.5 py-2.5 text-[11px] leading-relaxed text-foreground/70">
+            Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Для консультації: <a href="tel:+380739338895" className="text-primary font-semibold">+38 073 933 88 95</a>.
           </div>
 
-          <p className="mt-5 text-sm font-medium text-foreground">Тариф: {product.price} грн/м² · {CATEGORY_LABELS[product.category]}</p>
+          {/* Tariff line */}
+          <div className="flex items-baseline gap-2 pb-3 border-b border-border/70">
+            <span className="text-lg font-bold text-foreground">{product.price} грн/м²</span>
+            <span className="text-sm font-medium text-muted-foreground">· {CATEGORY_LABELS[product.category]}</span>
+          </div>
 
-          <div className="mt-5 grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div className="border-b-[3px] border-primary pb-5">
-              <h2 className="text-xl font-bold text-foreground mb-1">Розмір</h2>
-              <p className="text-xs text-muted-foreground leading-snug mb-4">Обов'язково вкажіть актуальну довжину вашого макета</p>
-              <div className="grid grid-cols-[1fr_auto_1fr] gap-2.5 items-end">
-                <label className="text-xs text-foreground">Ширина (м)<input type="number" min="0" step="0.01" value={width} onChange={(e) => setWidth(e.target.value)} className="mt-1.5 h-11 w-full rounded-xl border-0 bg-muted px-4 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" /></label>
-                <span className="pb-3 text-foreground">×</span>
-                <label className="text-xs text-foreground">Лист (м)<input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1.5 h-11 w-full rounded-xl border-0 bg-muted px-4 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" /></label>
-              </div>
+          {/* Sizes — one row */}
+          <div>
+            <h2 className="text-base font-bold text-foreground mb-0.5">Розмір</h2>
+            <p className="text-[11px] text-muted-foreground mb-3 leading-snug">Обов'язково вкажіть актуальну довжину вашого макета</p>
+            <div className="grid grid-cols-2 gap-2.5">
+              <label className="text-xs text-foreground">Ширина (м)
+                <input type="number" min="0" step="0.01" value={width} onChange={(e) => setWidth(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+              </label>
+              <label className="text-xs text-foreground">Лист (м)
+                <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+              </label>
             </div>
+          </div>
 
-            <div className="border-b-[3px] border-primary pb-5 flex flex-col">
-              <div className="flex items-center gap-1.5 text-xl font-bold text-foreground mb-3">Терміново <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-4 h-4 text-muted-foreground" /></span></div>
-              <label className="inline-flex items-center gap-2.5 text-xs text-foreground cursor-pointer mb-5"><input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} className="w-5 h-5 accent-primary" />Термінове виготовлення (+30%)</label>
-              <button type="button" onClick={() => setModalOpen(true)} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5">
+          {/* Urgent + upload — one row */}
+          <div>
+            <div className="flex items-center gap-1.5 text-base font-bold text-foreground mb-2">Терміново
+              <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-3.5 h-3.5 text-muted-foreground" /></span>
+            </div>
+            <div className="flex flex-col sm:flex-row sm:items-center gap-3">
+              <label className="inline-flex items-center gap-2 text-xs text-foreground cursor-pointer">
+                <input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} className="w-5 h-5 accent-primary" />
+                Термінове виготовлення (+30%)
+              </label>
+              <button type="button" onClick={() => setModalOpen(true)} className="sm:ml-auto inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5">
                 {attachedUrl ? <CheckCircle2 className="w-5 h-5" /> : <FileUp className="w-5 h-5" />}
                 {attachedUrl ? 'Макет додано' : 'Завантажити макет'}
               </button>
-              {attachedUrl && (
-                <p className="mt-2 text-[11px] text-primary font-medium truncate" title={attachedUrl}>
-                  Долучено: {attachedUrl}
-                </p>
-              )}
             </div>
+            {attachedUrl && (
+              <p className="mt-2 text-[11px] text-primary font-medium truncate" title={attachedUrl}>
+                Долучено: {attachedUrl}
+              </p>
+            )}
           </div>
+        </div>
 
-          <div className="mt-auto pt-6 border-t border-border">
-            <div className="flex items-center justify-between gap-4 mb-4">
-              <span className="text-lg font-medium text-foreground">До сплати:</span>
-              <div className="flex items-baseline gap-2.5">
-                {total > 0 && <span className="text-lg text-muted-foreground line-through">{retailTotal} грн</span>}
-                <strong className="text-3xl leading-none text-primary">{total} грн</strong>
-              </div>
-            </div>
-            <button onClick={orderPrint} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">{attachedUrl ? 'Перейти до оформлення' : 'Додати в кошик'}</button>
+        {/* Price + CTA — single strip, no divider */}
+        <div className="flex items-center gap-4 px-5 lg:px-6 pb-5 lg:pb-6">
+          <div className="flex items-baseline gap-2 shrink-0">
+            <span className="text-sm font-medium text-muted-foreground">До сплати:</span>
+            {total > 0 && <span className="text-sm text-muted-foreground line-through">{retailTotal} грн</span>}
+            <strong className="text-2xl leading-none text-primary">{total} грн</strong>
           </div>
+          <button onClick={orderPrint} disabled={!dimensionsValid} className="ml-auto sm:flex-1 max-sm:w-full bg-primary text-primary-foreground rounded-xl py-3.5 px-5 font-semibold text-sm hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground whitespace-nowrap">
+            {attachedUrl ? 'Перейти до оформлення' : 'Додати в кошик'}
+          </button>
         </div>
 
         <LayoutUploadModal
