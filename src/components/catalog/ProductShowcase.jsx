@@ -1,7 +1,6 @@
-import React, { useMemo, useRef, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { FileUp, Grid2X2, HelpCircle, Loader2 } from 'lucide-react';
-import { base44 } from '@/api/base44Client';
+import { FileUp, Grid2X2, HelpCircle } from 'lucide-react';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
 import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
@@ -9,13 +8,9 @@ import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
 export default function ProductShowcase({ product }) {
   const navigate = useNavigate();
   const { addItem } = useCart();
-  const fileRef = useRef(null);
   const [width, setWidth] = useState(product.category === 'dtf' ? '0.58' : '');
   const [height, setHeight] = useState('1');
   const [urgent, setUrgent] = useState(false);
-  const [layoutUrl, setLayoutUrl] = useState('');
-  const [fileName, setFileName] = useState('');
-  const [uploading, setUploading] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
 
   const total = useMemo(() => {
@@ -24,20 +19,12 @@ export default function ProductShowcase({ product }) {
     return Math.round(product.price * area * (urgent ? 1.3 : 1));
   }, [product.price, width, height, urgent]);
 
-  const uploadLayout = async (event) => {
-    const file = event.target.files?.[0];
-    if (!file) return;
-    setUploading(true);
-    const { file_url } = await base44.integrations.Core.UploadFile({ file });
-    setLayoutUrl(file_url);
-    setFileName(file.name);
-    setUploading(false);
-  };
-
-  const orderPrint = () => {
+  const handleModalSubmit = ({ layoutUrl, phone }) => {
     addItem({ id: product.id, name: product.title, image: product.image, price: total, qty: 1, maket_url: layoutUrl, attrs: {
       'Ширина': `${width || 0} м`, 'Лист': `${height || 0} м`, 'Терміново': urgent ? 'Так (+30%)' : 'Ні',
+      ...(phone ? { 'Телефон': phone } : {}),
     }});
+    setModalOpen(false);
     navigate('/cart');
   };
 
@@ -70,16 +57,15 @@ export default function ProductShowcase({ product }) {
             <div className="border-b-[3px] border-primary pb-5 flex flex-col">
               <div className="flex items-center gap-1.5 text-xl font-bold text-foreground mb-3">Терміново <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-4 h-4 text-muted-foreground" /></span></div>
               <label className="inline-flex items-center gap-2.5 text-xs text-foreground cursor-pointer mb-5"><input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} className="w-5 h-5 accent-primary" />Термінове виготовлення (+30%)</label>
-              <input ref={fileRef} type="file" onChange={uploadLayout} className="hidden" />
-              <button type="button" onClick={() => setModalOpen(true)} disabled={uploading} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5 disabled:opacity-50">
-                {uploading ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileUp className="w-5 h-5" />}{uploading ? 'Завантаження...' : fileName || 'Завантажити макет'}
+              <button type="button" onClick={() => setModalOpen(true)} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5">
+                <FileUp className="w-5 h-5" />Завантажити макет
               </button>
             </div>
           </div>
 
           <div className="mt-auto pt-6 border-t border-border">
             <div className="flex items-center justify-between gap-4 mb-4"><span className="text-lg font-medium text-foreground">До сплати:</span><strong className="text-3xl leading-none text-foreground">{total} грн</strong></div>
-            <button onClick={orderPrint} disabled={!dimensionsValid || uploading} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
+            <button onClick={() => setModalOpen(true)} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Замовити друк</button>
             <Link to={`/catalog?cat=${product.category}`} className="mt-3 w-full inline-flex items-center justify-center gap-2 text-muted-foreground hover:text-primary text-sm font-semibold"><Grid2X2 className="w-4 h-4" />До каталогу</Link>
           </div>
         </div>
@@ -87,8 +73,10 @@ export default function ProductShowcase({ product }) {
         <LayoutUploadModal
           open={modalOpen}
           onClose={() => setModalOpen(false)}
-          uploading={uploading}
-          onUploadClick={() => { setModalOpen(false); fileRef.current?.click(); }}
+          product={product}
+          total={total}
+          qty={1}
+          onSubmit={handleModalSubmit}
         />
       </div>
     </section>
