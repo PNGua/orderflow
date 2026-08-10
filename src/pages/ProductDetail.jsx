@@ -4,6 +4,7 @@ import { ChevronRight } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import ProductShowcase from '@/components/catalog/ProductShowcase';
+import SimilarProducts from '@/components/catalog/SimilarProducts';
 import { CATEGORY_LABELS, PRODUCTS } from '@/components/catalog/products';
 
 export default function ProductDetail() {
@@ -27,6 +28,7 @@ export default function ProductDetail() {
         </nav>
         <h1 className="text-2xl lg:text-3xl font-bold text-center text-foreground mb-6">{product.title}</h1>
         <ProductShowcase product={product} />
+        <SimilarProducts product={product} />
       </main>
       <Footer />
     </div>
