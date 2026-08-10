@@ -25,6 +25,7 @@ import WideFormatPrint from './pages/WideFormatPrint';
 import HeatTransferPrint from './pages/HeatTransferPrint';
 import ScreenPrint from './pages/ScreenPrint';
 import ProductDetail from './pages/ProductDetail';
+import { CartProvider } from '@/lib/CartContext';
 // Add page imports here
 
 const AuthenticatedApp = () => {
@@ -85,7 +86,9 @@ function App() {
     <AuthProvider>
       <QueryClientProvider client={queryClientInstance}>
         <Router>
-          <AuthenticatedApp />
+          <CartProvider>
+            <AuthenticatedApp />
+          </CartProvider>
         </Router>
         <Toaster />
       </QueryClientProvider>

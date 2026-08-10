@@ -4,6 +4,7 @@ import { Phone, Facebook, Instagram, Youtube, ShoppingCart, UserRound, Menu, Che
 import Navbar from '@/components/Navbar';
 import MobileNav from '@/components/MobileNav';
 import ServicesMegaMenu from '@/components/ServicesMegaMenu';
+import { useCart } from '@/lib/CartContext';
 
 export default function Header() {
   const [servicesOpen, setServicesOpen] = useState(false);
@@ -13,6 +14,7 @@ export default function Header() {
   const menuRef = useRef(null);
   const menuRefMobile = useRef(null);
   const navigate = useNavigate();
+  const { count } = useCart();
 
   const submitSearch = (e) => {
     e.preventDefault();
@@ -122,7 +124,7 @@ export default function Header() {
               aria-label="Кошик"
             >
               <ShoppingCart className="w-5 h-5" />
-              <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 w-4 flex items-center justify-center font-bold">1</span>
+              {count > 0 && <span className="absolute top-1 right-1 bg-primary text-primary-foreground text-[10px] rounded-full h-4 min-w-4 px-1 flex items-center justify-center font-bold">{count}</span>}
             </Link>
             {/* Mobile burger */}
             <button

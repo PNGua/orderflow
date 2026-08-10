@@ -1,37 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, Trash2, Minus, Plus, FileImage, ArrowRight, ChevronRight, ExternalLink } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-
-const SAMPLE_ITEMS = [
-  {
-    id: 'dtf-prem',
-    name: 'ДТФ плівка преміум',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=160&q=80',
-    price: 980,
-    qty: 1,
-    maket_url: 'https://example.com/layout.pdf',
-    attrs: {
-      'Тип матеріалу': 'Плівка на гарячу',
-      'Розмір': '580 × 2000 мм',
-    },
-  },
-];
+import { useCart } from '@/lib/CartContext';
 
 export default function Cart() {
-  const [items, setItems] = useState(SAMPLE_ITEMS);
-
-  const updateQty = (id, delta) => {
-    setItems((prev) =>
-      prev
-        .map((it) => (it.id === id ? { ...it, qty: Math.max(0, it.qty + delta) } : it))
-        .filter((it) => it.qty > 0)
-    );
-  };
-
-  const removeItem = (id) => setItems((prev) => prev.filter((it) => it.id !== id));
+  const { items, updateQty, removeItem } = useCart();
 
   const total = items.reduce((sum, it) => sum + it.price * it.qty, 0);
   const isEmpty = items.length === 0;
@@ -89,7 +65,7 @@ export default function Cart() {
                 <div className="lg:col-span-2 space-y-4">
                   {items.map((it) => (
                     <article
-                      key={it.id}
+                      key={it.cartId}
                       className="group bg-card border border-border rounded-2xl overflow-hidden shadow-sm hover:shadow-md hover:border-primary/30 transition-all"
                     >
                       {/* Main row */}
@@ -101,7 +77,7 @@ export default function Cart() {
                           <div className="flex items-start justify-between gap-2">
                             <h3 className="font-bold text-foreground leading-tight group-hover:text-primary transition-colors">{it.name}</h3>
                             <button
-                              onClick={() => removeItem(it.id)}
+                              onClick={() => removeItem(it.cartId)}
                               className="shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                               aria-label="Видалити"
                             >
@@ -120,16 +96,11 @@ export default function Cart() {
                           </div>
 
                           {/* Quick actions */}
-                          <a
-                            href={it.maket_url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline mt-3"
-                          >
-                            <FileImage className="w-3.5 h-3.5 shrink-0" />
-                            <span>Переглянути макет</span>
-                            <ExternalLink className="w-3 h-3 shrink-0" />
-                          </a>
+                          {it.maket_url && (
+                            <a href={it.maket_url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-xs font-medium text-primary hover:underline mt-3">
+                              <FileImage className="w-3.5 h-3.5 shrink-0" /><span>Переглянути макет</span><ExternalLink className="w-3 h-3 shrink-0" />
+                            </a>
+                          )}
                         </div>
                       </div>
 
@@ -139,7 +110,7 @@ export default function Cart() {
                           <span className="text-xs text-muted-foreground hidden sm:inline">Кількість</span>
                           <div className="flex items-center border rounded-full bg-card">
                             <button
-                              onClick={() => updateQty(it.id, -1)}
+                              onClick={() => updateQty(it.cartId, -1)}
                               className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                               aria-label="Зменшити"
                             >
@@ -147,7 +118,7 @@ export default function Cart() {
                             </button>
                             <span className="w-8 text-center text-sm font-bold text-foreground">{it.qty}</span>
                             <button
-                              onClick={() => updateQty(it.id, 1)}
+                              onClick={() => updateQty(it.cartId, 1)}
                               className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted hover:text-foreground transition-colors"
                               aria-label="Збільшьити"
                             >

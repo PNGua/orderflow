@@ -10,24 +10,13 @@ import ContactSection from '@/components/checkout/ContactSection';
 import DeliverySection from '@/components/checkout/DeliverySection';
 import PaymentSection from '@/components/checkout/PaymentSection';
 import SummarySection from '@/components/checkout/SummarySection';
-
-const SAMPLE_ITEMS = [
-  {
-    product_name: 'ДТФ плівка рефлектив',
-    product_image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=160&q=80',
-    product_url: 'https://pngdruk.com.ua/product/wideformat/large-format-printing/dtf-plivka-reflektiv-40sm/',
-    material_type: 'Плівка на холодну',
-    size: '580 * 2000 мм',
-    print_quality: 'Цифрова',
-    quantity: 1,
-    price: 800,
-  },
-];
+import { useCart } from '@/lib/CartContext';
 
 export default function Checkout() {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { user, isAuthenticated } = useAuth();
+  const { items: cartItems, clearCart } = useCart();
   const [showPass, setShowPass] = useState(false);
   const [submitting, setSubmitting] = useState(false);
 
@@ -68,7 +57,7 @@ export default function Checkout() {
 
   const setField = (k, v) => setForm((prev) => ({ ...prev, [k]: v }));
 
-  const total = SAMPLE_ITEMS.reduce((sum, it) => sum + it.price * it.quantity, 0);
+  const total = cartItems.reduce((sum, item) => sum + item.price * item.qty, 0);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,10 +95,20 @@ export default function Checkout() {
         address_city: form.address_city || form.service_zone,
         service_zone: form.service_zone,
         comment: form.comment,
-        items: SAMPLE_ITEMS,
+        items: cartItems.map((item) => ({
+          product_name: item.name,
+          product_image: item.image,
+          product_url: `${window.location.origin}/product/${item.id}`,
+          quantity: item.qty,
+          price: item.price,
+          material_type: item.attrs?.['Терміново'] || '',
+          size: `${item.attrs?.['Ширина'] || ''} × ${item.attrs?.['Лист'] || ''}`,
+          print_quality: 'Цифрова',
+        })),
       };
       await base44.entities.Order.create(orderRecord);
       toast({ title: 'Замовлення оформлено!', description: `Номер: ${orderNumber}` });
+      clearCart();
       navigate(`/thank-you?order=${orderNumber}`, { state: { order: orderRecord } });
     } catch (err) {
       toast({ title: 'Помилка оформлення', description: err?.message || 'Спробуйте ще раз', variant: 'destructive' });
