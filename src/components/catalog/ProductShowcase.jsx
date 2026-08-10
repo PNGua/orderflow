@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileUp, HelpCircle } from 'lucide-react';
+import { FileUp, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
 import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
@@ -12,6 +12,8 @@ export default function ProductShowcase({ product }) {
   const [height, setHeight] = useState('1');
   const [urgent, setUrgent] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [attachedUrl, setAttachedUrl] = useState('');
+  const [attachedPhone, setAttachedPhone] = useState('');
 
   const total = useMemo(() => {
     if (product.price === 0) return 0;
@@ -29,13 +31,15 @@ export default function ProductShowcase({ product }) {
   };
 
   const handleModalSubmit = ({ layoutUrl, phone }) => {
-    addToCart(layoutUrl, phone);
+    setAttachedUrl(layoutUrl);
+    setAttachedPhone(phone);
     setModalOpen(false);
-    navigate('/cart');
   };
 
   const orderPrint = () => {
-    addToCart();
+    addToCart(attachedUrl, attachedPhone);
+    setAttachedUrl('');
+    setAttachedPhone('');
     navigate('/cart');
   };
 
@@ -69,8 +73,14 @@ export default function ProductShowcase({ product }) {
               <div className="flex items-center gap-1.5 text-xl font-bold text-foreground mb-3">Терміново <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-4 h-4 text-muted-foreground" /></span></div>
               <label className="inline-flex items-center gap-2.5 text-xs text-foreground cursor-pointer mb-5"><input type="checkbox" checked={urgent} onChange={(e) => setUrgent(e.target.checked)} className="w-5 h-5 accent-primary" />Термінове виготовлення (+30%)</label>
               <button type="button" onClick={() => setModalOpen(true)} className="mt-auto min-h-11 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl px-4 py-2.5 text-sm font-semibold hover:bg-primary/5">
-                <FileUp className="w-5 h-5" />Завантажити макет
+                {attachedUrl ? <CheckCircle2 className="w-5 h-5" /> : <FileUp className="w-5 h-5" />}
+                {attachedUrl ? 'Макет додано' : 'Завантажити макет'}
               </button>
+              {attachedUrl && (
+                <p className="mt-2 text-[11px] text-primary font-medium truncate" title={attachedUrl}>
+                  Долучено: {attachedUrl}
+                </p>
+              )}
             </div>
           </div>
 
