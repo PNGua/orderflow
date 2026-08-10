@@ -92,7 +92,7 @@ export default function ProductShowcase({ product }) {
                 <strong className="text-3xl leading-none text-primary">{total} грн</strong>
               </div>
             </div>
-            <button onClick={orderPrint} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">Додати в кошик</button>
+            <button onClick={orderPrint} disabled={!dimensionsValid} className="w-full bg-primary text-primary-foreground rounded-xl py-3.5 font-semibold text-base hover:bg-primary/90 disabled:bg-muted disabled:text-muted-foreground">{attachedUrl ? 'Перейти до оформлення' : 'Додати в кошик'}</button>
           </div>
         </div>
 
