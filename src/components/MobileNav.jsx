@@ -4,11 +4,11 @@ import { Menu as MenuIcon, ShoppingCart } from 'lucide-react';
 
 const NAV_ITEMS = [
   { label: 'Головна', to: '/' },
-  { label: 'Про нас', to: '/about' },
   { label: 'Технології друку', to: '/technologies' },
   { label: 'Послуги', to: '/services' },
   { label: 'Блог', to: '/blog' },
   { label: 'Калькулятор', section: 'calculator' },
+  { label: 'Про нас', to: '/about' },
   { label: 'Q&A', to: '/qna' },
   { label: 'Оплата і доставка', to: '/delivery' },
   { label: 'Контакти', to: '/contacts' },
