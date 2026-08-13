@@ -44,6 +44,17 @@ const TEAM = [
   { role: 'Менеджмент та логістика', count: '9' },
 ];
 
+const TEAM_MEMBERS = [
+  { name: 'Сергій Демко', role: 'Засновник', img: 'https://images.unsplash.com/photo-1560250097-0b93528c534e?w=500&h=600&fit=crop' },
+  { name: 'Андрій Мельник', role: 'Executive Director', img: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=500&h=600&fit=crop' },
+  { name: 'Вікторія Кондратюк', role: 'Тім-лідерка відділу брендування', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=500&h=600&fit=crop' },
+  { name: 'Костянтин Ковалишин', role: 'Дизайнер', img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=500&h=600&fit=crop' },
+  { name: 'Надія Баранецька', role: 'Дизайнерка', img: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=500&h=600&fit=crop' },
+  { name: 'Марта Ткаченко', role: 'Senior маркетолог', img: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=500&h=600&fit=crop' },
+  { name: 'Іванна Шкурлей', role: 'Менеджерка з брендування', img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=500&h=600&fit=crop' },
+  { name: 'Оксана Бучак', role: 'Менеджерка з брендування', img: 'https://images.unsplash.com/photo-1614128478865-44d685e2f1b8?w=500&h=600&fit=crop' },
+];
+
 export default function About() {
   return (
     <div className="min-h-screen flex flex-col bg-background">
@@ -269,6 +280,33 @@ export default function About() {
                 <div key={t.role} className="bg-card border rounded-2xl p-6 shadow-sm flex items-center gap-4">
                   <div className="text-4xl font-bold text-primary leading-none">{t.count}</div>
                   <div className="text-sm font-semibold text-foreground leading-snug">{t.role}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Team portraits */}
+        <section className="pb-16">
+          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
+              {TEAM_MEMBERS.map((m) => (
+                <div key={m.name} className="group bg-card border rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                  <div className="relative aspect-[5/6] overflow-hidden bg-muted">
+                    <img
+                      src={m.img}
+                      alt={m.name}
+                      loading="lazy"
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    <div className="absolute bottom-2 left-2 bg-primary text-primary-foreground text-[9px] font-bold uppercase tracking-wider px-2 py-0.5 rounded">
+                      PNG druk
+                    </div>
+                  </div>
+                  <div className="p-4 text-center">
+                    <h3 className="font-bold text-foreground text-sm leading-tight">{m.name}</h3>
+                    <p className="text-xs text-muted-foreground mt-0.5">{m.role}</p>
+                  </div>
                 </div>
               ))}
             </div>
