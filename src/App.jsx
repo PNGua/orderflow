@@ -18,6 +18,7 @@ import PrintTechnologies from './pages/PrintTechnologies';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
+import About from './pages/About';
 import PaymentDelivery from './pages/PaymentDelivery';
 import UvDtfPrint from './pages/UvDtfPrint';
 import SublimationPrint from './pages/SublimationPrint';
@@ -55,6 +56,7 @@ const AuthenticatedApp = () => {
   return (
     <Routes>
       <Route path="/" element={<Home />} />
+      <Route path="/about" element={<About />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/thank-you" element={<OrderSuccess />} />

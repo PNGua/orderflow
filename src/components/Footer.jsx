@@ -32,6 +32,7 @@ export default function Footer() {
             <h3 className="font-semibold text-sm uppercase tracking-wider text-white/50">Навігація</h3>
             <ul className="space-y-2 text-sm text-white/80">
               <li><Link to="/" className="hover:text-primary transition-colors">Головна</Link></li>
+              <li><Link to="/about" className="hover:text-primary transition-colors">Про нас</Link></li>
               <li><Link to="/dtf-print" className="hover:text-primary transition-colors">ДТФ друк</Link></li>
               <li><Link to="/delivery" className="hover:text-primary transition-colors">Оплата і доставка</Link></li>
               <li><Link to="/blog" className="hover:text-primary transition-colors">Блог</Link></li>
