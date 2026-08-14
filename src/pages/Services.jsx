@@ -94,7 +94,7 @@ const SERVICES = [
     ],
     price: 'від 95 грн',
     image: 'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=800&q=80',
-    landing: '/contacts',
+    landing: '/apparel-branding',
   },
 ];
 

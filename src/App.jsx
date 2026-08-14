@@ -19,6 +19,7 @@ import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import OrderSuccess from './pages/OrderSuccess';
 import About from './pages/About';
+import ApparelBranding from './pages/ApparelBranding';
 import PaymentDelivery from './pages/PaymentDelivery';
 import UvDtfPrint from './pages/UvDtfPrint';
 import SublimationPrint from './pages/SublimationPrint';
@@ -57,6 +58,7 @@ const AuthenticatedApp = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/about" element={<About />} />
+      <Route path="/apparel-branding" element={<ApparelBranding />} />
       <Route path="/cart" element={<Cart />} />
       <Route path="/checkout" element={<Checkout />} />
       <Route path="/thank-you" element={<OrderSuccess />} />
