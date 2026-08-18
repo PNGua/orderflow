@@ -1,8 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ArrowRight, ChevronRight, Printer, Layers, Sparkles } from 'lucide-react';
+import { ArrowRight, Printer, Layers } from 'lucide-react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import PageHeroBanner from '@/components/PageHeroBanner';
 
 const TECHNOLOGIES = [
   {
@@ -48,33 +49,15 @@ export default function PrintTechnologies() {
       <Header />
 
       <main className="flex-1">
-        {/* Breadcrumb */}
-        <div className="container mx-auto px-4 lg:px-8 max-w-6xl pt-6">
-          <nav className="flex items-center gap-1 text-xs text-muted-foreground flex-wrap">
-            <Link to="/" className="hover:text-primary transition-colors">Головна</Link>
-            <ChevronRight className="w-3 h-3" />
-            <span className="text-foreground font-medium">Технології друку</span>
-          </nav>
-        </div>
-
-        {/* Hero */}
-        <section className="py-10">
-          <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
-            <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 bg-[#037291]/10 text-[#037291] text-xs font-semibold uppercase tracking-widest px-3 py-1 rounded-full mb-4">
-                <Sparkles className="w-3.5 h-3.5" />
-                Технології
-              </div>
-              <h1 className="text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-3">
-                Технології друку
-              </h1>
-              <p className="text-muted-foreground text-base leading-relaxed">
-                Ознайомтеся з технологіями друку, які ми пропонуємо. Кожна технология має власну посадкову
-                сторінку з описом, можливостями та калькулятором вартості.
-              </p>
-            </div>
-          </div>
-        </section>
+        {/* Hero plaque */}
+        <PageHeroBanner
+          breadcrumb={[
+            { label: 'Головна', to: '/' },
+            { label: 'Технології друку' },
+          ]}
+          title="Технології друку"
+          description="Повний цикл друкарських технологій — від плівок у рулонах до прямого нанесення на тканину. Оберіть технологію, щоб перейти на її сторінку з деталями та замовленням."
+        />
 
         {/* Technologies grid */}
         <section className="pb-14">
