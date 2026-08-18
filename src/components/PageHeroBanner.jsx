@@ -14,7 +14,7 @@ import { ChevronRight } from 'lucide-react';
 export default function PageHeroBanner({ breadcrumb = [], title, description }) {
   return (
     <section className="bg-[#487d8e] text-white">
-      <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-10 lg:py-14">
+      <div className="container mx-auto px-4 lg:px-8 max-w-6xl py-12 lg:py-16">
         {breadcrumb.length > 0 && (
           <nav className="flex items-center gap-1 text-xs text-white/80 flex-wrap mb-4">
             {breadcrumb.map((item, idx) => {

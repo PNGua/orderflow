@@ -60,7 +60,7 @@ export default function PrintTechnologies() {
         />
 
         {/* Technologies grid */}
-        <section className="pb-14">
+        <section className="pt-10 lg:pt-14 pb-14">
           <div className="container mx-auto px-4 lg:px-8 max-w-6xl">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
               {TECHNOLOGIES.map((t) => {
