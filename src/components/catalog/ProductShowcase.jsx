@@ -56,12 +56,6 @@ export default function ProductShowcase({ product }) {
             Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Для консультації: <a href="tel:+380739338895" className="text-foreground font-bold">+38 073 933 88 95</a>.
           </div>
 
-          {/* Tariff line */}
-          <div className="flex items-baseline gap-2 pb-3 border-b border-border/70">
-            <span className="text-lg font-bold text-foreground">{product.price} грн/м²</span>
-            <span className="text-sm font-medium text-muted-foreground">· {CATEGORY_LABELS[product.category]}</span>
-          </div>
-
           {/* Sizes — one row */}
           <div className="pb-4 border-b border-border/70">
             <h2 className="text-base font-bold text-foreground mb-1">Розмір</h2>
