@@ -48,7 +48,7 @@ export default function ProductShowcase({ product }) {
 
   return (
     <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-stretch gap-5">
-      <ProductGallery product={product} attachedUrl={attachedUrl} onUploadClick={() => setModalOpen(true)} />
+      <ProductGallery product={product} />
       <div className="bg-card border rounded-2xl shadow-sm overflow-hidden flex flex-col">
         <div className="p-5 lg:p-6 flex-1 flex flex-col gap-4">
           {/* Condensed info strip */}

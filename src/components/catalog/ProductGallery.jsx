@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { FileUp, CheckCircle2 } from 'lucide-react';
 
-export default function ProductGallery({ product, attachedUrl, onUploadClick }) {
+export default function ProductGallery({ product }) {
   const images = product.gallery && product.gallery.length > 0 ? product.gallery : [product.image];
   // Build a media list: images first, then optional video appended as a special item.
   const media = [
@@ -63,15 +62,6 @@ export default function ProductGallery({ product, attachedUrl, onUploadClick }) 
         })}
       </div>
 
-      {/* Action button below thumbnails */}
-      <button
-        type="button"
-        onClick={onUploadClick}
-        className="mt-3 w-full inline-flex items-center justify-center gap-2 border-2 border-primary text-primary rounded-xl py-3 px-4 text-sm font-semibold hover:bg-primary/5 transition-colors"
-      >
-        {attachedUrl ? <CheckCircle2 className="w-5 h-5" /> : <FileUp className="w-5 h-5" />}
-        {attachedUrl ? 'Макет додано' : 'Завантажити макет'}
-      </button>
     </div>
   );
 }
