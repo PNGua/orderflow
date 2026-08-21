@@ -4,6 +4,7 @@ import { FileUp, HelpCircle, CheckCircle2 } from 'lucide-react';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
 import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
+import ProductGallery from '@/components/catalog/ProductGallery';
 
 export default function ProductShowcase({ product }) {
   const navigate = useNavigate();
@@ -47,9 +48,7 @@ export default function ProductShowcase({ product }) {
 
   return (
     <section className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-[35fr_65fr] items-stretch gap-5">
-      <div className="bg-muted border rounded-2xl overflow-hidden min-h-72 lg:min-h-[420px]">
-        <img src={product.image} alt={product.title} className="w-full h-full min-h-72 lg:min-h-[420px] object-cover" />
-      </div>
+      <ProductGallery product={product} attachedUrl={attachedUrl} onUploadClick={() => setModalOpen(true)} />
       <div className="bg-card border rounded-2xl shadow-sm overflow-hidden flex flex-col">
         <div className="p-5 lg:p-6 flex-1 flex flex-col gap-4">
           {/* Condensed info strip */}
