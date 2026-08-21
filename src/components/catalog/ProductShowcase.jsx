@@ -23,6 +23,7 @@ export default function ProductShowcase({ product }) {
   }, [product.price, width, height, urgent]);
 
   const retailTotal = Math.round(total * 1.2);
+  const pricePerMeter = product.price > 0 ? Math.round(product.price * Math.max(0, Number(width)) * 100) / 100 : 0;
 
   const addToCart = (layoutUrl = '', phone = '') => {
     addItem({ id: product.id, name: product.title, image: product.image, price: total, qty: 1, maket_url: layoutUrl, attrs: {
@@ -58,7 +59,10 @@ export default function ProductShowcase({ product }) {
 
           {/* Sizes — one row */}
           <div className="pb-4 border-b border-border/70">
-            <h2 className="text-base font-bold text-foreground mb-1">Розмір</h2>
+            <h2 className="text-base font-bold text-foreground mb-1 flex items-center justify-between gap-2">
+              Розмір
+              {pricePerMeter > 0 && <span className="text-xs font-bold text-primary bg-primary/10 rounded-full px-2.5 py-1">{pricePerMeter} грн/м.пог.</span>}
+            </h2>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Обов'язково вкажіть актуальну довжину вашого макета</p>
             <div className="grid grid-cols-2 gap-2.5 max-w-[240px] sm:max-w-[280px]">
               <label className="text-xs text-foreground">Ширина (м)
@@ -97,8 +101,7 @@ export default function ProductShowcase({ product }) {
         <div className="flex items-center gap-4 px-5 lg:px-6 pb-5 lg:pb-6">
           <div className="shrink-0">
             <div className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold mb-0.5">До сплати</div>
-            <div className="flex items-baseline gap-2">
-              {total > 0 && <span className="text-xs text-muted-foreground line-through decoration-1">{retailTotal} грн</span>}
+            <div className="flex items-baseline">
               <strong className="text-2xl font-bold text-primary leading-none">{total} <span className="text-sm font-semibold">грн</span></strong>
             </div>
           </div>
