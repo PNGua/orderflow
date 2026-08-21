@@ -52,8 +52,8 @@ export default function ProductShowcase({ product }) {
       <div className="bg-card border rounded-2xl shadow-sm overflow-hidden flex flex-col">
         <div className="p-5 lg:p-6 flex-1 flex flex-col gap-4">
           {/* Condensed info strip */}
-          <div className="rounded-lg bg-muted px-3.5 py-2.5 text-[11px] leading-relaxed text-foreground/70">
-            Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Для консультації: <a href="tel:+380739338895" className="text-primary font-semibold">+38 073 933 88 95</a>.
+          <div className="rounded-lg bg-muted px-3.5 py-3 text-[13px] leading-relaxed text-foreground/80">
+            Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Для консультації: <a href="tel:+380739338895" className="text-foreground font-bold">+38 073 933 88 95</a>.
           </div>
 
           {/* Tariff line */}
@@ -64,8 +64,8 @@ export default function ProductShowcase({ product }) {
 
           {/* Sizes — one row */}
           <div>
-            <h2 className="text-base font-bold text-foreground mb-0.5">Розмір</h2>
-            <p className="text-[11px] text-muted-foreground mb-3 leading-snug">Обов'язково вкажіть актуальну довжину вашого макета</p>
+            <h2 className="text-base font-bold text-foreground mb-1">Розмір</h2>
+            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Обов'язково вкажіть актуальну довжину вашого макета</p>
             <div className="grid grid-cols-2 gap-2.5">
               <label className="text-xs text-foreground">Ширина (м)
                 <input type="number" min="0" step="0.01" value={width} onChange={(e) => setWidth(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
@@ -92,9 +92,9 @@ export default function ProductShowcase({ product }) {
               </button>
             </div>
             {attachedUrl && (
-              <p className="mt-2 text-[11px] text-primary font-medium truncate" title={attachedUrl}>
-                Долучено: {attachedUrl}
-              </p>
+              <p className="mt-2 text-xs text-primary font-medium truncate" title={attachedUrl}>
+                 Долучено: {attachedUrl}
+               </p>
             )}
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function ProductShowcase({ product }) {
         {/* Price + CTA — single strip, no divider */}
         <div className="flex items-center gap-4 px-5 lg:px-6 pb-5 lg:pb-6">
           <div className="shrink-0">
-            <div className="text-[10px] uppercase tracking-wider text-muted-foreground font-semibold mb-0.5">До сплати</div>
+            <div className="text-[11px] uppercase tracking-wider text-muted-foreground font-semibold mb-0.5">До сплати</div>
             <div className="flex items-baseline gap-2">
               {total > 0 && <span className="text-xs text-muted-foreground line-through decoration-1">{retailTotal} грн</span>}
               <strong className="text-2xl font-bold text-primary leading-none">{total} <span className="text-sm font-semibold">грн</span></strong>
