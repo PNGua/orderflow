@@ -63,21 +63,21 @@ export default function ProductShowcase({ product }) {
           </div>
 
           {/* Sizes — one row */}
-          <div>
+          <div className="pb-4 border-b border-border/70">
             <h2 className="text-base font-bold text-foreground mb-1">Розмір</h2>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Обов'язково вкажіть актуальну довжину вашого макета</p>
-            <div className="grid grid-cols-2 gap-2.5">
+            <div className="grid grid-cols-2 gap-2.5 max-w-[240px] sm:max-w-[280px]">
               <label className="text-xs text-foreground">Ширина (м)
-                <input type="number" min="0" step="0.01" value={width} onChange={(e) => setWidth(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                <input type="number" min="0" step="0.01" value={width} readOnly className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/70 px-3 text-base text-muted-foreground cursor-not-allowed" />
               </label>
               <label className="text-xs text-foreground">Лист (м)
-                <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3.5 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
               </label>
             </div>
           </div>
 
           {/* Urgent + upload — one row */}
-          <div>
+          <div className="pb-4 border-b border-border/70">
             <div className="flex items-center gap-1.5 text-base font-bold text-foreground mb-2">Терміново
               <span title="Термінове виготовлення додає 30% до вартості"><HelpCircle className="w-3.5 h-3.5 text-muted-foreground" /></span>
             </div>
