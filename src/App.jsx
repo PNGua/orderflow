@@ -28,6 +28,7 @@ import WideFormatPrint from './pages/WideFormatPrint';
 import HeatTransferPrint from './pages/HeatTransferPrint';
 import ScreenPrint from './pages/ScreenPrint';
 import ProductDetail from './pages/ProductDetail';
+import SearchPage from './pages/Search';
 import { CartProvider } from '@/lib/CartContext';
 // Add page imports here
 
@@ -71,6 +72,7 @@ const AuthenticatedApp = () => {
       <Route path="/wide-format-print" element={<WideFormatPrint />} />
       <Route path="/heat-transfer-print" element={<HeatTransferPrint />} />
       <Route path="/screen-print" element={<ScreenPrint />} />
+      <Route path="/search" element={<SearchPage />} />
       <Route path="/catalog" element={<Catalog />} />
       <Route path="/product/:id" element={<ProductDetail />} />
       <Route path="/contacts" element={<Contacts />} />

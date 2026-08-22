@@ -19,7 +19,7 @@ export default function Header() {
   const submitSearch = (e) => {
     e.preventDefault();
     if (!searchQuery.trim()) return;
-    navigate(`/catalog?q=${encodeURIComponent(searchQuery.trim())}`);
+    navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
     setSearchOpen(false);
     setSearchQuery('');
   };
