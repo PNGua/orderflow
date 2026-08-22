@@ -1,6 +1,6 @@
 import React, { useState, useMemo, useEffect } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { Search as SearchIcon, ChevronRight, ArrowRight, X, SlidersHorizontal } from 'lucide-react';
+import { Search as SearchIcon, ChevronRight, ArrowRight, X } from 'lucide-react';
 import { Input } from "@/components/ui/input";
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -69,15 +69,16 @@ export default function SearchPage() {
     setQuery(urlParams.get('q') || '');
   }, [location.search]);
 
+  const q = query.trim().toLowerCase();
+  const hasQuery = q.length > 0;
   const results = useMemo(() => {
-    const q = query.trim().toLowerCase();
-    if (!q) return [];
+    if (!hasQuery) return PRODUCTS;
     return PRODUCTS.filter((p) =>
       p.title.toLowerCase().includes(q) ||
       p.description.toLowerCase().includes(q) ||
       (CATEGORY_LABELS[p.category] || '').toLowerCase().includes(q)
     );
-  }, [query]);
+  }, [q, hasQuery]);
 
   const submit = (e) => {
     e.preventDefault();
@@ -100,7 +101,7 @@ export default function SearchPage() {
         <div className="mb-6">
           <h1 className="text-2xl lg:text-3xl font-bold text-foreground mb-1 flex items-center gap-2">
             <SearchIcon className="w-7 h-7 text-primary" />
-            Пошук товарів
+            Результати пошуку
           </h1>
           <p className="text-sm text-muted-foreground">Шукайте плівки, матеріали та взірці по назві чи категорії</p>
 
@@ -127,12 +128,7 @@ export default function SearchPage() {
         </div>
 
         {/* Results */}
-        {query.trim() === '' ? (
-          <div className="text-center py-20 text-muted-foreground">
-            <SlidersHorizontal className="w-10 h-10 mx-auto mb-3 text-muted-foreground/50" />
-            <p className="text-sm">Почніть вводити запит, щоб знайти товари</p>
-          </div>
-        ) : results.length === 0 ? (
+        {results.length === 0 ? (
           <div className="text-center py-20 text-muted-foreground border border-dashed rounded-2xl">
             <p className="text-sm mb-1">За запитом <strong className="text-foreground">«{query.trim()}»</strong> нічого не знайдено</p>
             <p className="text-xs">Спробуйте змінити запит або переглянути <Link to="/catalog" className="text-primary font-semibold hover:underline">каталог</Link></p>
@@ -140,7 +136,11 @@ export default function SearchPage() {
         ) : (
           <>
             <p className="text-xs text-muted-foreground mb-4">
-              Знайдено: <strong className="text-foreground">{results.length}</strong> товарів за запитом <strong className="text-foreground">«{query.trim()}»</strong>
+              {hasQuery ? (
+                <>Знайдено: <strong className="text-foreground">{results.length}</strong> товарів за запитом <strong className="text-foreground">«{query.trim()}»</strong></>
+              ) : (
+                <>Усього в каталозі: <strong className="text-foreground">{results.length}</strong> товарів</>
+              )}
             </p>
             <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
               {results.map((product) => (
