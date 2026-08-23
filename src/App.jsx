@@ -3,7 +3,7 @@ import { QueryClientProvider } from '@tanstack/react-query'
 import { queryClientInstance } from '@/lib/query-client'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import PageNotFound from './lib/PageNotFound';
-import NotFound from './pages/NotFound';
+import NotFoundFullscreen from './pages/NotFoundFullscreen';
 import { AuthProvider, useAuth } from '@/lib/AuthContext';
 import UserNotRegisteredError from '@/components/UserNotRegisteredError';
 import Cabinet from './pages/Cabinet';
@@ -81,7 +81,7 @@ const AuthenticatedApp = () => {
       <Route path="/qna" element={<QnA />} />
       <Route path="/services" element={<Services />} />
       <Route path="/delivery" element={<PaymentDelivery />} />
-      <Route path="*" element={<NotFound />} />
+      <Route path="*" element={<NotFoundFullscreen />} />
     </Routes>
   );
 };
