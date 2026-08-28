@@ -13,6 +13,43 @@ const PAYMENT_DETAILS = {
   iban: 'UA423220010000026005340038680',
 };
 
+const DEMO_ORDER = {
+  order_number: '27290',
+  order_date: '2026-08-28T00:00:00.000Z',
+  status: 'Нове',
+  total_amount: 700,
+  payment_type: 'Рахунок-фактура',
+  delivery_type: 'Доставка службою Нова пошта',
+  payer_name: 'ТЕСТ ФОП Мар\'ян',
+  payer_email: 'andreyusik1@gmail.com',
+  recipient_name: 'Усік Андрій',
+  recipient_phone: '+38 (063) 015-24-37',
+  address_branch: 'Відділення №10 (до 10 кг): вул. Левицького, 7',
+  address_city: 'Львів',
+  address_area: 'Львівська',
+  comment: 'Рахунок виставлено на:\nПлатник: ТЕСТ ФОП Мар\'ян\nЄДРПОУ: 111111',
+  items: [
+    {
+      product_name: 'Розробка дизайну',
+      quantity: 1,
+      price: 0,
+      'order-size-product': '600 * 100 мм',
+      'order-size-product-width': 600,
+      'order-size-product-height': 100,
+      isdesign_ordering: true,
+      links: 'https://pngdruk.com.ua/product/wideformat/vzirci-uk-uk-uk-uk/papka-vzirciiv-dtf-ta-uf-dt/',
+    },
+    {
+      product_name: 'ДТФ плівка преміум',
+      quantity: 1,
+      price: 700,
+      'order-size-product': '600 * 2000 мм',
+      'order-size-product-width': 600,
+      'order-size-product-height': 2000,
+    },
+  ],
+};
+
 const fmt = (n) => `${(Number(n || 0)).toFixed(2)} ₴`;
 
 const fmtDate = (d) => {
@@ -46,10 +83,12 @@ export default function OrderSuccess() {
     })();
   }, [order, orderNumberParam]);
 
-  const items = order?.items || [];
+  // Demo data fills the page when no real order is loaded (preview without ?order=)
+  const displayOrder = order || (!orderNumberParam ? DEMO_ORDER : null);
+  const items = displayOrder?.items || [];
   const itemsTotal = items.reduce((s, it) =>
     s + Number(it.price ?? it.ywcnp_amount ?? it.amount ?? 0) * (it.quantity || 1), 0);
-  const orderNo = order?.order_number || orderNumberParam || '—';
+  const orderNo = displayOrder?.order_number || orderNumberParam || '—';
 
   return (
     <div className="min-h-screen flex flex-col bg-[#f5f6f7]">
@@ -75,12 +114,17 @@ export default function OrderSuccess() {
             <div className="flex justify-center py-16">
               <div className="w-8 h-8 border-4 border-primary/20 border-t-primary rounded-full animate-spin" />
             </div>
-          ) : !order ? (
+          ) : !displayOrder ? (
             <div className="text-center text-sm text-muted-foreground py-12">
               Замовлення не знайдено. <Link to="/" className="text-primary hover:underline">На головну</Link>
             </div>
           ) : (
             <div className="space-y-5">
+              {!order && (
+                <div className="text-center text-xs text-muted-foreground bg-primary/5 border border-primary/20 rounded-lg px-4 py-2">
+                  Демо-дані замовлення для попереднього перегляду
+                </div>
+              )}
 
               {/* Order summary header */}
               <section className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
@@ -90,10 +134,10 @@ export default function OrderSuccess() {
                 </div>
                 <div className="grid grid-cols-2 md:grid-cols-3 gap-x-6 gap-y-3 px-5 sm:px-6 py-5 text-sm">
                   <Detail label="Номер замовлення" value={`№ ${orderNo}`} strong />
-                  <Detail label="Дата" value={fmtDate(order.order_date)} />
-                  <Detail label="E-mail" value={order.payer_email || '—'} />
-                  <Detail label="Всього" value={fmt(order.total_amount)} strong />
-                  <Detail label="Спосіб оплати" value={order.payment_type || '—'} />
+                  <Detail label="Дата" value={fmtDate(displayOrder.order_date)} />
+                  <Detail label="E-mail" value={displayOrder.payer_email || '—'} />
+                  <Detail label="Всього" value={fmt(displayOrder.total_amount)} strong />
+                  <Detail label="Спосіб оплати" value={displayOrder.payment_type || '—'} />
                 </div>
               </section>
 
@@ -170,25 +214,25 @@ export default function OrderSuccess() {
                 {/* Totals */}
                 <div className="px-5 sm:px-6 py-4 bg-muted/20 space-y-2 text-sm">
                   <TotRow label="Разом" value={fmt(itemsTotal)} />
-                  <TotRow label="Доставка" value={order.delivery_type || '—'} />
-                  <TotRow label="Спосіб оплати" value={order.payment_type || '—'} />
+                  <TotRow label="Доставка" value={displayOrder.delivery_type || '—'} />
+                  <TotRow label="Спосіб оплати" value={displayOrder.payment_type || '—'} />
                   <div className="flex justify-between gap-4 pt-2 border-t border-border text-base font-bold">
                     <span className="text-foreground">Всього</span>
-                    <span className="text-primary">{fmt(order.total_amount)}</span>
+                    <span className="text-primary">{fmt(displayOrder.total_amount)}</span>
                   </div>
                 </div>
               </section>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
                 {/* Payer note */}
-                {order.comment && (
+                {displayOrder.comment && (
                   <section className="bg-white rounded-2xl border border-border shadow-sm overflow-hidden">
                     <div className="px-5 sm:px-6 py-4 border-b border-border bg-muted/30 flex items-center gap-2">
                       <CreditCard className="w-4 h-4 text-primary" />
                       <h2 className="font-semibold text-foreground">Нотатка</h2>
                     </div>
                     <div className="px-5 sm:px-6 py-4 text-sm text-foreground/90 leading-relaxed whitespace-pre-line">
-                      {order.comment}
+                      {displayOrder.comment}
                     </div>
                   </section>
                 )}
@@ -200,17 +244,17 @@ export default function OrderSuccess() {
                     <h2 className="font-semibold text-foreground">Платіжна адреса</h2>
                   </div>
                   <div className="px-5 sm:px-6 py-4 space-y-1.5 text-sm text-foreground/90">
-                    <p className="font-medium text-foreground">{order.recipient_name || order.payer_name || '—'}</p>
-                    {order.address_branch && <p>{order.address_branch}</p>}
-                    <p>{[order.address_city, order.address_area].filter(Boolean).join(', ') || ''}</p>
-                    {order.recipient_phone && (
+                    <p className="font-medium text-foreground">{displayOrder.recipient_name || displayOrder.payer_name || '—'}</p>
+                    {displayOrder.address_branch && <p>{displayOrder.address_branch}</p>}
+                    <p>{[displayOrder.address_city, displayOrder.address_area].filter(Boolean).join(', ') || ''}</p>
+                    {displayOrder.recipient_phone && (
                       <p className="flex items-center gap-1.5 pt-1.5">
-                        <Phone className="w-3.5 h-3.5 text-primary" /> {order.recipient_phone}
+                        <Phone className="w-3.5 h-3.5 text-primary" /> {displayOrder.recipient_phone}
                       </p>
                     )}
-                    {order.payer_email && (
+                    {displayOrder.payer_email && (
                       <p className="flex items-center gap-1.5">
-                        <Mail className="w-3.5 h-3.5 text-primary" /> {order.payer_email}
+                        <Mail className="w-3.5 h-3.5 text-primary" /> {displayOrder.payer_email}
                       </p>
                     )}
                   </div>
