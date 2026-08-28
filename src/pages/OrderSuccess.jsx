@@ -47,7 +47,8 @@ export default function OrderSuccess() {
   }, [order, orderNumberParam]);
 
   const items = order?.items || [];
-  const itemsTotal = items.reduce((s, it) => s + (it.price || 0) * (it.quantity || 1), 0);
+  const itemsTotal = items.reduce((s, it) =>
+    s + Number(it.price ?? it.ywcnp_amount ?? it.amount ?? 0) * (it.quantity || 1), 0);
   const orderNo = order?.order_number || orderNumberParam || '—';
 
   return (
@@ -120,33 +121,51 @@ export default function OrderSuccess() {
                     <span>Товар</span>
                     <span>Загалом</span>
                   </div>
-                  {items.map((it, i) => (
-                    <div key={i} className="py-4 border-b border-border last:border-0">
-                      <div className="flex justify-between gap-4">
-                        <div className="min-w-0 space-y-1">
-                          <p className="text-sm font-medium text-foreground">
-                            {it.product_name || 'Товар'}{' '}
-                            <span className="text-muted-foreground font-normal">× {it.quantity || 1}</span>
-                          </p>
-                          {(it.size || it.material_type || it.print_quality) && (
-                            <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
-                              {it.size && <span>Розмір: {it.size}</span>}
-                              {it.material_type && <span>Матеріал: {it.material_type}</span>}
-                              {it.print_quality && <span>Друк: {it.print_quality}</span>}
+                  {items.map((it, i) => {
+                    const name = it.product_name || it.name || it.title || 'Товар';
+                    const qty = it.quantity || 1;
+                    const unitPrice = Number(it.price ?? it.ywcnp_amount ?? it.amount ?? 0);
+                    const size = it.size || it['order-size-product'] ||
+                      (it['order-size-product-width'] && it['order-size-product-height']
+                        ? `${it['order-size-product-width']} × ${it['order-size-product-height']} мм`
+                        : '');
+                    const link = it.product_url || it.links;
+                    const isDesign = it.isdesign_ordering === true || it.isdesign_ordering === 'true';
+                    return (
+                      <div key={i} className="py-4 border-b border-border last:border-0">
+                        <div className="flex justify-between gap-4">
+                          <div className="min-w-0 space-y-1">
+                            <div className="flex flex-wrap items-center gap-2">
+                              <p className="text-sm font-medium text-foreground">
+                                {name}{' '}
+                                <span className="text-muted-foreground font-normal">× {qty}</span>
+                              </p>
+                              {isDesign && (
+                                <span className="text-[10px] font-semibold uppercase tracking-wide bg-primary/10 text-primary px-2 py-0.5 rounded-full">
+                                  Розробка дизайну
+                                </span>
+                              )}
                             </div>
-                          )}
-                          {it.product_url && (
-                            <a href={it.product_url} target="_blank" rel="noreferrer" className="inline-block text-[11px] text-primary hover:underline break-all">
-                              Переглянути товар
-                            </a>
-                          )}
+                            {(size || it.material_type || it.print_quality) && (
+                              <div className="flex flex-wrap gap-x-3 gap-y-0.5 text-xs text-muted-foreground">
+                                {size && <span>Розмір: {size}</span>}
+                                {it.material_type && <span>Матеріал: {it.material_type}</span>}
+                                {it.print_quality && <span>Друк: {it.print_quality}</span>}
+                              </div>
+                            )}
+                            {link && (
+                              <a href={link} target="_blank" rel="noreferrer" className="inline-block text-[11px] text-primary hover:underline break-all">
+                                Переглянути товар
+                              </a>
+                            )}
+                          </div>
+                          <span className="text-sm font-semibold text-foreground whitespace-nowrap self-start">
+                            {fmt(unitPrice * qty)}
+                          </span>
                         </div>
-                        <span className="text-sm font-semibold text-foreground whitespace-nowrap self-start">
-                          {fmt((it.price || 0) * (it.quantity || 1))}
-                        </span>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
                 {/* Totals */}
                 <div className="px-5 sm:px-6 py-4 bg-muted/20 space-y-2 text-sm">
