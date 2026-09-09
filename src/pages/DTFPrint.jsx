@@ -7,6 +7,18 @@ import {
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import YoutubeVideoPlaceholder from '@/components/YoutubeVideoPlaceholder';
+import WorkGallery from '@/components/WorkGallery';
+
+const GALLERY = [
+  'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=85',
+  'https://images.unsplash.com/photo-1606293926249-ed229bb84d48?w=900&q=85',
+  'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=85',
+  'https://images.unsplash.com/photo-1605379399642-870262d3d931?w=900&q=85',
+  'https://images.unsplash.com/photo-1518621736915-f3b1c0a8a6f5?w=900&q=85',
+  'https://images.unsplash.com/photo-1535063406828-3c0a1c9f8f2b?w=900&q=85',
+  'https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=900&q=85',
+  'https://images.unsplash.com/photo-1503342394128-c104d54dba01?w=900&q=85',
+];
 
 const FEATURES = [
   {
@@ -121,6 +133,13 @@ export default function DTFPrint() {
             <YoutubeVideoPlaceholder title="Відео про технологію ДТФ друку" />
           </div>
         </section>
+
+        {/* Gallery */}
+        <WorkGallery
+          title="Галерея робіт"
+          subtitle="Приклади друкованих макетів та готових виробів ДТФ друку."
+          images={GALLERY}
+        />
 
         {/* Features */}
         <section className="py-12 bg-muted/30">

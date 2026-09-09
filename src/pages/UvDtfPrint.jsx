@@ -4,6 +4,18 @@ import { ArrowRight, Box, ChevronRight, Droplets, Layers, Sparkles, Sun } from '
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import YoutubeVideoPlaceholder from '@/components/YoutubeVideoPlaceholder';
+import WorkGallery from '@/components/WorkGallery';
+
+const GALLERY = [
+  'https://images.unsplash.com/photo-1611532736597-de2d4265fba3?w=900&q=85',
+  'https://images.unsplash.com/photo-1605379399642-870262d3d931?w=900&q=85',
+  'https://images.unsplash.com/photo-1606293926249-ed229bb84d48?w=900&q=85',
+  'https://images.unsplash.com/photo-1605379399847-8f0a1f2d3c7c?w=900&q=85',
+  'https://images.unsplash.com/photo-1581291518857-4e27b48ff24e?w=900&q=85',
+  'https://images.unsplash.com/photo-1544816155-12df9643f369?w=900&q=85',
+  'https://images.unsplash.com/photo-1562157873-818bc0726f68?w=900&q=85',
+  'https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=85',
+];
 
 const FEATURES = [
   { icon: Layers, title: "Об'ємний 3D-рельєф", text: 'Пошарове нанесення чорнил створює виразну фактуру та преміальний вигляд.' },
@@ -44,6 +56,8 @@ export default function UvDtfPrint() {
       </div></section>
 
       <section className="pb-12"><div className="container mx-auto px-4 lg:px-8 max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-8 items-center"><div><p className="text-xs font-semibold uppercase tracking-widest text-primary mb-3">Про технологію</p><h2 className="text-2xl lg:text-3xl font-bold mb-4">Як працює УФ ДТФ друк</h2><div className="space-y-3 text-sm lg:text-base text-muted-foreground leading-relaxed"><p>Зображення пошарово друкується УФ-чорнилами на клейовій плівці: спочатку біла основа, потім колір і захисний лак. Кожен шар одразу полімеризується ультрафіолетовим світлом.</p><p>Після ламінування трансфер переноситься на чисту тверду поверхню без нагрівання. Результат має виразний рельєф, точні контури та добре витримує щоденне використання.</p></div></div><YoutubeVideoPlaceholder title="Відео про технологію УФ ДТФ друку" /></div></section>
+
+      <WorkGallery title="Галерея робіт" subtitle="Приклади УФ ДТФ друку на твердих поверхнях — скло, пластик, метал, сувеніри." images={GALLERY} />
 
       <section className="py-12 bg-muted/30"><div className="container mx-auto px-4 lg:px-8 max-w-6xl"><h2 className="text-2xl lg:text-3xl font-bold text-center mb-2">Переваги УФ ДТФ</h2><p className="text-muted-foreground text-center mb-10">Технологія для брендованих виробів, пакування та сувенірної продукції.</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">{FEATURES.map(({ icon: Icon, title, text }) => <div key={title} className="bg-card border rounded-2xl p-6 shadow-sm"><div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mb-4"><Icon className="w-6 h-6 text-primary" /></div><h3 className="font-bold mb-2">{title}</h3><p className="text-sm text-muted-foreground leading-relaxed">{text}</p></div>)}</div>
