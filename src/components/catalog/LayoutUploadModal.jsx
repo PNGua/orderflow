@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { X, CloudUpload, Shapes, Phone, FileUp, CheckCircle2, Loader2, Link2 } from 'lucide-react';
+import { X, CloudUpload, Shapes, Phone, FileUp, CheckCircle2, Loader2, Link2, ArrowLeft } from 'lucide-react';
 import { base44 } from '@/api/base44Client';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 
@@ -80,28 +80,16 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
               <h2 className="text-xl font-bold text-foreground">Чи є у Вас макети до друку?</h2>
             </div>
 
-            <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
               <button
                 type="button"
-                onClick={() => { setMode('file'); setStep(1); }}
+                onClick={() => setStep(1)}
                 className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
               >
-                <FileUp className="w-12 h-12 text-primary" />
-                <span className="font-bold text-foreground">Завантажити файл</span>
+                <CloudUpload className="w-12 h-12 text-primary" />
+                <span className="font-bold text-foreground">Так, у мене є макети</span>
                 <span className="text-xs text-muted-foreground leading-relaxed">
-                  Завантажте готові макети файлами з пристрою
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => { setMode('link'); setStep(1); }}
-                className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
-              >
-                <Link2 className="w-12 h-12 text-primary" />
-                <span className="font-bold text-foreground">Вставити посилання</span>
-                <span className="text-xs text-muted-foreground leading-relaxed">
-                  Додайте посилання на файлообмінник (fex.net, Google Drive тощо)
+                  Завантажте файли макетів або вставте посилання на файлообмінник
                 </span>
               </button>
 
@@ -110,7 +98,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
                 className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
               >
                 <Shapes className="w-12 h-12 text-muted-foreground" />
-                <span className="font-bold text-foreground">Немає готових макетів</span>
+                <span className="font-bold text-foreground">Немає готових розкладок макетів для друку</span>
                 <span className="text-xs text-muted-foreground leading-relaxed">
                   Зверніться за допомогою до дизайнера
                 </span>
@@ -122,9 +110,55 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
               <a href="tel:+380739338895" className="font-semibold text-primary hover:underline">+38 073 933 88 95</a>
             </div>
           </>
+        ) : step === 1 ? (
+          <>
+            <div className="px-6 pt-6 pb-2 flex items-center gap-3">
+              <button
+                onClick={() => setStep(0)}
+                className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted transition-colors"
+                aria-label="Назад"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
+              <h2 className="text-xl font-bold text-foreground">Як завантажити макети?</h2>
+            </div>
+
+            <div className="px-6 pb-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <button
+                type="button"
+                onClick={() => { setMode('file'); setStep(2); }}
+                className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
+              >
+                <FileUp className="w-12 h-12 text-primary" />
+                <span className="font-bold text-foreground">Завантажити файл напряму</span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  Завантажте готові макети файлами з пристрою
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setMode('link'); setStep(2); }}
+                className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
+              >
+                <Link2 className="w-12 h-12 text-primary" />
+                <span className="font-bold text-foreground">Вставити посилання</span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  Додайте посилання на файлообмінник (fex.net, Google Drive тощо)
+                </span>
+              </button>
+            </div>
+          </>
         ) : (
           <>
-            <div className="px-6 pt-6 pb-2 text-center">
+            <div className="px-6 pt-6 pb-2 flex items-center gap-3">
+              <button
+                onClick={() => setStep(1)}
+                className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted transition-colors"
+                aria-label="Назад"
+              >
+                <ArrowLeft className="w-5 h-5" />
+              </button>
               <h2 className="text-xl font-bold text-foreground">Чудово, завантажте макети в форму нижче</h2>
             </div>
 
