@@ -80,16 +80,28 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
               <h2 className="text-xl font-bold text-foreground">Чи є у Вас макети до друку?</h2>
             </div>
 
-            <div className="p-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="p-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
               <button
                 type="button"
-                onClick={() => setStep(1)}
+                onClick={() => { setMode('file'); setStep(1); }}
                 className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
               >
-                <CloudUpload className="w-12 h-12 text-primary" />
-                <span className="font-bold text-foreground">Так, у мене є макети</span>
+                <FileUp className="w-12 h-12 text-primary" />
+                <span className="font-bold text-foreground">Завантажити файл</span>
                 <span className="text-xs text-muted-foreground leading-relaxed">
-                  Завантажте файли макетів або вставте посилання на файлообмінник
+                  Завантажте готові макети файлами з пристрою
+                </span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => { setMode('link'); setStep(1); }}
+                className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
+              >
+                <Link2 className="w-12 h-12 text-primary" />
+                <span className="font-bold text-foreground">Вставити посилання</span>
+                <span className="text-xs text-muted-foreground leading-relaxed">
+                  Додайте посилання на файлообмінник (fex.net, Google Drive тощо)
                 </span>
               </button>
 
@@ -98,7 +110,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
                 className="flex flex-col items-center text-center gap-3 border-2 border-border rounded-2xl p-6 hover:border-primary hover:bg-primary/5 transition-colors"
               >
                 <Shapes className="w-12 h-12 text-muted-foreground" />
-                <span className="font-bold text-foreground">Немає готових розкладок макетів для друку</span>
+                <span className="font-bold text-foreground">Немає готових макетів</span>
                 <span className="text-xs text-muted-foreground leading-relaxed">
                   Зверніться за допомогою до дизайнера
                 </span>
@@ -119,28 +131,6 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
             <div className="p-6 grid grid-cols-1 md:grid-cols-2 gap-5">
               {/* Left: file upload / link input + instructions */}
               <div className="rounded-2xl border border-[#AABBC0] bg-[#F4F9FB] p-5">
-                {/* Mode toggle */}
-                <div className="grid grid-cols-2 gap-1.5 p-1 mb-4 rounded-xl bg-white border border-[#AABBC0]">
-                  <button
-                    type="button"
-                    onClick={() => setMode('file')}
-                    className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold transition-colors ${
-                      mode === 'file' ? 'bg-primary text-primary-foreground' : 'text-foreground/70 hover:bg-muted'
-                    }`}
-                  >
-                    <FileUp className="w-3.5 h-3.5" /> Завантажити файл
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setMode('link')}
-                    className={`flex items-center justify-center gap-1.5 rounded-lg py-2 text-xs font-semibold transition-colors ${
-                      mode === 'link' ? 'bg-primary text-primary-foreground' : 'text-foreground/70 hover:bg-muted'
-                    }`}
-                  >
-                    <Link2 className="w-3.5 h-3.5" /> Вставити посилання
-                  </button>
-                </div>
-
                 {mode === 'file' ? (
                   <div>
                     <input
