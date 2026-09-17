@@ -13,11 +13,11 @@ import BalanceSection from "@/components/cabinet/BalanceSection";
 import PayersSection from "@/components/cabinet/PayersSection";
 import RecipientsSection from "@/components/cabinet/RecipientsSection";
 import ManagersSection from "@/components/cabinet/ManagersSection";
+import LoyaltySection from "@/components/cabinet/LoyaltySection";
 
 const SECTION_TITLES = {
   user:       "Користувач",
   balance:    "Баланс",
-  discounts:  "Знижки",
   payers:     "Платники",
   recipients: "Отримувачі",
   managers:   "Менеджери",
@@ -65,6 +65,8 @@ export default function Cabinet() {
                 <RecipientsSection />
               ) : section === "managers" ? (
                 <ManagersSection />
+              ) : section === "loyalty" ? (
+                <LoyaltySection />
               ) : (
                 <PlaceholderSection title={SECTION_TITLES[section]} />
               )}

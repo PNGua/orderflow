@@ -1,13 +1,13 @@
-import { User, Wallet, Tag, CreditCard, Users, UserCog, ShoppingBag } from "lucide-react";
+import { User, Wallet, Award, CreditCard, Users, UserCog, ShoppingBag } from "lucide-react";
 
 const MENU_ITEMS = [
-  { key: "user",       label: "Користувач",    icon: User },
-  { key: "balance",    label: "Баланс",         icon: Wallet },
-  { key: "discounts",  label: "Знижки",         icon: Tag },
-  { key: "payers",     label: "Платники",       icon: CreditCard },
-  { key: "recipients", label: "Отримувачі",     icon: Users },
-  { key: "managers",   label: "Менеджери",      icon: UserCog },
-  { key: "orders",     label: "Мої замовлення", icon: ShoppingBag },
+  { key: "user",       label: "Користувач",        icon: User },
+  { key: "orders",     label: "Мої замовлення",    icon: ShoppingBag },
+  { key: "loyalty",    label: "Програма лояльності", icon: Award },
+  { key: "balance",    label: "Баланс",            icon: Wallet },
+  { key: "payers",     label: "Платники",          icon: CreditCard },
+  { key: "recipients", label: "Отримувачі",        icon: Users },
+  { key: "managers",   label: "Менеджери",         icon: UserCog },
 ];
 
 export default function CabinetSidebar({ active, onSelect }) {
