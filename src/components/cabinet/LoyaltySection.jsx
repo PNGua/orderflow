@@ -70,6 +70,41 @@ function HowItWorksModal({ open, onClose }) {
               <p className="text-sm text-muted-foreground">Тариф фіксується на весь наступний квартал, тому ви заздалегідь знаєте свої умови і можете планувати наступні замовлення.</p>
             </div>
           </div>
+
+          <div className="border-t pt-5">
+            <p className="text-sm font-bold text-foreground mb-3">Як змінюється тариф</p>
+            <div className="overflow-x-auto -mx-1">
+              <table className="w-full text-sm border border-border rounded-lg">
+                <thead>
+                  <tr className="bg-muted/60">
+                    <th className="text-left font-semibold text-foreground px-3 py-2.5 border-b border-border">Оборот за квартал</th>
+                    <th className="text-left font-semibold text-foreground px-3 py-2.5 border-b border-border">Зараз</th>
+                    <th className="text-left font-semibold text-foreground px-3 py-2.5 border-b border-border">Наступний квартал</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr className="border-b border-border last:border-0">
+                    <td className="px-3 py-2.5 text-muted-foreground">До 30 000 грн</td>
+                    <td className="px-3 py-2.5 text-muted-foreground">Поточний тариф продовжує діяти</td>
+                    <td className="px-3 py-2.5 font-semibold text-foreground">Базовий</td>
+                  </tr>
+                  <tr className="border-b border-border last:border-0">
+                    <td className="px-3 py-2.5 text-muted-foreground">Від 30 000 грн</td>
+                    <td className="px-3 py-2.5 text-foreground">Бізнес активується одразу</td>
+                    <td className="px-3 py-2.5 font-semibold text-foreground">Бізнес</td>
+                  </tr>
+                  <tr>
+                    <td className="px-3 py-2.5 text-muted-foreground">Від 150 000 грн</td>
+                    <td className="px-3 py-2.5 text-foreground">Партнерський активується одразу</td>
+                    <td className="px-3 py-2.5 font-semibold text-foreground">Партнерський</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p className="text-sm text-muted-foreground mt-3 leading-relaxed">
+              Досягли нового рівня — тариф змінюється одразу та зберігається на весь наступний квартал. Протягом поточного кварталу тариф не знижується.
+            </p>
+          </div>
         </div>
       </div>
     </div>
