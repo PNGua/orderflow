@@ -1,6 +1,80 @@
+import { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import { Award, Sparkles, Phone, CheckCircle2 } from "lucide-react";
+import { Award, Sparkles, Phone, CheckCircle2, HelpCircle, X } from "lucide-react";
+
+function HowItWorksModal({ open, onClose }) {
+  if (!open) return null;
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/40" onClick={onClose}>
+      <div
+        className="bg-card rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-center justify-between px-6 py-5 border-b">
+          <h2 className="text-lg font-bold text-foreground">Як працюють тарифи</h2>
+          <button
+            onClick={onClose}
+            className="w-8 h-8 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted"
+            aria-label="Закрити"
+          >
+            <X className="w-4 h-4" />
+          </button>
+        </div>
+        <div className="px-6 py-6 space-y-5">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            Чим більше ви замовляєте — тим вигідніша ціна. Ми автоматично
+            враховуємо суму ваших завершених замовлень за поточний квартал і на
+            її основі визначаємо тариф на наступні 3 місяці.
+          </p>
+
+          <ol className="space-y-4">
+            <li className="flex gap-3">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#037291] text-white text-xs font-bold flex items-center justify-center">1</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Базовий</p>
+                <p className="text-sm text-muted-foreground mt-0.5">Стартовий тариф без додаткових умов.</p>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#037291] text-white text-xs font-bold flex items-center justify-center">2</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Бізнес</p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Якщо сума завершених замовлень за поточний квартал становить від <b className="text-foreground">30 000 грн</b>, на наступний квартал автоматично застосовується тариф «Бізнес».
+                </p>
+              </div>
+            </li>
+            <li className="flex gap-3">
+              <span className="shrink-0 w-6 h-6 rounded-full bg-[#037291] text-white text-xs font-bold flex items-center justify-center">3</span>
+              <div>
+                <p className="text-sm font-semibold text-foreground">Партнерський</p>
+                <p className="text-sm text-muted-foreground mt-0.5">
+                  Якщо сума завершених замовлень за поточний квартал становить від <b className="text-foreground">150 000 грн</b>, на наступний квартал автоматично застосовується «Партнерський» тариф. Отримати його можна одразу — проходити тариф «Бізнес» не потрібно.
+                </p>
+              </div>
+            </li>
+          </ol>
+
+          <div className="border-t pt-5 space-y-4">
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Коли оновлюється тариф?</p>
+              <p className="text-sm text-muted-foreground">1-го числа кожного нового кварталу система підсумовує завершені замовлення за попередній квартал і визначає тариф на наступні 3 місяці.</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Що враховується?</p>
+              <p className="text-sm text-muted-foreground">У розрахунок входить сума завершених замовлень за поточний квартал.</p>
+            </div>
+            <div>
+              <p className="text-sm font-semibold text-foreground mb-1">Ваша вигода</p>
+              <p className="text-sm text-muted-foreground">Тариф фіксується на весь наступний квартал, тому ви заздалегідь знаєте свої умови і можете планувати наступні замовлення.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 const TARIFFS = [
   { key: "basic",    name: "Базовий",      threshold: 0,      color: "#037291" },
@@ -22,6 +96,7 @@ const quarterBounds = () => {
 };
 
 export default function LoyaltySection() {
+  const [howOpen, setHowOpen] = useState(false);
   const { data: orders = [] } = useQuery({
     queryKey: ["my-orders-loyalty"],
     queryFn: () => base44.entities.Order.list("-order_date", 200),
@@ -60,9 +135,18 @@ export default function LoyaltySection() {
                 {currentTariff.name.toUpperCase()}
               </span>
             </div>
-            <p className="text-sm text-muted-foreground">
-              Чим більше ви замовляєте — тим вигідніші умови отримуєте.
-            </p>
+            <div className="flex items-center gap-2">
+              <p className="text-sm text-muted-foreground">
+                Чим більше ви замовляєте — тим вигідніші умови отримуєте.
+              </p>
+              <button
+                onClick={() => setHowOpen(true)}
+                className="inline-flex items-center gap-1 text-sm font-semibold text-[#037291] hover:underline"
+              >
+                <HelpCircle className="w-4 h-4" />
+                Як це працює
+              </button>
+            </div>
           </div>
 
           <div className="md:text-right md:border-l md:pl-6 border-t md:border-t-0 pt-4 md:pt-0">
@@ -176,6 +260,8 @@ export default function LoyaltySection() {
           </div>
         </div>
       </div>
+
+      <HowItWorksModal open={howOpen} onClose={() => setHowOpen(false)} />
     </div>
   );
 }
