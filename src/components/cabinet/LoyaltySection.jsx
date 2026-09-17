@@ -1,17 +1,25 @@
 import { useQuery } from "@tanstack/react-query";
 import { base44 } from "@/api/base44Client";
-import { Award, Phone, Info, ShoppingBag, Heart, Clock } from "lucide-react";
+import { Award, Phone, Info, ShoppingBag, Heart, Clock, Sparkles, CheckCircle2 } from "lucide-react";
 
-const LEVELS = [
-  { key: "blue",     name: "Блакитний",   threshold: 0,      color: "#4a8fb9", text: "#4a8fb9" },
-  { key: "silver",   name: "Срібний",    threshold: 5001,   color: "#a0a0a0", text: "#6b7280" },
-  { key: "gold",     name: "Золотий",    threshold: 15001,  color: "#d4af37", text: "#b8941f" },
-  { key: "diamond",  name: "Діамантовий", threshold: 30001, color: "#7b68ee", text: "#7b68ee" },
-  { key: "vip",      name: "VIP",        threshold: 50001,  color: "#1f2937", text: "#1f2937" },
+// Tariff thresholds (UAH per quarter). "personal" is off the scale — separate block.
+const TARIFFS = [
+  { key: "basic",    name: "Базовий",      threshold: 0,      color: "#4a8fb9", discount: "до -10%" },
+  { key: "business", name: "Бізнес",       threshold: 30000,  color: "#d4af37", discount: "до -25%" },
+  { key: "partner",  name: "Партнерський", threshold: 150000, color: "#7b68ee", discount: "до -40%" },
 ];
 
 const fmtUAH = (n) =>
-  new Intl.NumberFormat("uk-UA", { maximumFractionDigits: 0 }).format(n || 0) + " грн";
+  new Intl.NumberFormat("uk-UA", { maximumFractionDigits: 0 }).format(Math.round(n || 0)) + " грн";
+
+// current quarter bounds
+const quarterBounds = () => {
+  const now = new Date();
+  const q = Math.floor(now.getMonth() / 3);
+  const start = new Date(now.getFullYear(), q * 3, 1);
+  const end = new Date(now.getFullYear(), q * 3 + 3, 1);
+  return { start, end };
+};
 
 export default function LoyaltySection() {
   const { data: orders = [] } = useQuery({
@@ -19,61 +27,62 @@ export default function LoyaltySection() {
     queryFn: () => base44.entities.Order.list("-order_date", 200),
   });
 
+  const { start, end } = quarterBounds();
   const quarterlyTotal = orders
-    .filter((o) => o.status !== "Скасовано")
+    .filter((o) => {
+      if (o.status === "Скасовано" || o.status === "Не вдалося") return false;
+      const d = o.order_date ? new Date(o.order_date) : null;
+      return d && d >= start && d < end;
+    })
     .reduce((sum, o) => sum + (Number(o.total_amount) || 0), 0);
 
-  const currentLevel =
-    [...LEVELS].reverse().find((l) => quarterlyTotal >= l.threshold) || LEVELS[0];
-  const nextLevel = LEVELS.find((l) => l.threshold > quarterlyTotal);
-  const progress = nextLevel
-    ? Math.min(
-        100,
-        ((quarterlyTotal - currentLevel.threshold) /
-          (nextLevel.threshold - currentLevel.threshold)) *
-          100
-      )
-    : 100;
+  // current tariff = highest threshold reached
+  const currentTariff =
+    [...TARIFFS].reverse().find((t) => quarterlyTotal >= t.threshold) || TARIFFS[0];
+  const nextTariff = TARIFFS.find((t) => t.threshold > quarterlyTotal);
 
-  const overallProgress = Math.min(
-    100,
-    (quarterlyTotal / LEVELS[LEVELS.length - 1].threshold) * 100
-  );
+  const maxThreshold = TARIFFS[TARIFFS.length - 1].threshold;
+  const overallProgress = Math.min(100, (quarterlyTotal / maxThreshold) * 100);
+
+  const toNext = nextTariff ? nextTariff.threshold - quarterlyTotal : 0;
+  const reachedNext = !!nextTariff && quarterlyTotal >= nextTariff.threshold;
+
+  // Guaranteed tariff for next quarter = highest threshold reached this quarter
+  const guaranteedTariff = currentTariff;
 
   return (
     <div className="space-y-6">
       {/* Header card */}
       <div className="bg-card border rounded-xl shadow-sm overflow-hidden">
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
-          {/* Left: status */}
+          {/* Left: current tariff */}
           <div className="p-6 lg:border-r border-b lg:border-b-0">
             <p className="text-xs font-semibold text-muted-foreground tracking-wider mb-1">
               ПРОГРАМА ЛОЯЛЬНОСТІ
             </p>
             <div className="flex items-center gap-2 mb-3">
-              <span className="text-sm text-muted-foreground">ВАШ РІВЕНЬ:</span>
+              <span className="text-sm text-muted-foreground">ВАШ ТАРИФ:</span>
               <span
                 className="text-base font-bold px-2.5 py-0.5 rounded text-white"
-                style={{ backgroundColor: currentLevel.color }}
+                style={{ backgroundColor: currentTariff.color }}
               >
-                {currentLevel.name.toUpperCase()}
+                {currentTariff.name.toUpperCase()}
               </span>
             </div>
             <p className="text-xs text-muted-foreground mb-3 leading-relaxed">
-              Чим більше ви купуєте — тим більшу знижку отримуєте. Ваш рівень
-              оновлюється автоматично за сумою замовлень за квартал.
+              Знижки на ДТФ у рулонах залежать від обороту за квартал. Чим більший
+              оборот — тим вищий тариф і вигідніша ціна.
             </p>
-            {/* progress bar to next level */}
             <div className="w-full h-2 rounded-full bg-[#e0e0e0] overflow-hidden">
               <div
                 className="h-full rounded-full transition-all"
-                style={{ width: `${progress}%`, backgroundColor: currentLevel.color }}
+                style={{ width: `${overallProgress}%`, backgroundColor: currentTariff.color }}
               />
             </div>
             <p className="text-[11px] text-muted-foreground mt-2">
-              {nextLevel
-                ? `Ви вже досягли суми для переходу на рівень «${nextLevel.name}»`
-                : "Ви досягли максимального рівня — VIP. Дякуємо за довіру!"}
+              {nextTariff
+                ? `До переходу на тариф «${nextTariff.name}» залишилось ${fmtUAH(toNext)}`
+                : "Ви на максимальному тарифі — Партнерський. Дякуємо за довіру!"}
             </p>
           </div>
 
@@ -86,13 +95,13 @@ export default function LoyaltySection() {
               <div className="flex items-start gap-2">
                 <Award className="w-4 h-4 text-[#4a8fb9] shrink-0 mt-0.5" />
                 <p className="text-sm text-foreground">
-                  При купівлі тканини від 1 рул. (гурт) — до <b>-40%</b>
+                  ДТФ у рулонах (гурт) — <b>{currentTariff.discount}</b>
                 </p>
               </div>
               <div className="flex items-start gap-2">
                 <Award className="w-4 h-4 text-[#d4af37] shrink-0 mt-0.5" />
                 <p className="text-sm text-foreground">
-                  Преміум-знижки на товари-новинки та ексклюзивні колекції
+                  Пріоритетне виробництво та персональний менеджер
                 </p>
               </div>
             </div>
@@ -114,9 +123,7 @@ export default function LoyaltySection() {
               <li className="flex items-center gap-2">
                 <ShoppingBag className="w-4 h-4 text-[#4a8fb9]" />
                 <span className="text-foreground">Мої замовлення</span>
-                <span className="ml-auto font-semibold text-foreground">
-                  {orders.length}
-                </span>
+                <span className="ml-auto font-semibold text-foreground">{orders.length}</span>
               </li>
               <li className="flex items-center gap-2">
                 <Heart className="w-4 h-4 text-[#4a8fb9]" />
@@ -133,29 +140,29 @@ export default function LoyaltySection() {
         </div>
       </div>
 
-      {/* Notification banner */}
+      {/* Notification banner: guaranteed tariff for next quarter */}
       <div className="bg-[#eef6f9] border border-[#4a8fb9]/20 rounded-xl px-5 py-4 flex items-start gap-3">
-        <Info className="w-5 h-5 text-[#4a8fb9] shrink-0 mt-0.5" />
+        <CheckCircle2 className="w-5 h-5 text-[#4a8fb9] shrink-0 mt-0.5" />
         <p className="text-sm text-foreground leading-relaxed">
-          До 15 числа наступного календарного кварталу буде проведено перерахунок.
-          Щоб перейти на срібний рівень потрібно купити товарів на суму від{" "}
-          <b>5 000 грн</b> до останнього дня календарного кварталу.
+          Ви вже гарантовано отримуєте тариф <b>«{guaranteedTariff.name}»</b> на
+          наступний квартал. Якщо оборот до кінця поточного кварталу досягне
+          вищого порогу — тариф буде автоматично підвищено.
         </p>
       </div>
 
-      {/* Status overview */}
+      {/* Status overview: current tariff + quarterly turnover */}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <div className="bg-card border rounded-xl shadow-sm p-5 flex items-center gap-4">
           <div
             className="w-12 h-12 rounded-full flex items-center justify-center text-white font-bold shrink-0"
-            style={{ backgroundColor: currentLevel.color }}
+            style={{ backgroundColor: currentTariff.color }}
           >
             <Award className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-muted-foreground">Ваш поточний рівень</p>
-            <p className="text-lg font-bold" style={{ color: currentLevel.text }}>
-              {currentLevel.name} рівень
+            <p className="text-xs text-muted-foreground">Поточний тариф</p>
+            <p className="text-lg font-bold" style={{ color: currentTariff.color }}>
+              {currentTariff.name}
             </p>
           </div>
         </div>
@@ -164,71 +171,139 @@ export default function LoyaltySection() {
             ₴
           </div>
           <div>
-            <p className="text-xs text-muted-foreground">Сума замовлень за квартал</p>
-            <p className="text-lg font-bold text-foreground">
-              {fmtUAH(quarterlyTotal)}
-            </p>
+            <p className="text-xs text-muted-foreground">Оборот за поточний квартал</p>
+            <p className="text-lg font-bold text-foreground">{fmtUAH(quarterlyTotal)}</p>
           </div>
         </div>
       </div>
 
-      {/* Progress tracker */}
+      {/* Progress tracker: Basic / Business / Partner (no Personal) */}
       <div className="bg-card border rounded-xl shadow-sm p-6">
         <div className="flex items-center gap-2 mb-6">
-          <span className="text-sm text-muted-foreground">ВАШ РІВЕНЬ:</span>
+          <span className="text-sm text-muted-foreground">ВАШ ТАРИФ:</span>
           <span
             className="text-sm font-bold px-2 py-0.5 rounded text-white"
-            style={{ backgroundColor: currentLevel.color }}
+            style={{ backgroundColor: currentTariff.color }}
           >
-            {currentLevel.name.toUpperCase()}
+            {currentTariff.name.toUpperCase()}
           </span>
+          {reachedNext && (
+            <span className="text-xs text-[#d4af37] font-semibold ml-2">
+              ✓ Поріг {nextTariff.name} досягнуто
+            </span>
+          )}
         </div>
 
-        {/* bar */}
-        <div className="relative pt-1">
-          <div className="w-full h-1.5 rounded-full bg-[#e0e0e0] overflow-hidden">
+        {/* progress bar with 3 stops */}
+        <div className="relative pt-2">
+          <div className="w-full h-2 rounded-full bg-[#e0e0e0] overflow-hidden">
             <div
               className="h-full rounded-full transition-all"
               style={{ width: `${overallProgress}%`, backgroundColor: "#4a8fb9" }}
             />
           </div>
+          {/* threshold markers */}
+          <div className="absolute top-0 left-0 right-0 flex justify-between px-0 pointer-events-none">
+            {TARIFFS.map((t) => (
+              <span
+                key={t.key}
+                className="w-0.5 h-6 -mt-2"
+                style={{
+                  backgroundColor: "#cbd5e1",
+                  marginLeft: t.key === "basic" ? 0 : undefined,
+                  marginRight: t.key === "partner" ? 0 : undefined,
+                }}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* levels */}
-        <div className="grid grid-cols-5 gap-1 mt-4">
-          {LEVELS.map((lvl) => {
-            const reached = quarterlyTotal >= lvl.threshold;
-            const isCurrent = lvl.key === currentLevel.key;
+        {/* tariff stops */}
+        <div className="grid grid-cols-3 gap-2 mt-5">
+          {TARIFFS.map((t) => {
+            const reached = quarterlyTotal >= t.threshold;
+            const isCurrent = t.key === currentTariff.key;
+            const isNext = nextTariff && t.key === nextTariff.key;
             return (
-              <div
-                key={lvl.key}
-                className="flex flex-col items-center text-center"
-              >
+              <div key={t.key} className="flex flex-col items-center text-center">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-xs font-bold border-2 transition-all ${
                     isCurrent ? "ring-2 ring-offset-2" : ""
                   }`}
                   style={{
-                    backgroundColor: reached ? lvl.color : "#fff",
+                    backgroundColor: reached ? t.color : "#fff",
                     color: reached ? "#fff" : "#9ca3af",
-                    borderColor: lvl.color,
-                    ...(isCurrent ? { "--tw-ring-color": lvl.color } : {}),
+                    borderColor: t.color,
+                    ...(isCurrent ? { "--tw-ring-color": t.color } : {}),
                   }}
                 >
                   {reached ? "✓" : ""}
                 </div>
                 <p
-                  className="text-[11px] font-semibold mt-2"
-                  style={{ color: reached ? lvl.text : "#9ca3af" }}
+                  className="text-xs font-semibold mt-2"
+                  style={{ color: reached ? t.color : "#9ca3af" }}
                 >
-                  {lvl.name}
+                  {t.name}
                 </p>
-                <p className="text-[10px] text-muted-foreground">
-                  {fmtUAH(lvl.threshold)}
+                <p className="text-[11px] text-muted-foreground">
+                  від {fmtUAH(t.threshold)}
                 </p>
+                {isCurrent && (
+                  <span className="text-[10px] text-[#4a8fb9] font-semibold mt-1">
+                    активний
+                  </span>
+                )}
+                {isNext && !reached && (
+                  <span className="text-[10px] text-muted-foreground mt-1">
+                    ще {fmtUAH(toNext)}
+                  </span>
+                )}
               </div>
             );
           })}
+        </div>
+      </div>
+
+      {/* Personal tariff — separate block, not on the progress bar */}
+      <div className="bg-gradient-to-br from-[#1f2937] to-[#111827] rounded-xl p-6 text-white">
+        <div className="flex items-start gap-4">
+          <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center shrink-0">
+            <Sparkles className="w-6 h-6 text-[#d4af37]" />
+          </div>
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-1">
+              <h3 className="text-lg font-bold">Персональний тариф</h3>
+              <span className="text-[10px] bg-[#d4af37] text-black px-2 py-0.5 rounded font-semibold">
+                ІНДИВІДУАЛЬНІ УМОВИ
+              </span>
+            </div>
+            <p className="text-sm text-white/70 mb-4 leading-relaxed">
+              Для великих виробників та брендів із стабільним обсягом. Умови
+              формуються індивідуально: фіксована ціна, відкладений платіж,
+              резерв матеріалу, пріоритетний менеджер.
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mb-4">
+              <div className="bg-white/5 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-white/50 uppercase tracking-wider">Обсяг</p>
+                <p className="text-sm font-semibold">від 300 000 грн/кв</p>
+              </div>
+              <div className="bg-white/5 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-white/50 uppercase tracking-wider">Знижка</p>
+                <p className="text-sm font-semibold">за домовленістю</p>
+              </div>
+              <div className="bg-white/5 rounded-lg px-3 py-2">
+                <p className="text-[10px] text-white/50 uppercase tracking-wider">Менеджер</p>
+                <p className="text-sm font-semibold">персональний</p>
+              </div>
+            </div>
+            <a
+              href="tel:0800752001"
+              className="inline-flex items-center gap-2 bg-[#d4af37] hover:bg-[#c4a030] text-black font-semibold text-sm px-4 py-2.5 rounded-lg transition-colors"
+            >
+              <Phone className="w-4 h-4" />
+              Обговорити умови: 0800 752 001
+            </a>
+          </div>
         </div>
       </div>
     </div>
