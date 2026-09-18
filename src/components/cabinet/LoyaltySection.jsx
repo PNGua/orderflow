@@ -278,12 +278,11 @@ export default function LoyaltySection() {
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-1">
-              <h3 className="text-base font-bold text-foreground">Персональний тариф</h3>
+              <h3 className="text-base font-bold text-foreground">Залишилися питання?</h3>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed mb-4">
-              Для вашого акаунта можуть діяти індивідуальні умови, призначені
-              менеджером вручну. Цей тариф не входить у автоматичну шкалу та
-              не залежить від обороту.
+              Якщо потрібна допомога з тарифами, умовами співпраці або розрахунком
+              вартості — зверніться до вашого менеджера.
             </p>
             <a
               href="tel:0800752001"
