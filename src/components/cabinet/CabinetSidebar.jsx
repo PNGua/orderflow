@@ -1,4 +1,5 @@
-import { User, Wallet, Award, CreditCard, Users, UserCog, ShoppingBag } from "lucide-react";
+import { User, Wallet, Award, CreditCard, Users, UserCog, ShoppingBag, FileText, LogOut } from "lucide-react";
+import { base44 } from "@/api/base44Client";
 
 const MENU_ITEMS = [
   { key: "user",       label: "Користувач",        icon: User },
@@ -8,7 +9,10 @@ const MENU_ITEMS = [
   { key: "payers",     label: "Платники",          icon: CreditCard },
   { key: "recipients", label: "Отримувачі",        icon: Users },
   { key: "managers",   label: "Менеджери",         icon: UserCog },
+  { key: "documents",  label: "Документи",         icon: FileText },
 ];
+
+const LOGOUT_ITEM = { key: "logout", label: "Вийти", icon: LogOut };
 
 export default function CabinetSidebar({ active, onSelect }) {
   return (
@@ -32,6 +36,15 @@ export default function CabinetSidebar({ active, onSelect }) {
             </button>
           );
         })}
+        <button
+          onClick={() => {
+            base44.auth.logout(window.location.origin);
+          }}
+          className="w-full flex items-center gap-3 px-4 py-3 text-sm transition-colors text-left text-gray-600 hover:bg-red-50 hover:text-red-600"
+        >
+          <LogOut className="w-4 h-4 shrink-0" />
+          {LOGOUT_ITEM.label}
+        </button>
       </nav>
     </aside>
   );

@@ -1,0 +1,46 @@
+{
+  "name": "DocumentAcceptance",
+  "type": "object",
+  "properties": {
+    "document_type": {
+      "type": "string",
+      "default": "public_offer",
+      "description": "\u0422\u0438\u043f \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430"
+    },
+    "document_title": {
+      "type": "string",
+      "description": "\u041d\u0430\u0437\u0432\u0430 \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430"
+    },
+    "document_version": {
+      "type": "string",
+      "description": "\u0412\u0435\u0440\u0441\u0456\u044f \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430"
+    },
+    "document_hash": {
+      "type": "string",
+      "description": "Hash \u0434\u043e\u043a\u0443\u043c\u0435\u043d\u0442\u0430"
+    },
+    "user_id": {
+      "type": "string",
+      "description": "ID \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+    },
+    "email": {
+      "type": "string",
+      "description": "Email \u043a\u043e\u0440\u0438\u0441\u0442\u0443\u0432\u0430\u0447\u0430"
+    },
+    "accepted_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "\u0414\u0430\u0442\u0430 \u0442\u0430 \u0447\u0430\u0441 \u043f\u0440\u0438\u0439\u043d\u044f\u0442\u0442\u044f"
+    },
+    "ip_address": {
+      "type": "string",
+      "description": "IP-\u0430\u0434\u0440\u0435\u0441\u0430"
+    }
+  },
+  "required": [
+    "document_type",
+    "document_version",
+    "user_id",
+    "accepted_at"
+  ]
+}
