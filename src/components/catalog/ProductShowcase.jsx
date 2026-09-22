@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { FileUp, HelpCircle, CheckCircle2 } from 'lucide-react';
+import { FileUp, HelpCircle, CheckCircle2, FileCheck, ListChecks } from 'lucide-react';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 import { useCart } from '@/lib/CartContext';
 import LayoutUploadModal from '@/components/catalog/LayoutUploadModal';
+import FileRequirementsModal from '@/components/catalog/FileRequirementsModal';
 import ProductGallery from '@/components/catalog/ProductGallery';
 
 export default function ProductShowcase({ product }) {
@@ -13,6 +14,8 @@ export default function ProductShowcase({ product }) {
   const [height, setHeight] = useState('1');
   const [urgent, setUrgent] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [reqOpen, setReqOpen] = useState(false);
+  const [reqTab, setReqTab] = useState('requirements');
   const [attachedUrl, setAttachedUrl] = useState('');
   const [attachedPhone, setAttachedPhone] = useState('');
 
@@ -54,7 +57,27 @@ export default function ProductShowcase({ product }) {
         <div className="p-5 lg:p-6 flex-1 flex flex-col gap-4">
           {/* Condensed info strip */}
           <div className="rounded-lg bg-muted px-3.5 py-3 text-[13px] leading-relaxed text-foreground/80">
-            Перед завантаженням файлів переконайтеся, що макет відповідає <span className="text-primary font-semibold">технічним вимогам</span>. Для консультації: <a href="tel:+380739338895" className="text-foreground font-bold">+38 073 933 88 95</a>.
+            Перед завантаженням файлів ознайомтесь із вимогами до макетів. Для консультації: <a href="tel:+380739338895" className="text-foreground font-bold">+38 073 933 88 95</a>.
+          </div>
+
+          {/* Requirements / instructions buttons */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+            <button
+              type="button"
+              onClick={() => { setReqTab('requirements'); setReqOpen(true); }}
+              className="inline-flex items-center justify-center gap-2 border border-input bg-transparent rounded-lg px-3 py-2 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+            >
+              <FileCheck className="w-4 h-4" />
+              Технічні вимоги
+            </button>
+            <button
+              type="button"
+              onClick={() => { setReqTab('instructions'); setReqOpen(true); }}
+              className="inline-flex items-center justify-center gap-2 border border-input bg-transparent rounded-lg px-3 py-2 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+            >
+              <ListChecks className="w-4 h-4" />
+              Інструкція з підготовки файлів
+            </button>
           </div>
 
           {/* Sizes — one row */}
@@ -117,6 +140,12 @@ export default function ProductShowcase({ product }) {
           total={total}
           qty={1}
           onSubmit={handleModalSubmit}
+        />
+
+        <FileRequirementsModal
+          open={reqOpen}
+          initialTab={reqTab}
+          onClose={() => setReqOpen(false)}
         />
       </div>
     </section>
