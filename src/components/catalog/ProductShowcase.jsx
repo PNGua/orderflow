@@ -35,9 +35,8 @@ export default function ProductShowcase({ product }) {
     }});
   };
 
-  const handleModalSubmit = ({ layoutUrl, fileLength }) => {
+  const handleModalSubmit = ({ layoutUrl }) => {
     setAttachedUrl(layoutUrl);
-    setAttachedFileLength(fileLength);
     setModalOpen(false);
   };
 
@@ -100,6 +99,23 @@ export default function ProductShowcase({ product }) {
                  Долучено: {attachedUrl}
                </p>
             )}
+          </div>
+
+          {/* Довжина файла — one row */}
+          <div className="pb-4 border-b border-border/70">
+            <label className="block text-xs text-foreground mb-1">Довжина файла</label>
+            <div className="relative max-w-[200px]">
+              <input
+                type="number"
+                min="0"
+                step="0.01"
+                value={attachedFileLength}
+                onChange={(e) => setAttachedFileLength(e.target.value)}
+                placeholder="0"
+                className="w-full h-11 pl-4 pr-9 rounded-xl border border-input bg-muted/50 text-base text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30"
+              />
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">м</span>
+            </div>
           </div>
         </div>
 

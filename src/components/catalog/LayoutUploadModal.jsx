@@ -7,7 +7,6 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
   const [step, setStep] = useState(0);
   const [mode, setMode] = useState('file'); // 'file' | 'link'
   const [layoutUrl, setLayoutUrl] = useState('');
-  const [fileLength, setFileLength] = useState('');
   const [fileUrl, setFileUrl] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -19,7 +18,6 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
     setStep(0);
     setMode('file');
     setLayoutUrl('');
-    setFileLength('');
     setFileUrl('');
     setFileName('');
     setUploading(false);
@@ -57,7 +55,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    onSubmit?.({ layoutUrl: resolvedUrl, fileLength: fileLength.trim() });
+    onSubmit?.({ layoutUrl: resolvedUrl });
   };
 
   return (
@@ -254,20 +252,6 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
                       <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
                     </label>
                   </div>
-                </div>
-
-                <label className="mt-4 mb-1.5 text-xs font-medium text-foreground/80">Довжина файла</label>
-                <div className="relative">
-                  <input
-                    type="number"
-                    min="0"
-                    step="0.01"
-                    value={fileLength}
-                    onChange={(e) => setFileLength(e.target.value)}
-                    placeholder="0"
-                    className="w-full h-11 pl-4 pr-9 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                  />
-                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">м</span>
                 </div>
 
                 <button
