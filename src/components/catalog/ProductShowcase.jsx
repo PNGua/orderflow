@@ -80,23 +80,6 @@ export default function ProductShowcase({ product }) {
             </button>
           </div>
 
-          {/* Sizes — one row */}
-          <div className="pb-4 border-b border-border/70">
-            <h2 className="text-base font-bold text-foreground mb-1 flex items-center justify-between gap-2">
-              Розмір
-              {pricePerMeter > 0 && <span className="text-xs font-bold text-primary bg-primary/10 rounded-full px-2.5 py-1">{pricePerMeter} грн/м.пог.</span>}
-            </h2>
-            <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Обов'язково вкажіть актуальну довжину вашого макета</p>
-            <div className="grid grid-cols-2 gap-2.5 max-w-[240px] sm:max-w-[280px]">
-              <label className="text-xs text-foreground">Ширина (м)
-                <input type="number" min="0" step="0.01" value={width} readOnly className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/70 px-3 text-base text-muted-foreground cursor-not-allowed" />
-              </label>
-              <label className="text-xs text-foreground">Лист (м)
-                <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
-              </label>
-            </div>
-          </div>
-
           {/* Urgent + upload — one row */}
           <div className="pb-4 border-b border-border/70">
             <div className="flex items-center gap-1.5 text-base font-bold text-foreground mb-2">Терміново
@@ -140,6 +123,10 @@ export default function ProductShowcase({ product }) {
           total={total}
           qty={1}
           onSubmit={handleModalSubmit}
+          width={width}
+          height={height}
+          setHeight={setHeight}
+          pricePerMeter={pricePerMeter}
         />
 
         <FileRequirementsModal

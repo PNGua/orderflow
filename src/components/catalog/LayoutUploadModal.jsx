@@ -3,7 +3,7 @@ import { X, CloudUpload, Shapes, Phone, FileUp, CheckCircle2, Loader2, Link2, Ar
 import { base44 } from '@/api/base44Client';
 import { CATEGORY_LABELS } from '@/components/catalog/products';
 
-export default function LayoutUploadModal({ open, onClose, product, total, qty = 1, onSubmit }) {
+export default function LayoutUploadModal({ open, onClose, product, total, qty = 1, onSubmit, width, height, setHeight, pricePerMeter }) {
   const [step, setStep] = useState(0);
   const [mode, setMode] = useState('file'); // 'file' | 'link'
   const [layoutUrl, setLayoutUrl] = useState('');
@@ -237,6 +237,23 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
                 <div className="flex items-center justify-between text-sm text-foreground/80">
                   <span>Тираж: {qty} шт.</span>
                   <span className="font-bold text-foreground">Вартість: {total} грн</span>
+                </div>
+
+                {/* Size block */}
+                <div className="mt-4 pb-4 border-b border-border/70">
+                  <h2 className="text-base font-bold text-foreground mb-1 flex items-center justify-between gap-2">
+                    Розмір
+                    {pricePerMeter > 0 && <span className="text-xs font-bold text-primary bg-primary/10 rounded-full px-2.5 py-1">{pricePerMeter} грн/м.пог.</span>}
+                  </h2>
+                  <p className="text-xs text-muted-foreground mb-3 leading-relaxed">Обов'язково вкажіть актуальну довжину вашого макета</p>
+                  <div className="grid grid-cols-2 gap-2.5">
+                    <label className="text-xs text-foreground">Ширина (м)
+                      <input type="number" min="0" step="0.01" value={width} readOnly className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/70 px-3 text-base text-muted-foreground cursor-not-allowed" />
+                    </label>
+                    <label className="text-xs text-foreground">Лист (м)
+                      <input type="number" min="0" step="0.01" value={height} onChange={(e) => setHeight(e.target.value)} className="mt-1 h-11 w-full rounded-xl border border-input bg-muted/50 px-3 text-base text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30" />
+                    </label>
+                  </div>
                 </div>
 
                 <label className="mt-4 mb-1.5 text-xs font-medium text-foreground/80">Довжина файла</label>
