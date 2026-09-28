@@ -7,7 +7,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
   const [step, setStep] = useState(0);
   const [mode, setMode] = useState('file'); // 'file' | 'link'
   const [layoutUrl, setLayoutUrl] = useState('');
-  const [phone, setPhone] = useState('');
+  const [fileLength, setFileLength] = useState('');
   const [fileUrl, setFileUrl] = useState('');
   const [fileName, setFileName] = useState('');
   const [uploading, setUploading] = useState(false);
@@ -19,7 +19,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
     setStep(0);
     setMode('file');
     setLayoutUrl('');
-    setPhone('');
+    setFileLength('');
     setFileUrl('');
     setFileName('');
     setUploading(false);
@@ -57,7 +57,7 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
 
   const handleSubmit = () => {
     if (!canSubmit) return;
-    onSubmit?.({ layoutUrl: resolvedUrl, phone: phone.trim() });
+    onSubmit?.({ layoutUrl: resolvedUrl, fileLength: fileLength.trim() });
   };
 
   return (
@@ -239,14 +239,19 @@ export default function LayoutUploadModal({ open, onClose, product, total, qty =
                   <span className="font-bold text-foreground">Вартість: {total} грн</span>
                 </div>
 
-                <label className="mt-4 mb-1.5 text-xs font-medium text-foreground/80">Телефон для зв'язку</label>
-                <input
-                  type="tel"
-                  value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  placeholder="+38 (063)-015-24-37"
-                  className="w-full h-11 px-4 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30"
-                />
+                <label className="mt-4 mb-1.5 text-xs font-medium text-foreground/80">Довжина файла</label>
+                <div className="relative">
+                  <input
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={fileLength}
+                    onChange={(e) => setFileLength(e.target.value)}
+                    placeholder="0"
+                    className="w-full h-11 pl-4 pr-9 rounded-xl border border-border bg-white text-sm text-foreground placeholder:text-muted-foreground/70 focus:outline-none focus:ring-2 focus:ring-primary/30"
+                  />
+                  <span className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted-foreground pointer-events-none">м</span>
+                </div>
 
                 <button
                   type="button"

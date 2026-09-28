@@ -17,7 +17,7 @@ export default function ProductShowcase({ product }) {
   const [reqOpen, setReqOpen] = useState(false);
   const [reqTab, setReqTab] = useState('requirements');
   const [attachedUrl, setAttachedUrl] = useState('');
-  const [attachedPhone, setAttachedPhone] = useState('');
+  const [attachedFileLength, setAttachedFileLength] = useState('');
 
   const total = useMemo(() => {
     if (product.price === 0) return 0;
@@ -28,23 +28,23 @@ export default function ProductShowcase({ product }) {
   const retailTotal = Math.round(total * 1.2);
   const pricePerMeter = product.price > 0 ? Math.round(product.price * Math.max(0, Number(width)) * 100) / 100 : 0;
 
-  const addToCart = (layoutUrl = '', phone = '') => {
+  const addToCart = (layoutUrl = '', fileLength = '') => {
     addItem({ id: product.id, name: product.title, image: product.image, price: total, qty: 1, maket_url: layoutUrl, attrs: {
       'Ширина': `${width || 0} м`, 'Лист': `${height || 0} м`, 'Терміново': urgent ? 'Так (+30%)' : 'Ні',
-      ...(phone ? { 'Телефон': phone } : {}),
+      ...(fileLength ? { 'Довжина файла': `${fileLength} м` } : {}),
     }});
   };
 
-  const handleModalSubmit = ({ layoutUrl, phone }) => {
+  const handleModalSubmit = ({ layoutUrl, fileLength }) => {
     setAttachedUrl(layoutUrl);
-    setAttachedPhone(phone);
+    setAttachedFileLength(fileLength);
     setModalOpen(false);
   };
 
   const orderPrint = () => {
-    addToCart(attachedUrl, attachedPhone);
+    addToCart(attachedUrl, attachedFileLength);
     setAttachedUrl('');
-    setAttachedPhone('');
+    setAttachedFileLength('');
     navigate('/cart');
   };
 
