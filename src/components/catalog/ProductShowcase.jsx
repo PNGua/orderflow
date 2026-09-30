@@ -64,7 +64,7 @@ export default function ProductShowcase({ product }) {
             <button
               type="button"
               onClick={() => { setReqTab('requirements'); setReqOpen(true); }}
-              className="inline-flex items-center justify-center gap-2 border border-input bg-transparent rounded-lg px-3 py-2 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-primary/25 bg-primary/5 rounded-lg px-3 py-2 text-xs font-semibold text-primary/90 hover:bg-primary/10 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
             >
               <FileCheck className="w-4 h-4" />
               Технічні вимоги
@@ -72,7 +72,7 @@ export default function ProductShowcase({ product }) {
             <button
               type="button"
               onClick={() => { setReqTab('instructions'); setReqOpen(true); }}
-              className="inline-flex items-center justify-center gap-2 border border-input bg-transparent rounded-lg px-3 py-2 text-xs font-medium text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
+              className="inline-flex items-center justify-center gap-2 border border-primary/25 bg-primary/5 rounded-lg px-3 py-2 text-xs font-semibold text-primary/90 hover:bg-primary/10 hover:border-primary/40 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring transition-colors"
             >
               <ListChecks className="w-4 h-4" />
               Інструкція з підготовки файлів
